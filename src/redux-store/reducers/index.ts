@@ -1,6 +1,9 @@
-import { combineReducers } from 'redux'
-import { testReducer } from './testReducer'
+import { combineReducers } from "redux"
+import AppStateInterface from "../../interfaces/state/AppStateInterface"
+import authReducer from "./authSlice"
 
-export const rootReducer = combineReducers({
-  test: testReducer
+const rootReducer = combineReducers<AppStateInterface>({
+  auth: authReducer
 })
+
+export default rootReducer
