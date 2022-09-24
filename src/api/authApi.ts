@@ -1,6 +1,4 @@
 import axios from "axios"
-import { AuthDataInterface } from "../interfaces/AuthDataInterface"
-import { IS_AUTHENTICATED, TOKEN_RESPONSE } from "../utils/persistentStateConstants"
 
 const apiClient = axios.create()
 
@@ -10,26 +8,13 @@ const commonParams = {
   client_secret: process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
 }
 
-// export const spotifyAuth = async ({ code, refreshToken }: { code?: string | null, refreshToken?: string | null }) => {
-
-/*
-let requiredParams: any = { code, grant_type: 'authorization_code' }
-
-console.log('refreshToken > ', refreshToken)
-if (refreshToken) {
-  requiredParams = { refresh_token: refreshToken, grant_type: 'refresh_token' }
-}
-*/
-
 export const spotifyAuth = async (requiredParams: any) => {
-
   try {
     const params: any = {
       ...requiredParams,
       ...commonParams
     }
 
-    // Correct way to be read by Spotify API
     const searchParams = Object.keys(params).map((key: any) =>
       encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
     ).join('&')
@@ -41,13 +26,8 @@ export const spotifyAuth = async (requiredParams: any) => {
       headers: { 'Content-type': 'application/x-www-form-urlencoded' }
     })
 
-    // localStorage.setItem(IS_AUTHENTICATED, JSON.stringify(true))
-    // localStorage.setItem(TOKEN_RESPONSE, JSON.stringify(authData))
     return response
-
   } catch (error) {
-    console.log('Error: ', error)
     throw (error)
   }
-
 }

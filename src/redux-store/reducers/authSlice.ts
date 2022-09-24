@@ -9,7 +9,6 @@ const initialState = {
   error: null
 } as AuthStateInterface
 
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,

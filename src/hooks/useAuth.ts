@@ -32,7 +32,6 @@ const useAuth = () => {
     }, (authData.expires_in - 60) * 1000)
 
     return () => clearInterval(interval)
-
   }, [authData, dispatch])
 
   return null
