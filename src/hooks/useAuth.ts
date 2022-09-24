@@ -1,21 +1,16 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import { AuthDataInterface } from "../interfaces/AuthDataInterface"
-import { spotifyAuth } from "../service/authService"
-import { TOKEN_RESPONSE } from "../utils/persistentStateConstants"
+import { RootState } from "../redux-store"
+import { refreshSpotifyToken, spotifyAuthentication } from "../redux-store/actions/authActions"
+import { useAppDispatch, useAppSelector } from "./useTypedSelector"
 
 const useAuth = () => {
-
   let isInitial = true
   const location = useLocation()
   const code = new URLSearchParams(location.search).get('code')
-  const authData: AuthDataInterface = JSON.parse(localStorage.getItem(TOKEN_RESPONSE) as string)
-  console.log('authData > ', authData)
-
-
-  const authenticateUser = async (code: string | null) => {
-    await spotifyAuth({ code })
-  }
+  const dispatch = useAppDispatch()
+  const authState = useAppSelector((state: RootState) => state.auth)
+  const authData = authState.data
 
   useEffect(() => {
     if (isInitial) {
@@ -23,25 +18,22 @@ const useAuth = () => {
       return
     }
 
-    if (code) authenticateUser(code)
-  }, [code])
+    if (code && (!authData || !authData.refresh_token)) {
+      dispatch(spotifyAuthentication(code))
+      if (authData) console.log('Go Home Screen')
+    }
+  }, [code, authData, dispatch])
 
   useEffect(() => {
-    console.log('auth data: ', authData)
-    /*
-    if (!authData) return
-
-    const refreshToken = authData.refresh_token
-    const expiresIn = authData.expires_in
+    if (!authData || !authData.refresh_token || !authData.expires_in) return
 
     const interval = setInterval(async () => {
-      await spotifyAuth({ refreshToken })
-    }, (5 - 60) * 1000)
+      dispatch(refreshSpotifyToken(authData.refresh_token))
+    }, (authData.expires_in - 60) * 1000)
 
     return () => clearInterval(interval)
-    */
-  }, [authData])
 
+  }, [authData, dispatch])
 
   return null
 }
