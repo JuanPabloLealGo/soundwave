@@ -1,9 +1,19 @@
 import { combineReducers } from "redux"
 import AppStateInterface from "../../interfaces/state/AppStateInterface"
 import authReducer from "./authSlice"
+import storage from "redux-persist/lib/storage"
+import persistReducer from "redux-persist/es/persistReducer"
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['auth'] // only auth will be persisted
+}
 
 const rootReducer = combineReducers<AppStateInterface>({
-  auth: authReducer
+  auth: authReducer,
 })
 
-export default rootReducer
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export default persistedReducer

@@ -1,15 +1,39 @@
-import { Action, Dispatch } from "redux"
-import { AuthDataInterface } from "../../interfaces/AuthDataInterface"
-import { spotifyAuth } from "../../service/authService"
-import { TOKEN_RESPONSE } from "../../utils/persistentStateConstants"
-import { spotifyLoginFailed, spotifyLoginRequest, spotifyLoginSuccessful } from "../reducers/authSlice"
+import { createAsyncThunk } from "@reduxjs/toolkit"
+import { spotifyAuth } from "../../api/authApi"
 
-// const data: AuthDataInterface = JSON.parse(localStorage.getItem(TOKEN_RESPONSE) as string)
-// const refreshToken = data.refresh_token
-// const expiresIn = data.expires_in
+
+export const spotifyAuthentication = createAsyncThunk(
+  'authentication',
+  async (code: string, thunkAPI) => {
+    try {
+      const response = await spotifyAuth({ code, grant_type: 'authorization_code' })
+      return response.data
+    } catch (error: any) {
+      const message = error.message
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const refreshSpotifyToken = createAsyncThunk(
+  'refreshToken',
+  async (refreshToken: string, thunkAPI) => {
+    try {
+      const response = await spotifyAuth({ refresh_token: refreshToken, grant_type: 'refresh_token' })
+      return response.data
+    } catch (error: any) {
+      const message = error.message
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 
 /*
-export const spotifyLogin = (code: string) => {
+
+ACTION STRUCTURE IF IT WAS A SYNC ACTION
+
+export const spotifyAuthentication = (code: string) => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch(spotifyLoginRequest())
     try {
@@ -21,15 +45,17 @@ export const spotifyLogin = (code: string) => {
   }
 }
 
-export const spotifyRefreshToken = (refreshToken: string) => {
+
+export const refreshSpotifyToken = (refreshToken: string) => {
   return async (dispatch: Dispatch<Action>) => {
-    dispatch(spotifyLoginRequest())
+    dispatch(refreshTokenRequest())
     try {
       const response = await spotifyAuth({ refresh_token: refreshToken, grant_type: 'refresh_token' })
-      dispatch(spotifyLoginSuccessful(response))
+      dispatch(refreshTokenSuccessful(response))
     } catch (error: any) {
-      dispatch(spotifyLoginFailed(error))
+      dispatch(refreshTokenFailed(error))
     }
   }
 }
+
 */
