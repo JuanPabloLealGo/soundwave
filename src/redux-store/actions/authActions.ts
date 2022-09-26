@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { spotifyAuth } from "../../api/authApi"
 
-
 export const spotifyAuthentication = createAsyncThunk(
   'authentication',
   async (code: string, thunkAPI) => {
@@ -44,7 +43,6 @@ export const spotifyAuthentication = (code: string) => {
     }
   }
 }
-
 
 export const refreshSpotifyToken = (refreshToken: string) => {
   return async (dispatch: Dispatch<Action>) => {

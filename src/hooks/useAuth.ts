@@ -1,16 +1,20 @@
-import { useEffect } from "react"
-import { useLocation } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 import { RootState } from "../redux-store"
 import { refreshSpotifyToken, spotifyAuthentication } from "../redux-store/actions/authActions"
 import { useAppDispatch, useAppSelector } from "./useTypedSelector"
 
 const useAuth = () => {
-  let isInitial = true
   const location = useLocation()
-  const code = new URLSearchParams(location.search).get('code')
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const authState = useAppSelector((state: RootState) => state.auth)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  let isInitial = true
   const authData = authState.data
+  const error = authState.error
+  const code = new URLSearchParams(location.search).get('code')
 
   useEffect(() => {
     if (isInitial) {
@@ -20,21 +24,26 @@ const useAuth = () => {
 
     if (code && (!authData || !authData.refresh_token)) {
       dispatch(spotifyAuthentication(code))
-      if (authData) console.log('Go Home Screen')
+      navigate('/')
     }
   }, [code, authData, dispatch])
 
   useEffect(() => {
     if (!authData || !authData.refresh_token || !authData.expires_in) return
 
-    const interval = setInterval(async () => {
+    setIsAuthenticated(true)
+
+    const interval = setInterval(() => {
       dispatch(refreshSpotifyToken(authData.refresh_token))
     }, (authData.expires_in - 60) * 1000)
 
-    return () => clearInterval(interval)
-  }, [authData, dispatch])
+    if (error) {
+      setIsAuthenticated(false)
+      return () => clearInterval(interval)
+    }
+  }, [authData, error, dispatch])
 
-  return null
+  return isAuthenticated
 }
 
 export default useAuth

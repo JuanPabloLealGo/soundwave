@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AuthDataInterface } from "../../interfaces/AuthDataInterface"
 import { AuthStateInterface } from "../../interfaces/state/AuthStateInterface"
-import { spotifyAuthentication } from "../actions/authActions"
+import { refreshSpotifyToken, spotifyAuthentication } from "../actions/authActions"
 
 const initialState = {
   data: null,
@@ -24,6 +24,12 @@ const authSlice = createSlice({
       })
       .addCase(spotifyAuthentication.rejected, (state, action: PayloadAction<any>) => {
         state.isLoading = false
+        state.error = action.payload
+      })
+      .addCase(refreshSpotifyToken.fulfilled, (state, action: PayloadAction<AuthDataInterface>) => {
+        state.data = action.payload
+      })
+      .addCase(refreshSpotifyToken.rejected, (state, action: PayloadAction<any>) => {
         state.error = action.payload
       })
   }

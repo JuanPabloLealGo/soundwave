@@ -1,10 +1,11 @@
 import React from "react"
 import { AUTH_URL } from "../../environment/appEnvironment"
-import useAuth from "../../hooks/useAuth"
 
+interface Props {
+  isAuthenticated: boolean
+}
 
-const Home = () => {
-  useAuth()
+const Home = ({ isAuthenticated }: Props) => {
 
   const handleLoginClick = () => {
     window.location.replace(AUTH_URL)
@@ -12,9 +13,13 @@ const Home = () => {
 
   return (
     <div>
-      <button onClick={handleLoginClick}>
-        Login with Spotify
-      </button>
+      {isAuthenticated ? (
+        <div>AUTHENTICATED VIEW</div>
+      ) : (
+        <button onClick={handleLoginClick}>
+          Login with Spotify
+        </button>
+      )}
     </div>
   )
 }
