@@ -1,11 +1,12 @@
 import React from "react"
 import { AUTH_URL } from "../../environment/appEnvironment"
+import { useAppSelector } from "../../hooks/useTypedSelector"
+import { RootState } from "../../redux-store"
 
-interface Props {
-  isAuthenticated: boolean
-}
 
-const Home = ({ isAuthenticated }: Props) => {
+const Home = () => {
+
+  const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
 
   const handleLoginClick = () => {
     window.location.replace(AUTH_URL)

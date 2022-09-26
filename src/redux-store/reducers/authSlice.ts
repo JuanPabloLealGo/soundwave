@@ -25,12 +25,14 @@ const authSlice = createSlice({
       .addCase(spotifyAuthentication.rejected, (state, action: PayloadAction<any>) => {
         state.isLoading = false
         state.error = action.payload
+        state.data = null
       })
       .addCase(refreshSpotifyToken.fulfilled, (state, action: PayloadAction<AuthDataInterface>) => {
         state.data = action.payload
       })
       .addCase(refreshSpotifyToken.rejected, (state, action: PayloadAction<any>) => {
         state.error = action.payload
+        state.data = null
       })
   }
 })

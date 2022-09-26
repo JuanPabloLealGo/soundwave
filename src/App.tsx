@@ -8,12 +8,12 @@ import Playlists from './components/pages/Playlists';
 import useAuth from './hooks/useAuth';
 
 const App = () => {
-  const isAuthenticated = useAuth()
+  useAuth()
 
   const element = useRoutes([
     {
       path: '/',
-      element: <Home isAuthenticated={isAuthenticated} />
+      element: <Home />
     },
     {
       path: '/playlists',

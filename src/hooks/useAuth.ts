@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { RootState } from "../redux-store"
 import { refreshSpotifyToken, spotifyAuthentication } from "../redux-store/actions/authActions"
@@ -9,7 +9,6 @@ const useAuth = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const authState = useAppSelector((state: RootState) => state.auth)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   let isInitial = true
   const authData = authState.data
@@ -31,19 +30,16 @@ const useAuth = () => {
   useEffect(() => {
     if (!authData || !authData.refresh_token || !authData.expires_in) return
 
-    setIsAuthenticated(true)
-
     const interval = setInterval(() => {
       dispatch(refreshSpotifyToken(authData.refresh_token))
     }, (authData.expires_in - 60) * 1000)
 
     if (error) {
-      setIsAuthenticated(false)
       return () => clearInterval(interval)
     }
   }, [authData, error, dispatch])
 
-  return isAuthenticated
+  return null
 }
 
 export default useAuth
