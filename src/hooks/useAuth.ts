@@ -1,8 +1,7 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { RootState } from "../redux-store"
+import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
 import { refreshSpotifyToken, spotifyAuthentication } from "../redux-store/actions/authActions"
-import { useAppDispatch, useAppSelector } from "./useTypedSelector"
 
 const useAuth = () => {
   const location = useLocation()
@@ -10,14 +9,14 @@ const useAuth = () => {
   const dispatch = useAppDispatch()
   const authState = useAppSelector((state: RootState) => state.auth)
 
-  let isInitial = true
+  const didMountRef = useRef(true)
   const authData = authState.data
   const error = authState.error
   const code = new URLSearchParams(location.search).get('code')
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false
+    if (didMountRef.current) {
+      didMountRef.current = false
       return
     }
 
@@ -25,7 +24,7 @@ const useAuth = () => {
       dispatch(spotifyAuthentication(code))
       navigate('/')
     }
-  }, [code, authData, dispatch])
+  }, [code, authData, dispatch, navigate])
 
   useEffect(() => {
     if (!authData || !authData.refresh_token || !authData.expires_in) return

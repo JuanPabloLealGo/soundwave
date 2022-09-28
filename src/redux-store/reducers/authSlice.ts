@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { AuthDataInterface } from "../../interfaces/AuthDataInterface"
-import { AuthStateInterface } from "../../interfaces/state/AuthStateInterface"
+import AuthDataInterface from "../../interfaces/AuthDataInterface"
+import AuthStateInterface from "../../interfaces/state/AuthStateInterface"
 import { refreshSpotifyToken, spotifyAuthentication } from "../actions/authActions"
 
 const initialState = {
