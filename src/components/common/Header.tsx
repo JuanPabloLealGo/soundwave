@@ -1,8 +1,11 @@
-import React from "react"
+import ToggleThemeButton from "./ToggleThemeButton"
 
 const Header = () => {
   return (
-    <h1>Header</h1>
+    <>
+      <h1>Header</h1>
+      <ToggleThemeButton />
+    </>
   )
 }
 
