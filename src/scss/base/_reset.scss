@@ -1,0 +1,97 @@
+@use '../abstracts/colors' as *;
+@use '../abstracts/typography' as *;
+
+html,
+body {
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+#root {
+  height: 100%;
+}
+
+.btn,
+.toggle {
+  cursor: pointer;
+  min-height: 50px;
+  padding: 12px;
+  transition: transform 0.4s ease-in-out;
+  width: fit-content;
+  @extend .shadowed;
+}
+
+.btn {
+  border-radius: 5px;
+  border: none;
+
+  &--primary {
+    border: 3px solid;
+    background-color: transparent;
+  }
+
+  &--secondary {
+    background-color: $primary;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: $pink-light;
+    }
+  }
+}
+
+.shadowed {
+  box-shadow: $dark-shadow;
+}
+
+.light {
+  background-color: $background;
+  color: $black;
+  min-height: 100%;
+
+  .btn {
+    box-shadow: $dark-shadow;
+
+    &--primary {
+      color: $background-dark;
+      border-color: $background-dark;
+
+      &:hover {
+        background-color: $background-dark;
+        color: $white;
+      }
+    }
+
+    &--secondary {
+      color: $white;
+    }
+  }
+}
+
+.dark {
+  background-color: $background-dark;
+  color: $white;
+  min-height: 100%;
+
+  .btn {
+    box-shadow: $light-shadow;
+
+    &--primary {
+      color: $secondary;
+      border-color: $secondary;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $secondary;
+        color: $background-dark;
+      }
+    }
+
+    &--secondary {
+      color: $background-dark;
+    }
+  }
+}

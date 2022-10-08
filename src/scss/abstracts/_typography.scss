@@ -1,0 +1,71 @@
+@use './layout' as *;
+@use './colors' as *;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Comfortaa', cursive;
+
+$font-size-small: 1rem;
+$font-size-medium: 2rem;
+$font-size-large: 3rem;
+$font-size-extra-large: 4rem;
+
+body {
+  font-family: $font-primary;
+  font-size: $font-size-medium;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+h1 {
+  font-family: $font-primary;
+  font-size: $font-size-extra-large;
+  font-weight: 700;
+  line-height: 1.2;
+
+  @include for-size(m) {
+    font-size: $font-size-extra-large;
+  }
+
+  &.h1--primary {
+    color: $primary;
+  }
+}
+
+h2 {
+  font-family: $font-primary;
+  font-size: $font-size-large;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h3 {
+  font-family: $font-primary;
+  font-size: $font-size-medium;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h4 {
+  font-family: $font-secondary;
+  font-size: $font-size-medium;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  font-size: $font-size-small;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.btn,
+.toggle {
+  font-size: $font-size-small;
+}
