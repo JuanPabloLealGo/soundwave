@@ -20,17 +20,19 @@ const Home = () => {
   }, [dispatch])
 
   return (
-    <>
+    <div>
       <h1>Home Page</h1>
       {isLoading
         ? (<h1>Loading...</h1>)
         : (data && (data?.categories.items.map((item: CategoryItemInterface) => {
           return (
-            <div key={item.id}>{item.name}</div>
+            <div key={item.id}>
+              {item.name}
+            </div>
           )
         })))
       }
-    </>
+    </div>
   )
 }
 

@@ -3,11 +3,12 @@ import MainLayout from './components/layouts/MainLayout'
 import Home from './components/pages/Home'
 import Landing from './components/pages/Landing'
 import NotFound from './components/pages/NotFount'
-import Playlist from './components/pages/Playlist'
-import Playlists from './components/pages/Playlists'
+// import Playlist from './components/pages/Playlist'
+// import Playlists from './components/pages/Playlists'
+import StyleGuide from './components/pages/StyleGuide'
 import useAuth from './hooks/useAuth'
 import { RootState, useAppSelector } from './redux-store'
-import './scss/_main.scss'
+import './scss/main.scss'
 
 const App = () => {
   useAuth()
@@ -23,6 +24,7 @@ const App = () => {
         { index: true, element: initialScreen },
       ]
     },
+    /*
     {
       path: '/playlists',
       element: <MainLayout />,
@@ -30,6 +32,11 @@ const App = () => {
         { index: true, element: <Playlists /> },
         { path: ':id', element: <Playlist /> }
       ]
+    },
+    */
+    {
+      path: '/styleguide',
+      element: <StyleGuide />,
     },
     {
       path: '*',
@@ -39,9 +46,7 @@ const App = () => {
 
   return (
     <div className={isDarkTheme ? 'dark' : 'light'}>
-      <div className="background">
-        {element}
-      </div>
+      {element}
     </div>
   )
 }
