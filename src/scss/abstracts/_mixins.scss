@@ -1,0 +1,4 @@
+@mixin transition($x) {
+  -webkit-transition: $x;
+  transition: $x;
+}

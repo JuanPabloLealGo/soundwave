@@ -1,0 +1,34 @@
+@import '../scss/main.scss';
+
+
+.ToggleThemeBtn {
+  align-items: center;
+  background-color: $secondary;
+  border: none;
+  border-radius: 25px;
+  color: $black;
+  display: flex;
+  height: 50px;
+  min-height: 50px;
+
+  &Disabled {
+    background-color: $white;
+    color: $disable;
+  }
+
+  &:hover p {
+    max-width: 200px;
+  }
+
+  p {
+    max-width: 0;
+    @include transition(max-width 1.5s);
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &Icon {
+    height: 35px;
+    width: 35px;
+  }
+}

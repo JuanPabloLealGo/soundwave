@@ -1,20 +1,30 @@
-import React from 'react'
-import { useRoutes } from 'react-router-dom';
-import MainLayout from './components/layouts/MainLayout';
+import { useRoutes } from 'react-router-dom'
+import MainLayout from './components/layouts/MainLayout'
 import Home from './components/pages/Home'
-import NotFound from './components/pages/NotFount';
-import Playlist from './components/pages/Playlist';
-import Playlists from './components/pages/Playlists';
-import useAuth from './hooks/useAuth';
+import Landing from './components/pages/Landing'
+import NotFound from './components/pages/NotFount'
+// import Playlist from './components/pages/Playlist'
+// import Playlists from './components/pages/Playlists'
+import StyleGuide from './components/pages/StyleGuide'
+import useAuth from './hooks/useAuth'
+import { RootState, useAppSelector } from './redux-store'
+import './scss/main.scss'
 
 const App = () => {
   useAuth()
+  const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
+  const isDarkTheme = useAppSelector((state: RootState) => state.ui.isDarkTheme)
+  let initialScreen = isAuthenticated ? <Home /> : <Landing />
 
   const element = useRoutes([
     {
       path: '/',
-      element: <Home />
+      element: <MainLayout />,
+      children: [
+        { index: true, element: initialScreen },
+      ]
     },
+    /*
     {
       path: '/playlists',
       element: <MainLayout />,
@@ -23,13 +33,22 @@ const App = () => {
         { path: ':id', element: <Playlist /> }
       ]
     },
+    */
+    {
+      path: '/styleguide',
+      element: <StyleGuide />,
+    },
     {
       path: '*',
       element: <NotFound />
     }
   ])
 
-  return element
+  return (
+    <div className={isDarkTheme ? 'dark' : 'light'}>
+      {element}
+    </div>
+  )
 }
 
 // OTHER WAY:
