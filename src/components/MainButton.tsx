@@ -1,10 +1,15 @@
 import styles from "./MainButton.module.scss"
 
+export enum MainButtonType {
+  Primary = 'primary',
+  Secondary = 'secondary',
+}
+
 interface Props {
   className?: Object
   icon?: JSX.Element
   label?: string
-  type: string
+  type: MainButtonType
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 

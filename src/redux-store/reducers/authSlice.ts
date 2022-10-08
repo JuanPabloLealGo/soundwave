@@ -12,7 +12,11 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state: AuthStateInterface) => {
+      state.data = null
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(spotifyAuthentication.pending, (state) => {
@@ -37,56 +41,5 @@ const authSlice = createSlice({
   }
 })
 
+export const { logout } = authSlice.actions
 export default authSlice.reducer
-
-/*
-
-SLICE STRUCTURE FOR SYNCRONOUS ACTIONS
-
-const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {
-    spotifyLoginRequest: (state: AuthStateInterface) => {
-      state.isLoading = true
-    },
-    spotifyLoginSuccessful: (state: AuthStateInterface, action: PayloadAction<AuthDataInterface>) => {
-      state.authData = action.payload
-      state.isLoggedIn = true
-      state.isLoading = false
-      state.isSuccessful = true
-    },
-    spotifyLoginFailed: (state: AuthStateInterface, action: PayloadAction<{}>) => {
-      state.isSuccessful = false
-      state.isLoggedIn = false
-      // state.error = action.payload
-    },
-    refreshTokenRequest: (state: AuthStateInterface) => {
-      state.isLoading = true
-    },
-    refreshTokenSuccessful: (state: AuthStateInterface, action: PayloadAction<AuthDataInterface>) => {
-      state.authData = action.payload
-      state.isLoggedIn = true
-      state.isLoading = false
-      state.isSuccessful = true
-    },
-    refreshTokenFailed: (state: AuthStateInterface, action: PayloadAction<{}>) => {
-      state.isSuccessful = false
-      state.isLoggedIn = false
-      // state.error = action.payload
-    }
-  }
-})
-
-export const {
-  spotifyLoginRequest,
-  spotifyLoginSuccessful,
-  spotifyLoginFailed,
-  refreshTokenRequest,
-  refreshTokenSuccessful,
-  refreshTokenFailed
-} = authSlice.actions
-
-export default authSlice.reducer
-
-*/

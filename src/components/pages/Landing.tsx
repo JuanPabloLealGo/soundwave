@@ -1,4 +1,6 @@
 import { AUTH_URL } from "../../environment/appEnvironment"
+import MainButton, { MainButtonType } from "../MainButton"
+
 
 const Landing = () => {
   const handleLoginClick = () => {
@@ -11,9 +13,11 @@ const Landing = () => {
         Headline Image
       </div>
       <h1 className="text">Landing Page</h1>
-      <button onClick={handleLoginClick}>
-        Login with Spotify
-      </button>
+      <MainButton
+        label='Login with Spotify'
+        onClick={handleLoginClick}
+        type={MainButtonType.Secondary}
+      />
     </div>
   )
 }
