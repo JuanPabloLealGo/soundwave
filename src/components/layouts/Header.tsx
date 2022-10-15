@@ -1,11 +1,15 @@
-import ToggleThemeButton from "../ToggleThemeButton"
+import { useAppDispatch, useAppSelector } from "../../redux-store"
+import { logout } from "../../redux-store/reducers/authSlice"
+import MainButton, { MainButtonType } from "../MainButton"
+import styles from "./Header.module.scss"
+
 
 const Header = () => {
+
   return (
-    <>
-      <h1>Header</h1>
-      <ToggleThemeButton />
-    </>
+    <div className={styles.Header}>
+      Header
+    </div>
   )
 }
 

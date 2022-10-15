@@ -1,8 +1,12 @@
 import { useRoutes } from 'react-router-dom'
 import MainLayout from './components/layouts/MainLayout'
+import About from './components/pages/About'
+import Contact from './components/pages/Contact'
+import Favorites from './components/pages/Favorites'
 import Home from './components/pages/Home'
 import Landing from './components/pages/Landing'
 import NotFound from './components/pages/NotFount'
+import Services from './components/pages/Services'
 // import Playlist from './components/pages/Playlist'
 // import Playlists from './components/pages/Playlists'
 import StyleGuide from './components/pages/StyleGuide'
@@ -22,6 +26,10 @@ const App = () => {
       element: <MainLayout />,
       children: [
         { index: true, element: initialScreen },
+        { path: 'about', element: <About /> },
+        { path: 'favorites', element: <Favorites /> },
+        { path: 'services', element: <Services /> },
+        { path: 'contact', element: <Contact /> }
       ]
     },
     /*
