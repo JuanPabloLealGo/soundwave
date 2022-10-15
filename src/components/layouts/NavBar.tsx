@@ -63,21 +63,12 @@ const NavBar = () => {
               )
             })
           }
-          {isAuthenticated ? (
-            <MainButton
-              label="Sign Out"
-              onClick={onLogoutHandler}
-              className={styles.NavBarSignOnButton}
-              type={MainButtonType.Secondary}
-            />
-          ) : (
-            <MainButton
-              label='Sign In'
-              onClick={onLoginHandler}
-              className={styles.NavBarSignOnButton}
-              type={MainButtonType.Secondary}
-            />
-          )}
+          <MainButton
+            label={isAuthenticated ? 'Sign Out' : 'Sign In'}
+            onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
+            className={styles.NavBarSignOnButton}
+            type={MainButtonType.Secondary}
+          />
         </ul>
         <button
           className={`mobile-menu-icon ${styles.NavBarMenuIcon}`}

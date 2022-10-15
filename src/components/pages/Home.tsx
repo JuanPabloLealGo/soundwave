@@ -3,8 +3,6 @@ import { useRef } from "react"
 import CategoryItemInterface from "../../interfaces/CategoryItemIterface"
 import { RootState, useAppDispatch, useAppSelector } from "../../redux-store"
 import { getCategoryPage } from "../../redux-store/actions/categoryActions"
-import ToggleThemeButton from "../ToggleThemeButton"
-
 
 const Home = () => {
   const dispatch = useAppDispatch()
@@ -23,7 +21,6 @@ const Home = () => {
   return (
     <div>
       <h1>Home Page</h1>
-      <ToggleThemeButton />
       {isLoading
         ? (<h1>Loading...</h1>)
         : (data && (data?.categories.items.map((item: CategoryItemInterface) => {
