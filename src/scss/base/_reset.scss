@@ -5,11 +5,23 @@ html,
 body {
   height: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
   position: relative;
 }
 
 #root {
   height: 100%;
+}
+
+li {
+  cursor: pointer;
+  list-style: none;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+ul {
+  padding: 0;
 }
 
 .btn,
@@ -20,6 +32,10 @@ body {
   transition: transform 0.4s ease-in-out;
   width: fit-content;
   @extend .shadowed;
+}
+
+.logo {
+  color: $primary;
 }
 
 .btn {
@@ -34,6 +50,7 @@ body {
 
   &--secondary {
     background-color: $primary;
+    color: $white;
 
     &:active,
     &:focus,
@@ -64,11 +81,21 @@ body {
         color: $white;
       }
     }
-
-    &--secondary {
-      color: $white;
-    }
   }
+
+  .nav-link,
+  .mobile-menu-icon {
+    color: $black;
+  }
+
+  .background-theme {
+    background-color: $background;
+  }
+
+  .color-theme {
+    color: $background-dark;
+  }
+
 }
 
 .dark {
@@ -90,9 +117,21 @@ body {
         color: $background-dark;
       }
     }
+  }
 
-    &--secondary {
-      color: $background-dark;
-    }
+  .nav-link {
+    color: $white;
+  }
+
+  .mobile-menu-icon {
+    color: $white;
+  }
+
+  .background-theme {
+    background-color: $background-dark;
+  }
+
+  .color-theme {
+    color: $background;
   }
 }

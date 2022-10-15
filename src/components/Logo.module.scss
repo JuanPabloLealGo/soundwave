@@ -1,0 +1,14 @@
+@import '../scss/main.scss';
+
+.Logo {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 160px;
+
+  &Img {
+    color: $primary;
+    font-size: 40px;
+    margin-right: 5px;
+  }
+}

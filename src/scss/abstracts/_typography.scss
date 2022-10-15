@@ -2,10 +2,13 @@
 @use './colors' as *;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 $font-primary: 'Montserrat', sans-serif;
 $font-secondary: 'Comfortaa', cursive;
+$font-tertiary: 'Pacifico', cursive;
 
+$font-size-extra-small: 0.875rem;
 $font-size-small: 1rem;
 $font-size-medium: 2rem;
 $font-size-large: 3rem;
@@ -59,13 +62,17 @@ h4 {
   line-height: 1.2;
 }
 
-p {
+li {
   font-size: $font-size-small;
-  line-height: 1.2;
-  margin: 0;
 }
 
 .btn,
 .toggle {
   font-size: $font-size-small;
+}
+
+.logo {
+  font-size: 24px;
+  font-family: $font-tertiary;
+  font-weight: 700;
 }
