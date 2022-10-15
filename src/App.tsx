@@ -6,12 +6,10 @@ import Favorites from './components/pages/Favorites'
 import Home from './components/pages/Home'
 import Landing from './components/pages/Landing'
 import NotFound from './components/pages/NotFount'
+import { RootState, useAppSelector } from './redux-store'
 import Services from './components/pages/Services'
-// import Playlist from './components/pages/Playlist'
-// import Playlists from './components/pages/Playlists'
 import StyleGuide from './components/pages/StyleGuide'
 import useAuth from './hooks/useAuth'
-import { RootState, useAppSelector } from './redux-store'
 import './scss/main.scss'
 
 const App = () => {
