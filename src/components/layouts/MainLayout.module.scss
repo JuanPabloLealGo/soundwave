@@ -1,4 +1,8 @@
 .MainLayout {
+  &Content {
+    min-height: calc(100vh - 380px);
+  }
+
   &ThemeButton {
     position: fixed;
     bottom: 0;

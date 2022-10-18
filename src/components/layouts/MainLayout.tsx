@@ -8,7 +8,9 @@ const MainLayout = () => {
   return (
     <div>
       <NavBar />
-      <Outlet />
+      <div className={styles.MainLayoutContent}>
+        <Outlet />
+      </div>
       <ToggleThemeButton className={styles.MainLayoutThemeButton} />
       <Footer />
     </div>

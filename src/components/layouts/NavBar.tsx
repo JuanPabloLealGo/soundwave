@@ -40,7 +40,7 @@ const NavBar = () => {
   return (
     <nav className={styles.NavBar}>
       <div className={styles.NavBarContainer}>
-        <NavLink onClick={onClickLogoHandler} to={'/'} className={`nav-link ${styles.NavBarLogo}`}>
+        <NavLink onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
           <Logo />
         </NavLink>
         <ul
@@ -54,7 +54,7 @@ const NavBar = () => {
                 <li key={index}>
                   <NavLink
                     end
-                    className={({ isActive }) => `nav-link ${styles.NavBarMenuLink} ${isActive && styles.NavBarMenuLinkActive}`}
+                    className={({ isActive }) => `link ${styles.NavBarMenuLink} ${isActive && styles.NavBarMenuLinkActive}`}
                     to={link}
                   >
                     {label}
