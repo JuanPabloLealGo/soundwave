@@ -1,0 +1,118 @@
+@import '../../scss/main.scss';
+
+.NavBar {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+
+  &Container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  &Logo {
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+
+  &Menu {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    left: -110%;
+    opacity: 1;
+    padding-bottom: 48px;
+    padding-top: 24px;
+    position: absolute;
+    transition: all 0.5s ease;
+    top: 48px;
+    width: 100%;
+
+    &Active {
+      left: 0px;
+      opacity: 1;
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+
+    li {
+      width: 100%;
+    }
+
+    &Link {
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      padding: 1.5rem 0;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    &LinkActive {
+      font-weight: 700;
+    }
+  }
+
+  &SignOnButton {
+    margin-left: 0;
+    margin-top: 40px;
+  }
+
+  &MenuIcon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: block;
+    font-size: 2rem;
+    position: absolute;
+    right: 0;
+    top: 20px;
+  }
+
+  @include for-size(m) {
+    flex-direction: row;
+    justify-content: space-between;
+
+    &Container {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 3rem;
+    }
+
+    &Menu {
+      flex-direction: row;
+      max-width: 90%;
+      left: auto;
+      padding-bottom: 0;
+      padding-top: 0;
+      position: relative;
+      top: 0;
+      transition: none;
+      width: auto;
+
+      &Link {
+        display: inline;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    &MenuIcon {
+      display: none;
+    }
+
+    &SignOnButton {
+      margin-left: 30px;
+      margin-top: 0;
+    }
+  }
+}

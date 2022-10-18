@@ -1,0 +1,13 @@
+@import '../scss/main.scss';
+
+.Logo {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-width: 170px;
+
+  &Img {
+    color: $primary;
+    margin-right: 5px;
+  }
+}

@@ -16,3 +16,4 @@ if ((window as any).Configs) {
 }
 
 export const BACKEND_URL = url
+export const AUTH_URL = `${process.env.REACT_APP_AUTH_URL}/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_SPOTIFY_REDIRECT_URL}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`

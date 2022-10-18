@@ -1,0 +1,12 @@
+.MainLayout {
+  &Content {
+    min-height: calc(100vh - 380px);
+  }
+
+  &ThemeButton {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+  }
+}
