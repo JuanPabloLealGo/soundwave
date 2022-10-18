@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <div className={styles.Logo}>
       <SiCastbox className={styles.LogoImg} />
-      <span className='logo'>Music box</span>
+      <span style={{}} className='logo'>Music box</span>
     </div>
   )
 }

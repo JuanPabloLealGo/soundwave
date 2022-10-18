@@ -6,13 +6,13 @@ import Favorites from './components/pages/Favorites'
 import Home from './components/pages/Home'
 import Landing from './components/pages/Landing'
 import NotFound from './components/pages/NotFount'
+import { RootState, useAppSelector } from './redux-store'
 import Services from './components/pages/Services'
-// import Playlist from './components/pages/Playlist'
-// import Playlists from './components/pages/Playlists'
 import StyleGuide from './components/pages/StyleGuide'
 import useAuth from './hooks/useAuth'
-import { RootState, useAppSelector } from './redux-store'
 import './scss/main.scss'
+import TermsOfServices from './components/pages/TermsOfService'
+import PrivacyPolicy from './components/pages/PrivacyPolicy'
 
 const App = () => {
   useAuth()
@@ -27,9 +27,11 @@ const App = () => {
       children: [
         { index: true, element: initialScreen },
         { path: 'about', element: <About /> },
+        { path: 'contact', element: <Contact /> },
         { path: 'favorites', element: <Favorites /> },
+        { path: 'privacy-policy', element: <PrivacyPolicy /> },
         { path: 'services', element: <Services /> },
-        { path: 'contact', element: <Contact /> }
+        { path: 'terms-of-service', element: <TermsOfServices /> },
       ]
     },
     /*

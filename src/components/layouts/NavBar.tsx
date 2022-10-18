@@ -3,35 +3,44 @@ import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { HiMenu } from 'react-icons/hi'
 import { NavLink } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../redux-store'
-import { logout } from '../redux-store/reducers/authSlice'
-import MainButton, { MainButtonType } from './MainButton'
-import Logo from './Logo'
+import Logo from '../Logo'
+import MainButton, { MainButtonType } from '../MainButton'
+import { RootState, useAppDispatch, useAppSelector } from '../../redux-store'
+import { logout } from '../../redux-store/reducers/authSlice'
+import { AUTH_URL } from '../../environment/appEnvironment'
 
 const NavBar = () => {
-
-  const [isActive, setIsActive] = useState(false)
   const dispatch = useAppDispatch()
-  const { data } = useAppSelector((state) => state.auth)
-
-  const onLogoutHandler = () => dispatch(logout())
+  const [isActive, setIsActive] = useState(false)
+  const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
 
   const onClickHandler = () => setIsActive(!isActive)
-
   const onClickLogoHandler = () => setIsActive(false)
+  const onLoginHandler = () => window.location.replace(AUTH_URL)
 
-  const links = [
+  const onLogoutHandler = () => {
+    dispatch(logout())
+    window.location.replace('/')
+  }
+
+  const privateLinks = [
     { label: 'Home', link: '/' },
     { label: 'Favorites', link: '/favorites' },
+  ]
+
+  const publicLinks = [
+    { label: 'Home', link: '/' },
     { label: 'About', link: '/about' },
     { label: 'Services', link: '/services' },
     { label: 'Contact', link: '/contact' },
   ]
 
+  const links = isAuthenticated ? privateLinks : publicLinks
+
   return (
     <nav className={styles.NavBar}>
       <div className={styles.NavBarContainer}>
-        <NavLink onClick={onClickLogoHandler} to={'/'} className={`nav-link ${styles.NavBarLogo}`}>
+        <NavLink onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
           <Logo />
         </NavLink>
         <ul
@@ -45,7 +54,7 @@ const NavBar = () => {
                 <li key={index}>
                   <NavLink
                     end
-                    className={({ isActive }) => `nav-link ${styles.NavBarMenuLink} ${isActive && styles.NavBarMenuLinkActive}`}
+                    className={({ isActive }) => `link ${styles.NavBarMenuLink} ${isActive && styles.NavBarMenuLinkActive}`}
                     to={link}
                   >
                     {label}
@@ -54,14 +63,12 @@ const NavBar = () => {
               )
             })
           }
-          {data && (
-            <MainButton
-              label="Sign Out"
-              onClick={onLogoutHandler}
-              className={styles.NavBarSignOnButton}
-              type={MainButtonType.Secondary}
-            />
-          )}
+          <MainButton
+            label={isAuthenticated ? 'Sign Out' : 'Sign In'}
+            onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
+            className={styles.NavBarSignOnButton}
+            type={MainButtonType.Secondary}
+          />
         </ul>
         <button
           className={`mobile-menu-icon ${styles.NavBarMenuIcon}`}
