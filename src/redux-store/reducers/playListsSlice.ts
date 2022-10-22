@@ -1,31 +1,31 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import PlayListsStateInterface from "../../interfaces/state/PlayListsStateInterface";
-import { getPlayListsPage } from "../actions/playListActions";
+import PlaylistsStateInterface from "../../interfaces/state/PlaylistsStateInterface";
+import { getPlaylistsPage } from "../actions/playlistActions";
 
 const initialState = {
   data: null,
   isLoading: false,
   error: null
-} as PlayListsStateInterface
+} as PlaylistsStateInterface
 
-const playListsSlice = createSlice({
+const playlistsSlice = createSlice({
   name: 'playLists',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getPlayListsPage.pending, (state) => {
+      .addCase(getPlaylistsPage.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getPlayListsPage.fulfilled, (state, { payload }) => {
+      .addCase(getPlaylistsPage.fulfilled, (state, { payload }) => {
         state.isLoading = false
         state.data = { ...state.data, ...payload }
       })
-      .addCase(getPlayListsPage.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(getPlaylistsPage.rejected, (state, action: PayloadAction<any>) => {
         state.isLoading = false
         state.error = action.payload
       })
   }
 })
 
-export default playListsSlice.reducer
+export default playlistsSlice.reducer

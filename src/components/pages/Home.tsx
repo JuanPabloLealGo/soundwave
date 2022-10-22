@@ -3,7 +3,7 @@ import { useRef } from "react"
 
 import { RootState, useAppDispatch, useAppSelector } from "../../redux-store"
 import { getCategoryPage } from "../../redux-store/actions/categoryActions"
-import { getPlayListsPage } from "../../redux-store/actions/playListActions"
+import { getPlaylistsPage } from "../../redux-store/actions/playlistActions"
 import CategoryList from "../CategoryList"
 import Spinner from "../common/Spinner"
 
@@ -19,9 +19,9 @@ const Home = () => {
   } = useAppSelector((state: RootState) => state.category)
 
   const {
-    data: playListsByCategory,
-    isLoading: playListsByCategoryIsLoading
-  } = useAppSelector((state: RootState) => state.playLists)
+    data: playlistsByCategory,
+    isLoading: playlistsByCategoryIsLoading
+  } = useAppSelector((state: RootState) => state.playlists)
 
   useEffect(() => {
     if (didMountRef.current) {
@@ -30,26 +30,26 @@ const Home = () => {
     }
 
     if (categories) {
-      if (!playListsByCategory) {
+      if (!playlistsByCategory) {
         categories.items.forEach((category) => {
-          dispatch(getPlayListsPage({ categoryId: category.id, limit: 5, offset: 0 }))
+          dispatch(getPlaylistsPage({ categoryId: category.id, limit: 5, offset: 0 }))
         })
       }
     } else {
       dispatch(getCategoryPage())
     }
 
-  }, [categories, playListsByCategory, dispatch])
+  }, [categories, playlistsByCategory, dispatch])
 
   return (
     <div className={styles.Home}>
       <div className={styles.HomeHeadlineImage} />
-      {categoriesIsLoading && playListsByCategoryIsLoading
+      {categoriesIsLoading && playlistsByCategoryIsLoading
         ? <Spinner />
-        : (categories && playListsByCategory && (
+        : (categories && playlistsByCategory && (
           <CategoryList
             categories={categories.items}
-            playListsByCategories={playListsByCategory}
+            playlistsByCategories={playlistsByCategory}
           />
         ))
       }

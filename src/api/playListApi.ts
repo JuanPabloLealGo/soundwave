@@ -1,7 +1,7 @@
 import { BACKEND_URL } from "../environment/appEnvironment"
 import api from "./apiClient"
 
-export const getCategorysPlayLists = async (categoryId: string, limit: number, offset: number) => {
+export const getCategorysPlaylists = async (categoryId: string, limit: number, offset: number) => {
   try {
     const response = await api({
       method: 'GET',

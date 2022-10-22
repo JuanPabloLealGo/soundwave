@@ -1,6 +1,6 @@
-import PlayListsPageInterface from "../PlayListsPageInterface";
+import PlaylistsPageInterface from "../PlaylistPageInterface";
 import CommonStateInterface from "./CommonStateInterface";
 
-export default interface PlayListsStateInterface extends CommonStateInterface {
-  data: null | { [key: string]: PlayListsPageInterface }
+export default interface PlaylistsStateInterface extends CommonStateInterface {
+  data: null | { [key: string]: PlaylistsPageInterface }
 }

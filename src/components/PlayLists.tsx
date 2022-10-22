@@ -1,19 +1,19 @@
-import PlayListInterface from "../interfaces/PlayListInterface"
+import PlaylistInterface from "../interfaces/PlaylistInterface"
 
 interface Props {
-  playLists: PlayListInterface[]
+  playlists: PlaylistInterface[]
 }
 
-const PlayLists = ({ playLists }: Props) => {
+const Playlists = ({ playlists }: Props) => {
   return (
     <div>
-      {playLists.map((playList, index) => {
-        return playList?.id
-          ? <div key={index}>{playList?.name.toLowerCase()}</div>
+      {playlists.map((playlist, index) => {
+        return playlist?.id
+          ? <div key={index}>{playlist?.name.toLowerCase()}</div>
           : null
       })}
     </div>
   )
 }
 
-export default PlayLists
+export default Playlists

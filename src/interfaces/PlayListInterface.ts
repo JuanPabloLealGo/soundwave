@@ -4,7 +4,7 @@ import ImageInterface from "./ImageInterface"
 import OwnerInterface from "./OwnerInterface"
 import TracksInterface from "./TracksInterface"
 
-export default interface PlayListInterface {
+export default interface PlaylistInterface {
   collaborative: boolean
   description: string
   external_urls: ExternalUrlsInterface

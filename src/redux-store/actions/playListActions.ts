@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { getCategorysPlayLists } from "../../api/playListApi"
-import PlayListsPageInterface from "../../interfaces/PlayListsPageInterface"
+import { getCategorysPlaylists } from "../../api/playlistApi"
+import PlaylistsPageInterface from "../../interfaces/PlaylistPageInterface"
 
 interface Props {
   categoryId: string
@@ -8,14 +8,14 @@ interface Props {
   offset: number
 }
 
-export const getPlayListsPage = createAsyncThunk(
+export const getPlaylistsPage = createAsyncThunk(
   'playlists',
   async ({ categoryId, limit, offset }: Props, thunkAPI) => {
     try {
-      const response = await getCategorysPlayLists(categoryId, limit, offset)
-      const categoryPlayLists = {} as { [key: string]: PlayListsPageInterface }
-      categoryPlayLists[categoryId] = response.data.playlists
-      return categoryPlayLists
+      const response = await getCategorysPlaylists(categoryId, limit, offset)
+      const categoryPlaylists = {} as { [key: string]: PlaylistsPageInterface }
+      categoryPlaylists[categoryId] = response.data.playlists
+      return categoryPlaylists
     } catch (error: any) {
       const message = error.message
       return thunkAPI.rejectWithValue(message)
