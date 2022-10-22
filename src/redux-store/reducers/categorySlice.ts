@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import CategoryPageInterface from "../../interfaces/CategoryPageInterface";
-import CategoryListStateInterface from "../../interfaces/state/CategoryListSatateInterface";
+import CategoryPageInterface from "../../interfaces/CategoryInterface";
+import CategoryListStateInterface from "../../interfaces/state/CategoryListStateInterface";
 import { getCategoryPage } from "../actions/categoryActions";
 
 const initialState = {

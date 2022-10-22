@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { HiMenu } from 'react-icons/hi'
 import { NavLink } from 'react-router-dom'
-import Logo from '../Logo'
-import MainButton, { MainButtonType } from '../MainButton'
+import Logo from '../common/Logo'
+import MainButton, { MainButtonType } from '../common/MainButton'
 import { RootState, useAppDispatch, useAppSelector } from '../../redux-store'
 import { logout } from '../../redux-store/reducers/authSlice'
 import { AUTH_URL } from '../../environment/appEnvironment'
@@ -71,7 +71,7 @@ const NavBar = () => {
           />
         </ul>
         <button
-          className={`mobile-menu-icon ${styles.NavBarMenuIcon}`}
+          className={`color-theme ${styles.NavBarMenuIcon}`}
           onClick={onClickHandler}
         >
           {isActive ? <IoMdClose /> : <HiMenu />}

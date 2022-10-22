@@ -13,6 +13,9 @@ body {
   height: 100%;
 }
 
+
+
+
 li {
   cursor: pointer;
   list-style: none;
@@ -22,6 +25,10 @@ li {
 
 ul {
   padding: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .btn,
@@ -69,6 +76,10 @@ ul {
   color: $black;
   min-height: 100%;
 
+  a {
+    color: $background-dark;
+  }
+
   .btn {
     box-shadow: $dark-shadow;
 
@@ -81,11 +92,6 @@ ul {
         color: $white;
       }
     }
-  }
-
-  .link,
-  .mobile-menu-icon {
-    color: $black;
   }
 
   .background-theme {
@@ -103,6 +109,10 @@ ul {
   color: $white;
   min-height: 100%;
 
+  a {
+    color: $white;
+  }
+
   .btn {
     box-shadow: $light-shadow;
 
@@ -119,19 +129,12 @@ ul {
     }
   }
 
-  .link {
-    color: $white;
-  }
-
-  .mobile-menu-icon {
-    color: $white;
-  }
 
   .background-theme {
     background-color: $background-dark;
   }
 
   .color-theme {
-    color: $background;
+    color: $white;
   }
 }
