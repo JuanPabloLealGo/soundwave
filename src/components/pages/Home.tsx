@@ -32,7 +32,7 @@ const Home = () => {
     if (categories) {
       if (!playlistsByCategory) {
         categories.items.forEach((category) => {
-          dispatch(getPlaylistsPage({ categoryId: category.id, limit: 5, offset: 0 }))
+          dispatch(getPlaylistsPage({ categoryId: category.id, limit: 10, offset: 0 }))
         })
       }
     } else {

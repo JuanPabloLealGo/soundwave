@@ -1,4 +1,6 @@
 import PlaylistInterface from "../interfaces/PlaylistInterface"
+import PlaylistCard from "./PlaylistCard"
+import styles from "./Playlists.module.scss"
 
 interface Props {
   playlists: PlaylistInterface[]
@@ -6,10 +8,10 @@ interface Props {
 
 const Playlists = ({ playlists }: Props) => {
   return (
-    <div>
-      {playlists.map((playlist, index) => {
+    <div className={styles.Playlists}>
+      {playlists.map((playlist) => {
         return playlist?.id
-          ? <div key={index}>{playlist?.name.toLowerCase()}</div>
+          ? <PlaylistCard key={playlist.id} playlist={playlist} />
           : null
       })}
     </div>
