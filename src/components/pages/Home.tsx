@@ -1,13 +1,27 @@
 import { useEffect } from "react"
 import { useRef } from "react"
-import CategoryItemInterface from "../../interfaces/CategoryItemIterface"
+
 import { RootState, useAppDispatch, useAppSelector } from "../../redux-store"
 import { getCategoryPage } from "../../redux-store/actions/categoryActions"
+import { getPlaylistsPage } from "../../redux-store/actions/playlistActions"
+import CategoryList from "../CategoryList"
+import Spinner from "../common/Spinner"
+
+import styles from './Home.module.scss'
 
 const Home = () => {
   const dispatch = useAppDispatch()
   const didMountRef = useRef(true)
-  const { isLoading, data } = useAppSelector((state: RootState) => state.category)
+
+  const {
+    data: categories,
+    isLoading: categoriesIsLoading
+  } = useAppSelector((state: RootState) => state.category)
+
+  const {
+    data: playlistsByCategory,
+    isLoading: playlistsByCategoryIsLoading
+  } = useAppSelector((state: RootState) => state.playlists)
 
   useEffect(() => {
     if (didMountRef.current) {
@@ -15,21 +29,29 @@ const Home = () => {
       return
     }
 
-    dispatch(getCategoryPage())
-  }, [dispatch])
+    if (categories) {
+      if (!playlistsByCategory) {
+        categories.items.forEach((category) => {
+          dispatch(getPlaylistsPage({ categoryId: category.id, limit: 10, offset: 0 }))
+        })
+      }
+    } else {
+      dispatch(getCategoryPage())
+    }
+
+  }, [categories, playlistsByCategory, dispatch])
 
   return (
-    <div>
-      <h1>Home Page</h1>
-      {isLoading
-        ? (<h1>Loading...</h1>)
-        : (data && (data?.categories.items.map((item: CategoryItemInterface) => {
-          return (
-            <div key={item.id}>
-              {item.name}
-            </div>
-          )
-        })))
+    <div className={styles.Home}>
+      <div className={styles.HomeHeadlineImage} />
+      {categoriesIsLoading && playlistsByCategoryIsLoading
+        ? <Spinner />
+        : (categories && playlistsByCategory && (
+          <CategoryList
+            categories={categories.items}
+            playlistsByCategories={playlistsByCategory}
+          />
+        ))
       }
     </div>
   )

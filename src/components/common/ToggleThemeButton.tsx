@@ -1,5 +1,5 @@
-import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
-import { toogleTheme } from "../redux-store/reducers/uiSlice"
+import { RootState, useAppDispatch, useAppSelector } from "../../redux-store"
+import { toogleTheme } from "../../redux-store/reducers/uiSlice"
 import styles from "./ToggleThemeButton.module.scss"
 import { WiMoonAltFirstQuarter } from "react-icons/wi"
 

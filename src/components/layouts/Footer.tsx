@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Logo from '../Logo'
+import Logo from '../common/Logo'
 import styles from './Footer.module.scss'
 
 const Footer = () => {
@@ -10,8 +10,8 @@ const Footer = () => {
           <Logo />
         </div>
         <div className={styles.FooterLinks}>
-          <Link className={styles.FooterLink} to='/terms-of-service'>Terms of Service</Link>
-          <Link className={styles.FooterLink} to='/privacy-policy'>Privacy Policy</Link>
+          <Link className={`${styles.FooterLink}`} to='/terms-of-service'>Terms of Service</Link>
+          <Link className={`${styles.FooterLink}`} to='/privacy-policy'>Privacy Policy</Link>
         </div>
         <span>{`© ${new Date().getFullYear()} Music Box`}</span>
       </div>

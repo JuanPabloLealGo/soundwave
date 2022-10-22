@@ -1,0 +1,34 @@
+.PlaylistCard {
+  width: 8rem;
+  min-width: 8rem;
+  background-color: gray;
+  margin-right: 8px;
+  padding: 20px;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+
+  &Name {
+    min-height: 50%;
+    font-size: 1.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+  }
+
+  &Description {
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+}
