@@ -3,7 +3,7 @@ import AppStateInterface from "../../interfaces/state/AppStateInterface"
 import authReducer from "./authSlice"
 import categoryReducer from "./categorySlice"
 import uiReducer from "./uiSlice"
-import playlistsReducer from "./playlistsSlice"
+import playlistsReducer from "./playListsSlice"
 import storage from "redux-persist/lib/storage"
 import persistReducer from "redux-persist/es/persistReducer"
 
