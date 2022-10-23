@@ -3,7 +3,7 @@ import { useRef } from "react"
 
 import { RootState, useAppDispatch, useAppSelector } from "../../redux-store"
 import { getCategoryPage } from "../../redux-store/actions/categoryActions"
-import { getPlaylistsPage } from "../../redux-store/actions/playlistActions"
+import { getPlaylistsPage } from "../../redux-store/actions/playlistsActions"
 import CategoryList from "../CategoryList"
 import Spinner from "../common/Spinner"
 
