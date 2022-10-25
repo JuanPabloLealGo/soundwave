@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { getCategorysPlaylists } from "../../api/playlistApi"
+import { getCategorysPlaylists } from "../../api/playListApi"
 import PlaylistsPageInterface from "../../interfaces/PlaylistPageInterface"
 
 interface Props {

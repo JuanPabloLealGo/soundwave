@@ -2,7 +2,7 @@ import styles from './NavBar.module.scss'
 import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { HiMenu } from 'react-icons/hi'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Logo from '../common/Logo'
 import MainButton, { MainButtonType } from '../common/MainButton'
 import { RootState, useAppDispatch, useAppSelector } from '../../redux-store'
@@ -11,6 +11,7 @@ import { AUTH_URL } from '../../environment/appEnvironment'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [isActive, setIsActive] = useState(false)
   const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
 
@@ -20,7 +21,7 @@ const NavBar = () => {
 
   const onLogoutHandler = () => {
     dispatch(logout())
-    window.location.replace('/')
+    return navigate('/')
   }
 
   const privateLinks = [

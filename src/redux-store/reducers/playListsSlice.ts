@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import PlaylistsStateInterface from "../../interfaces/state/PlaylistsStateInterface";
-import { getPlaylistsPage } from "../actions/playlistActions";
+import { getPlaylistsPage } from "../actions/playlistsActions";
 
 const initialState = {
   data: null,
@@ -9,7 +9,7 @@ const initialState = {
 } as PlaylistsStateInterface
 
 const playlistsSlice = createSlice({
-  name: 'playLists',
+  name: 'playlists',
   initialState,
   reducers: {},
   extraReducers(builder) {

@@ -1,7 +1,7 @@
 import CategoryItemInterface from "../interfaces/CategoryItemIterface"
 import PlaylistsPageInterface from "../interfaces/PlaylistPageInterface"
 import styles from "./CategoryList.module.scss"
-import Playlists from "./Playlists"
+import Playlists from "./PlayLists"
 
 interface Props {
   categories: CategoryItemInterface[]
