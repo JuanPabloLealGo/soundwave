@@ -1,20 +1,27 @@
 @import "../scss/main.scss";
 
 .CategoryList {
+  grid-column: 1/-1;
+  position: relative;
   width: 100%;
+  padding-bottom: 50px;
 
   &Item {
-    height: 21rem;
-    width: 100%;
-    display: flex;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 20px 15px;
-    flex-direction: column;
+    padding-top: 20px;
 
     &Name {
-      width: 100%;
-      text-transform: capitalize;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+  }
+
+  @include for-size(m) {
+    &Item {
+      padding-top: 30px;
+
+      &Name {
+        font-size: 1.75rem;
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 @use '../abstracts/colors' as *;
 @use '../abstracts/typography' as *;
+@use '../abstracts/layout' as *;
 
 html,
 body {
@@ -13,8 +14,9 @@ body {
   height: 100%;
 }
 
-
-
+* {
+  box-sizing: border-box;
+}
 
 li {
   cursor: pointer;
@@ -42,28 +44,59 @@ a {
 }
 
 .logo {
-  color: $primary;
+
+  &--xs {
+    height: 18px;
+  }
+
+  &--s {
+    height: 20px;
+  }
+
+  &--m {
+    height: 24px;
+  }
+
+  &--l {
+    height: 28px;
+  }
+
+  &--xl {
+    height: 30px;
+  }
+
+  @include for-size(m) {
+    &--xs {
+      height: 16px;
+    }
+
+    &--s {
+      height: 24px;
+    }
+
+    &--m {
+      height: 30px;
+    }
+
+    &--l {
+      height: 32px;
+    }
+
+    &--xl {
+      height: 36px;
+    }
+  }
 }
 
 .btn {
-  border-radius: 5px;
+  border-radius: 18px;
   border: none;
-  height: 45px;
+  height: 40px;
+  padding: 8px;
 
   &--primary {
-    border: 3px solid;
-    background-color: transparent;
-  }
-
-  &--secondary {
     background-color: $primary;
     color: $white;
-
-    &:active,
-    &:focus,
-    &:hover {
-      background-color: $pink-light;
-    }
   }
 }
 
@@ -72,40 +105,26 @@ a {
 }
 
 .light {
-  background-color: $background;
+  background-color: $white;
   color: $black;
   min-height: 100%;
 
   a {
-    color: $background-dark;
-  }
-
-  .btn {
-    box-shadow: $dark-shadow;
-
-    &--primary {
-      color: $background-dark;
-      border-color: $background-dark;
-
-      &:hover {
-        background-color: $background-dark;
-        color: $white;
-      }
-    }
+    color: $black;
   }
 
   .background-theme {
-    background-color: $background;
+    background-color: $white;
   }
 
   .color-theme {
-    color: $background-dark;
+    color: $black;
   }
 
 }
 
 .dark {
-  background-color: $background-dark;
+  background-color: $black;
   color: $white;
   min-height: 100%;
 
@@ -113,25 +132,8 @@ a {
     color: $white;
   }
 
-  .btn {
-    box-shadow: $light-shadow;
-
-    &--primary {
-      color: $secondary;
-      border-color: $secondary;
-
-      &:active,
-      &:focus,
-      &:hover {
-        background-color: $secondary;
-        color: $background-dark;
-      }
-    }
-  }
-
-
   .background-theme {
-    background-color: $background-dark;
+    background-color: $black;
   }
 
   .color-theme {

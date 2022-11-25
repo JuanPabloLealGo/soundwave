@@ -32,27 +32,32 @@ const Home = () => {
     if (categories) {
       if (!playlistsByCategory) {
         categories.items.forEach((category) => {
-          dispatch(getPlaylistsPage({ categoryId: category.id, limit: 10, offset: 0 }))
+          const currentOffset = 0
+          dispatch(getPlaylistsPage({ categoryId: category.id, limit: 10, offset: currentOffset }))
         })
       }
+
     } else {
       dispatch(getCategoryPage())
     }
 
   }, [categories, playlistsByCategory, dispatch])
 
+  console.log('playlistsByCategory: ', playlistsByCategory)
+
   return (
     <div className={styles.Home}>
-      <div className={styles.HomeHeadlineImage} />
-      {categoriesIsLoading && playlistsByCategoryIsLoading
-        ? <Spinner />
-        : (categories && playlistsByCategory && (
-          <CategoryList
-            categories={categories.items}
-            playlistsByCategories={playlistsByCategory}
-          />
-        ))
-      }
+      <div className='grid'>
+        {categoriesIsLoading && playlistsByCategoryIsLoading
+          ? <Spinner />
+          : (categories && playlistsByCategory && (
+            <CategoryList
+              categories={categories.items}
+              playlistsByCategories={playlistsByCategory}
+            />
+          ))
+        }
+      </div>
     </div>
   )
 }

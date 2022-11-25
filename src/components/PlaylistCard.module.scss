@@ -1,34 +1,98 @@
+@import "../scss/main.scss";
+
+.PlayListItem {
+  position: relative;
+}
+
 .PlaylistCard {
-  width: 8rem;
-  min-width: 8rem;
-  background-color: gray;
-  margin-right: 8px;
-  padding: 20px;
-  color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  height: 160px;
+  margin: 10px;
+  min-width: 145px;
+  position: relative;
+  width: 145px;
 
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
+  &BlurredContainer,
+  &Description {
+    bottom: 0;
+    border-radius: 8px 8px 20px 20px;
+    height: 35%;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+  }
 
-  &Name {
-    min-height: 50%;
-    font-size: 1.25rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-transform: capitalize;
+  &BlurredContainer {
+    backdrop-filter: blur(16px);
   }
 
   &Description {
-    font-size: 0.8rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    -webkit-box-orient: vertical;
+    background-color: $white;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    justify-content: center;
+
+    &Title {
+      width: 100%;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+
+    &Tracks {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  &Button {
+    align-items: center;
+    background-color: $primary;
+    bottom: 20px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    position: absolute;
+    right: 10px;
+    width: 40px;
+
+    &Icon {
+      height: 30px;
+      width: 25px;
+    }
+  }
+
+  @include for-size(m) {
+    border-radius: 30px;
+    font-size: 1rem;
+    height: 215px;
+    min-width: 200px;
+    width: 200px;
+
+    &BlurredContainer,
+    &Description {
+      padding: 16px;
+    }
+
+    &Button {
+      bottom: 25px;
+      height: 50px;
+      width: 50px;
+
+      &Icon {
+        height: 40px;
+        width: 30px;
+      }
+    }
   }
 }

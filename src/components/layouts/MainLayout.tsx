@@ -6,14 +6,14 @@ import styles from "./MainLayout.module.scss"
 
 const MainLayout = () => {
   return (
-    <div>
+    <>
       <NavBar />
       <div className={styles.MainLayoutContent}>
         <Outlet />
       </div>
       <ToggleThemeButton className={styles.MainLayoutThemeButton} />
       <Footer />
-    </div>
+    </>
   )
 }
 

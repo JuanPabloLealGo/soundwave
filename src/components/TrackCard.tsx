@@ -16,7 +16,7 @@ const TrackCard = ({ track, onTrackSelect }: Props) => {
       <div className={styles.TrackCardArtists}>
         {track.artists.map((artist) => {
           return (
-            <div>{artist.name}</div>
+            <div key={artist.id}>{artist.name}</div>
           )
         })}
       </div>

@@ -1,11 +1,20 @@
-import { SiCastbox } from 'react-icons/si'
+import { Size } from '../../enums/SizeEnum'
+import { RootState, useAppSelector } from '../../redux-store'
 import styles from './Logo.module.scss'
 
-const Logo = () => {
+interface Props {
+  size?: Size
+}
+
+const Logo = ({ size = Size.s }: Props) => {
+  const isDarkTheme = useAppSelector((state: RootState) => state.ui.isDarkTheme)
+
   return (
-    <div className={styles.Logo}>
-      <SiCastbox className={styles.LogoImg} />
-      <span style={{}} className='logo'>Music box</span>
+    <div className={`${styles.Logo} logo--${size}`}>
+      <img
+        src={isDarkTheme ? '/images/green_logo.png' : '/images/black_logo.png'}
+        alt='spotify'
+      />
     </div>
   )
 }
