@@ -8,6 +8,7 @@ import MainButton, { MainButtonType } from '../common/MainButton'
 import { RootState, useAppDispatch, useAppSelector } from '../../redux-store'
 import { logout } from '../../redux-store/reducers/authSlice'
 import { AUTH_URL } from '../../environment/appEnvironment'
+import { Size } from '../../enums/SizeEnum'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
@@ -39,10 +40,10 @@ const NavBar = () => {
   const links = isAuthenticated ? privateLinks : publicLinks
 
   return (
-    <nav className={styles.NavBar}>
+    <nav className={`background-theme ${styles.NavBar}`}>
       <div className={styles.NavBarContainer}>
         <NavLink onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
-          <Logo />
+          <Logo size={Size.m} />
         </NavLink>
         <ul
           className={`${styles.NavBarMenu} ${isActive && `${styles.NavBarMenuActive} background-theme`}`}
@@ -68,7 +69,7 @@ const NavBar = () => {
             label={isAuthenticated ? 'Sign Out' : 'Sign In'}
             onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
             className={styles.NavBarSignOnButton}
-            type={MainButtonType.Secondary}
+            type={MainButtonType.Primary}
           />
         </ul>
         <button

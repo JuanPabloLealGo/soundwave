@@ -1,7 +1,14 @@
+@import "../scss/main.scss";
+
 .Playlists {
   display: flex;
-  overflow-x: scroll;
-  height: 100%;
-  padding: 10px 5px;
-  border: 1px solid red;
+  flex-direction: row;
+  height: 210px;
+  overflow-x: auto;
+  padding-top: 10px;
+
+  @include for-size(m) {
+    height: 280px;
+    padding-top: 12px;
+  }
 }
