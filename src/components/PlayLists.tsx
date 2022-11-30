@@ -1,20 +1,46 @@
-import { UIEvent } from "react"
-import PlaylistInterface from "../interfaces/PlaylistInterface"
+import { UIEvent, useEffect } from "react"
+import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
+import { getPlaylistsPage } from "../redux-store/actions/playlistsActions"
 import PlaylistCard from "./PlaylistCard"
 import styles from "./Playlists.module.scss"
 
 interface Props {
-  onScroll: (event: UIEvent<HTMLElement>) => void
-  playlists: PlaylistInterface[]
+  categoryId: string
 }
 
-const Playlists = ({ onScroll, playlists }: Props) => {
+const Playlists = ({ categoryId }: Props) => {
+
+  const dispatch = useAppDispatch()
+
+  const {
+    data,
+    isLoading
+  } = useAppSelector((state: RootState) => state.playlists)
+
+  useEffect(() => {
+    if (categoryId) {
+      const offset = 0
+      dispatch(getPlaylistsPage({ categoryId: categoryId, limit: 10, offset }))
+    }
+  }, [categoryId, dispatch])
+
+  const handleScroll = (e: UIEvent<HTMLElement>) => {
+    // Make sure the data is not loading before send a new request
+
+    const { scrollLeft, scrollWidth, clientWidth } = e.currentTarget
+
+    if (Math.floor(scrollWidth - scrollLeft) <= clientWidth) {
+      console.log('request')
+    }
+  }
+
+  const playlists = data && data[categoryId] ? data[categoryId].items : []
 
   return (
-    <div onScroll={onScroll} className={styles.Playlists}>
-      {playlists.map((playlist) => {
+    <div onScroll={handleScroll} className={styles.Playlists} >
+      {playlists.map((playlist, i) => {
         return playlist?.id
-          ? <PlaylistCard key={playlist.id} playlist={playlist} />
+          ? <PlaylistCard key={i} playlist={playlist} />
           : null
       })}
     </div>

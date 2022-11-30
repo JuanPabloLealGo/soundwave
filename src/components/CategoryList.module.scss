@@ -5,23 +5,4 @@
   position: relative;
   width: 100%;
   padding-bottom: 50px;
-
-  &Item {
-    padding-top: 20px;
-
-    &Name {
-      font-size: 1.25rem;
-      font-weight: 700;
-    }
-  }
-
-  @include for-size(m) {
-    &Item {
-      padding-top: 30px;
-
-      &Name {
-        font-size: 1.75rem;
-      }
-    }
-  }
 }
