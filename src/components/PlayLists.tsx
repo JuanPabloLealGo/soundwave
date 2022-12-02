@@ -1,4 +1,5 @@
-import { UIEvent, useEffect } from "react"
+import { UIEvent, useEffect, useRef, useState } from "react"
+import { PaginationEnum } from "../enums/PaginationEnum"
 import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
 import { getPlaylistsPage } from "../redux-store/actions/playlistsActions"
 import PlaylistCard from "./PlaylistCard"
@@ -11,30 +12,40 @@ interface Props {
 const Playlists = ({ categoryId }: Props) => {
 
   const dispatch = useAppDispatch()
-
-  const {
-    data,
-    isLoading
-  } = useAppSelector((state: RootState) => state.playlists)
+  const [currentOffset, setCurrentOffset] = useState(0)
+  const didMountRef = useRef(true)
+  const { data } = useAppSelector((state: RootState) => state.playlists)
+  const playlists = data && data[categoryId] ? data[categoryId].items : []
 
   useEffect(() => {
-    if (categoryId) {
-      const offset = 0
-      dispatch(getPlaylistsPage({ categoryId: categoryId, limit: 10, offset }))
+    if (didMountRef.current) {
+      didMountRef.current = false
+      return
     }
-  }, [categoryId, dispatch])
+
+    if (categoryId) {
+      dispatch(getPlaylistsPage({
+        categoryId: categoryId,
+        limit: PaginationEnum.playlistsLimit,
+        offset: currentOffset
+      }))
+    }
+  }, [categoryId, currentOffset, dispatch])
 
   const handleScroll = (e: UIEvent<HTMLElement>) => {
-    // Make sure the data is not loading before send a new request
-
     const { scrollLeft, scrollWidth, clientWidth } = e.currentTarget
+    const hasMoreData = data && data[categoryId] && data[categoryId].next !== null
 
-    if (Math.floor(scrollWidth - scrollLeft) <= clientWidth) {
-      console.log('request')
+    if (hasMoreData && (Math.floor(scrollWidth - scrollLeft) <= clientWidth)) {
+      setCurrentOffset(prev => prev + PaginationEnum.playlistsLimit)
     }
   }
 
-  const playlists = data && data[categoryId] ? data[categoryId].items : []
+  if (data && data[categoryId] && data[categoryId].total === 0) {
+    return (
+      <div>No playlists</div>
+    )
+  }
 
   return (
     <div onScroll={handleScroll} className={styles.Playlists} >

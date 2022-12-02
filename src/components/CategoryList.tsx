@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
+import { PaginationEnum } from "../enums/PaginationEnum"
 import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
 import { getCategoryPage } from "../redux-store/actions/categoryActions"
 import CategoryItem from "./CategoryItem"
@@ -22,7 +23,7 @@ const CategoryList = () => {
       return
     }
 
-    dispatch(getCategoryPage({ limit: 10, offset: currentOffset }))
+    dispatch(getCategoryPage({ limit: PaginationEnum.commonLimit, offset: currentOffset }))
   }, [currentOffset, dispatch])
 
   // Intersection Observer
@@ -36,7 +37,7 @@ const CategoryList = () => {
 
     intObserver.current = new IntersectionObserver(categories => {
       if (categories[0].isIntersecting && hasNextPage) {
-        setCurrentOffset(prev => prev + 10)
+        setCurrentOffset(prev => prev + PaginationEnum.commonLimit)
       }
     })
 
