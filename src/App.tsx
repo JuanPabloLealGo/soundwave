@@ -1,18 +1,19 @@
-import { useRoutes } from 'react-router-dom'
-import MainLayout from './components/layouts/MainLayout'
-import About from './components/pages/About'
-import Contact from './components/pages/Contact'
-import Favorites from './components/pages/Favorites'
-import Home from './components/pages/Home'
-import Landing from './components/pages/Landing'
-import NotFound from './components/pages/NotFount'
-import { RootState, useAppSelector } from './redux-store'
-import Services from './components/pages/Services'
-import StyleGuide from './components/pages/StyleGuide'
-import useAuth from './hooks/useAuth'
-import './scss/main.scss'
-import TermsOfServices from './components/pages/TermsOfService'
-import PrivacyPolicy from './components/pages/PrivacyPolicy'
+import { useRoutes } from "react-router-dom"
+import MainLayout from "./components/layouts/MainLayout"
+import About from "./components/pages/About"
+import Contact from "./components/pages/Contact"
+import Favorites from "./components/pages/Favorites"
+import Home from "./components/pages/Home"
+import Landing from "./components/pages/Landing"
+import NotFound from "./components/pages/NotFount"
+import { RootState, useAppSelector } from "./redux-store"
+import Services from "./components/pages/Services"
+import StyleGuide from "./components/pages/StyleGuide"
+import useAuth from "./hooks/useAuth"
+import "./scss/main.scss"
+import TermsOfServices from "./components/pages/TermsOfService"
+import PrivacyPolicy from "./components/pages/PrivacyPolicy"
+import Playlist from "./components/pages/Playlist"
 
 const App = () => {
   useAuth()
@@ -32,18 +33,10 @@ const App = () => {
         { path: 'privacy-policy', element: <PrivacyPolicy /> },
         { path: 'services', element: <Services /> },
         { path: 'terms-of-service', element: <TermsOfServices /> },
+        { path: 'playlist/:id', element: <Playlist /> }
       ]
     },
-    /*
-    {
-      path: '/playlists',
-      element: <MainLayout />,
-      children: [
-        { index: true, element: <Playlists /> },
-        { path: ':id', element: <Playlist /> }
-      ]
-    },
-    */
+
     {
       path: '/styleguide',
       element: <StyleGuide />,

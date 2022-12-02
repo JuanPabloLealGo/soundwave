@@ -4,10 +4,11 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  width: 100%;
   height: 80px;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 
   &Container {
     align-items: center;
@@ -77,6 +78,7 @@
     position: absolute;
     right: 0;
     top: 20px;
+
   }
 
   @include for-size(m) {

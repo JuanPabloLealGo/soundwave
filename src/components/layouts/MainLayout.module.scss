@@ -1,6 +1,9 @@
 .MainLayout {
   &Content {
-    min-height: calc(100vh - 380px);
+    grid-column: 1/-1;
+    min-height: calc(100vh - 300px);
+    position: relative;
+    top: 80px;
   }
 
   &ThemeButton {

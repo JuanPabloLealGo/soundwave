@@ -1,4 +1,4 @@
-@import '../scss/main.scss';
+@import '../../scss/main.scss';
 
 .ToggleThemeBtn {
   align-items: center;
@@ -12,7 +12,7 @@
 
   &Disabled {
     background-color: $white;
-    color: $disable;
+    color: $secondary;
   }
 
   &:hover p {

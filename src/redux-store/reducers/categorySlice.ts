@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import CategoryPageInterface from "../../interfaces/CategoryPageInterface";
-import CategoryListStateInterface from "../../interfaces/state/CategoryListSatateInterface";
+import CategoryPageInterface from "../../interfaces/CategoryInterface";
+import CategoryListStateInterface from "../../interfaces/state/CategoryListStateInterface";
 import { getCategoryPage } from "../actions/categoryActions";
 
 const initialState = {
@@ -22,7 +22,10 @@ const categorySlice = createSlice({
       })
       .addCase(getCategoryPage.fulfilled, (state, action: PayloadAction<CategoryPageInterface>) => {
         state.isLoading = false
-        state.data = action.payload
+        state.data = {
+          ...action.payload,
+          items: [...state.data?.items ?? [], ...action.payload.items]
+        }
       })
       .addCase(getCategoryPage.rejected, (state, action: PayloadAction<any>) => {
         state.isLoading = false

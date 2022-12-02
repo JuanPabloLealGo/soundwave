@@ -1,5 +1,5 @@
-import MainButton, { MainButtonType } from '../MainButton'
-import ToggleThemeButton from '../ToggleThemeButton'
+import MainButton, { MainButtonType } from '../common/MainButton'
+import ToggleThemeButton from '../common/ToggleThemeButton'
 import styles from './StyleGuide.module.scss'
 
 const Colors = () => {

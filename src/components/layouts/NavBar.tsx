@@ -2,15 +2,17 @@ import styles from './NavBar.module.scss'
 import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { HiMenu } from 'react-icons/hi'
-import { NavLink } from 'react-router-dom'
-import Logo from '../Logo'
-import MainButton, { MainButtonType } from '../MainButton'
+import { NavLink, useNavigate } from 'react-router-dom'
+import Logo from '../common/Logo'
+import MainButton, { MainButtonType } from '../common/MainButton'
 import { RootState, useAppDispatch, useAppSelector } from '../../redux-store'
 import { logout } from '../../redux-store/reducers/authSlice'
 import { AUTH_URL } from '../../environment/appEnvironment'
+import { Size } from '../../enums/SizeEnum'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [isActive, setIsActive] = useState(false)
   const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
 
@@ -20,7 +22,7 @@ const NavBar = () => {
 
   const onLogoutHandler = () => {
     dispatch(logout())
-    window.location.replace('/')
+    return navigate('/')
   }
 
   const privateLinks = [
@@ -38,10 +40,10 @@ const NavBar = () => {
   const links = isAuthenticated ? privateLinks : publicLinks
 
   return (
-    <nav className={styles.NavBar}>
+    <nav className={`background-theme ${styles.NavBar}`}>
       <div className={styles.NavBarContainer}>
         <NavLink onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
-          <Logo />
+          <Logo size={Size.m} />
         </NavLink>
         <ul
           className={`${styles.NavBarMenu} ${isActive && `${styles.NavBarMenuActive} background-theme`}`}
@@ -67,11 +69,11 @@ const NavBar = () => {
             label={isAuthenticated ? 'Sign Out' : 'Sign In'}
             onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
             className={styles.NavBarSignOnButton}
-            type={MainButtonType.Secondary}
+            type={MainButtonType.Primary}
           />
         </ul>
         <button
-          className={`mobile-menu-icon ${styles.NavBarMenuIcon}`}
+          className={`color-theme ${styles.NavBarMenuIcon}`}
           onClick={onClickHandler}
         >
           {isActive ? <IoMdClose /> : <HiMenu />}
