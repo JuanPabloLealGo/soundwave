@@ -1,48 +1,66 @@
-import { UIEvent } from "react"
-import Playlists from "./PlayLists"
-import CategoryItemInterface from "../interfaces/CategoryItemIterface"
-import PlaylistsPageInterface from "../interfaces/PlaylistPageInterface"
-import { capitalizeFirstLetter } from "../utils/methods"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { PaginationEnum } from "../enums/PaginationEnum"
+import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
+import { getCategoryPage } from "../redux-store/actions/categoryActions"
+import CategoryItem from "./CategoryItem"
+
 import styles from "./CategoryList.module.scss"
 
-interface Props {
-  categories: CategoryItemInterface[]
-  playlistsByCategories: { [key: string]: PlaylistsPageInterface }
-}
+const CategoryList = () => {
+  const dispatch = useAppDispatch()
+  const didMountRef = useRef(true)
 
-const CategoryList = ({ categories, playlistsByCategories }: Props) => {
-  // const scrollableContainerRef = useRef<HTMLHeadingElement>(null)
-  const handleScroll = (e: UIEvent<HTMLElement>) => {
-    // Make sure the data is not loading before send a new request
+  const {
+    data: categories,
+    isLoading
+  } = useAppSelector((state: RootState) => state.category)
+  const [currentOffset, setCurrentOffset] = useState(0)
+  const hasNextPage = !!categories?.next
 
-    const { scrollLeft, scrollWidth, clientWidth } = e.currentTarget
-
-    if (Math.floor(scrollWidth - scrollLeft) <= clientWidth) {
-      console.log('request')
+  useEffect(() => {
+    if (didMountRef.current) {
+      didMountRef.current = false
+      return
     }
-  }
+
+    dispatch(getCategoryPage({ limit: PaginationEnum.commonLimit, offset: currentOffset }))
+  }, [currentOffset, dispatch])
+
+  // Intersection Observer
+  const intObserver = useRef<IntersectionObserver | null>(null)
+
+  const lastCategoryRef = useCallback((categoryElement: any) => {
+    if (isLoading) return
+
+    // we're essentially telling it to stop looking if we already have one there
+    if (intObserver.current) intObserver.current.disconnect()
+
+    intObserver.current = new IntersectionObserver(categories => {
+      if (categories[0].isIntersecting && hasNextPage) {
+        setCurrentOffset(prev => prev + PaginationEnum.commonLimit)
+      }
+    })
+
+    if (categoryElement) intObserver.current.observe(categoryElement)
+  }, [isLoading, hasNextPage])
+
+  const content = categories?.items.map((category, i) => {
+
+    if (categories.items.length === i + 1) {
+      return (
+        <CategoryItem
+          key={`${category.id}_${i}`}
+          categoryRef={lastCategoryRef}
+          item={category}
+        />)
+    }
+
+    return <CategoryItem key={`${category.id}_${i}`} item={category} />
+  })
 
   return (
     <div className={styles.CategoryList}>
-      {categories.map((category) => {
-        const categoryPlaylists = playlistsByCategories[category.id];
-
-        return (
-          <div
-            className={styles.CategoryListItem}
-            key={category.id}
-            onScroll={handleScroll}
-          >
-            <span className={styles.CategoryListItemName}>
-              {capitalizeFirstLetter(category.name)}
-            </span>
-            <Playlists
-              onScroll={handleScroll}
-              playlists={categoryPlaylists?.items ?? []}
-            />
-          </div>
-        )
-      })}
+      {!categories && isLoading ? <div>Loading...</div> : content}
     </div>
   )
 }
