@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import UiStateInterface from "../../interfaces/state/UiStateInterface";
 
 const initialState = {
-  isDarkTheme: false
+  isDarkTheme: false,
+  errorMessage: null
 } as UiStateInterface
 
 export const uiSlice = createSlice({
@@ -11,10 +12,13 @@ export const uiSlice = createSlice({
   reducers: {
     toogleTheme: (state: UiStateInterface) => {
       state.isDarkTheme = !state.isDarkTheme
+    },
+    setErrorMessage: (state: UiStateInterface, action: PayloadAction<string | null>) => {
+      state.errorMessage = action.payload
     }
   }
 })
 
-export const { toogleTheme } = uiSlice.actions
+export const { toogleTheme, setErrorMessage } = uiSlice.actions
 
 export default uiSlice.reducer
