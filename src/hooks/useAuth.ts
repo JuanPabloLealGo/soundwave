@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
 import { spotifyAuthentication } from "../redux-store/actions/authActions"
 import { logout } from "../redux-store/reducers/authSlice"
+import { setErrorMessage } from "../redux-store/reducers/uiSlice"
 
 const useAuth = () => {
   const location = useLocation()
@@ -32,6 +33,7 @@ const useAuth = () => {
 
     const interval = setInterval(() => {
       dispatch(logout())
+      dispatch(setErrorMessage('Your session has expired'))
     }, (authData.expires_in - 60) * 1000)
 
     if (error) {
