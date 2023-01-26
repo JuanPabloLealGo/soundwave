@@ -1,4 +1,6 @@
+import ErrorMessageInterface from "../ErrorMessageInterface"
+
 export default interface UiStateInterface {
   isDarkTheme: boolean
-  errorMessage: string | null
+  errorMessage: ErrorMessageInterface | null
 }
