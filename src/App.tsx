@@ -6,7 +6,7 @@ import Favorites from "./components/pages/Favorites"
 import Home from "./components/pages/Home"
 import Landing from "./components/pages/Landing"
 import NotFound from "./components/pages/NotFount"
-import { RootState, useAppDispatch, useAppSelector } from "./redux-store"
+import { RootState, useAppSelector } from "./redux-store"
 import Services from "./components/pages/Services"
 import StyleGuide from "./components/pages/StyleGuide"
 import useAuth from "./hooks/useAuth"
@@ -14,7 +14,6 @@ import "./scss/main.scss"
 import TermsOfServices from "./components/pages/TermsOfService"
 import PrivacyPolicy from "./components/pages/PrivacyPolicy"
 import Playlist from "./components/pages/Playlist"
-import { setErrorMessage } from "./redux-store/reducers/uiSlice"
 import ErrorMessage from "./components/common/ErrorMessage"
 
 const App = () => {
@@ -22,12 +21,7 @@ const App = () => {
   const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
   const isDarkTheme = useAppSelector((state: RootState) => state.ui.isDarkTheme)
   const errorMessage = useAppSelector((state: RootState) => state.ui.errorMessage)
-  const dispatch = useAppDispatch()
   let initialScreen = isAuthenticated ? <Home /> : <Landing />
-
-  const closeErrorMessage = () => {
-    dispatch(setErrorMessage(null));
-  }
 
   const element = useRoutes([
     {
@@ -59,9 +53,7 @@ const App = () => {
     <div className={isDarkTheme ? 'dark' : 'light'}>
       {errorMessage && (
         <ErrorMessage
-          onClick={closeErrorMessage}
-          title='Session Expired'
-          errorMessage={'Your session has expired. Please log in.'}
+          errorMessage={errorMessage}
         />
       )}
       {element}

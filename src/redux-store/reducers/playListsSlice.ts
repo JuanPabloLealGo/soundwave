@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import PlaylistInterface from "../../interfaces/PlaylistInterface";
 import PlaylistsPageInterface from "../../interfaces/PlaylistPageInterface";
 import PlaylistsStateInterface from "../../interfaces/state/PlaylistsStateInterface";
 import { getPlaylistsPage } from "../actions/playlistsActions";
@@ -6,13 +7,21 @@ import { getPlaylistsPage } from "../actions/playlistsActions";
 const initialState = {
   data: null,
   isLoading: false,
-  error: null
+  error: null,
+  currentPlaylist: null,
 } as PlaylistsStateInterface
 
 const playlistsSlice = createSlice({
   name: 'playlists',
   initialState,
-  reducers: {},
+  reducers: {
+    updateCurrentPlaylist: (
+      state: PlaylistsStateInterface,
+      action: PayloadAction<PlaylistInterface | null>
+    ) => {
+      state.currentPlaylist = action.payload
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(getPlaylistsPage.pending, (state) => {
@@ -41,5 +50,7 @@ const playlistsSlice = createSlice({
       })
   }
 })
+
+export const { updateCurrentPlaylist } = playlistsSlice.actions
 
 export default playlistsSlice.reducer
