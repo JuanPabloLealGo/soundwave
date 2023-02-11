@@ -3,6 +3,8 @@ import PlaylistInterface from "../interfaces/PlaylistInterface"
 import { capitalizeFirstLetter } from "../utils/methods"
 import { BsPlayFill } from "react-icons/bs"
 import styles from "./PlaylistCard.module.scss"
+import { useAppDispatch } from "../redux-store"
+import { updateCurrentPlaylist } from "../redux-store/reducers/playlistsSlice"
 
 interface Props {
   playlist: PlaylistInterface
@@ -10,8 +12,10 @@ interface Props {
 
 const PlaylistCard = ({ playlist }: Props) => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const handleClick = () => navigate(`/playlist/${playlist.id}`)
+  const handlePlaylistSelect = () => dispatch(updateCurrentPlaylist(playlist))
 
   const cardStyle = {
     'backgroundImage': `url(${playlist.images[0].url})`
@@ -30,7 +34,10 @@ const PlaylistCard = ({ playlist }: Props) => {
           </span>
         </div>
       </div>
-      <button onClick={() => console.log('PLAY')} className={`shadowed ${styles.PlaylistCardButton}`}>
+      <button
+        className={`shadowed ${styles.PlaylistCardButton}`}
+        onClick={handlePlaylistSelect}
+      >
         <BsPlayFill className={styles.PlaylistCardButtonIcon} />
       </button>
     </div>

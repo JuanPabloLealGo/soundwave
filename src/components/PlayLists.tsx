@@ -41,7 +41,8 @@ const Playlists = ({ categoryId }: Props) => {
     }
   }
 
-  if (data && data[categoryId] && data[categoryId].total === 0) {
+
+  if (data && data[categoryId] && (data[categoryId].total === 0 || data[categoryId].items.length === 0)) {
     return (
       <div>No playlists</div>
     )

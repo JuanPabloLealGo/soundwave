@@ -100,8 +100,9 @@ a {
   }
 }
 
-.shadowed {
-  box-shadow: $dark-shadow;
+.blurred-background {
+  background-color: $blurred-background;
+  backdrop-filter: blur(16px);
 }
 
 .light {
@@ -121,6 +122,10 @@ a {
     color: $black;
   }
 
+  .shadowed {
+    box-shadow: $dark-shadow;
+  }
+
 }
 
 .dark {
@@ -138,5 +143,9 @@ a {
 
   .color-theme {
     color: $white;
+  }
+
+  .shadowed {
+    box-shadow: $light-shadow;
   }
 }
