@@ -1,20 +1,51 @@
 .TrackCard {
   display: flex;
-  flex-direction: column;
-  margin: 5px 12px;
   border: 1px solid black;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
 
-  &Name {
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-
-  &Artists {
+  &Description {
+    align-items: center;
     display: flex;
-    flex-direction: column;
-    font-size: 0.8rem;
+    border: 1px solid red;
+    white-space: nowrap;
+
+    &Image {
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 5px;
+      height: 70px;
+      min-width: 70px;
+    }
+
+    &Text {
+      padding: 0 10px;
+      width: 330px;
+      min-width: 330px;
+
+      &Name {
+        display: block;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 3px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &Artists {
+        display: block;
+        flex-direction: column;
+        font-size: 0.8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
   }
+
+  &Stars {}
+
+  &Time {}
+
+  &Favorite {}
 }

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import ErrorMessageInterface from "../../interfaces/ErrorMessageInterface";
 import UiStateInterface from "../../interfaces/state/UiStateInterface";
 
 const initialState = {
@@ -14,7 +13,7 @@ export const uiSlice = createSlice({
     toogleTheme: (state: UiStateInterface) => {
       state.isDarkTheme = !state.isDarkTheme
     },
-    setErrorMessage: (state: UiStateInterface, action: PayloadAction<ErrorMessageInterface | null>) => {
+    setErrorMessage: (state: UiStateInterface, action: PayloadAction<string | null>) => {
       state.errorMessage = action.payload
     }
   }

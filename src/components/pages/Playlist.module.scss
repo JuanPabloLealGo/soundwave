@@ -1,0 +1,10 @@
+.Playlist {
+
+  grid-column: 1;
+  display: flex;
+
+  &Player {
+    width: 40%;
+  }
+
+}

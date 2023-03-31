@@ -1,34 +1,21 @@
-import ErrorMessageInterface from "../../interfaces/ErrorMessageInterface"
-import { useAppDispatch } from "../../redux-store"
-import { logout } from "../../redux-store/reducers/authSlice"
-import { setErrorMessage } from "../../redux-store/reducers/uiSlice"
 import styles from "./ErrorMessage.module.scss"
 
 interface Props {
-  errorMessage: ErrorMessageInterface
+  error: string
+  onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const ErrorMessage = ({ errorMessage }: Props) => {
-  const dispatch = useAppDispatch()
-  const { title, error, showLoginAgainButton } = errorMessage
-
-  const clickHandler = () => {
-    dispatch(setErrorMessage(null));
-
-    if (showLoginAgainButton) {
-      dispatch(logout())
-    }
-  }
+const ErrorMessage = ({ error, onClick }: Props) => {
 
   return (
     <div className={styles.ErrorMessage}>
       <div className={styles.ErrorMessageBackdrop} />
       <div className={styles.ErrorMessagePopup}>
-        <div className={styles.ErrorMessagePopupTitle}>{title}</div>
+        <div className={styles.ErrorMessagePopupTitle}>Error Message</div>
         <div className={styles.ErrorMessagePopupMessage}>{error}</div>
         <div className={styles.ErrorMessagePopupButton}>
-          <button className='background-theme color-theme' onClick={clickHandler}>
-            {showLoginAgainButton ? 'Click to login again' : 'OK'}
+          <button className='background-theme color-theme' onClick={onClick}>
+            Close
           </button>
         </div>
       </div>

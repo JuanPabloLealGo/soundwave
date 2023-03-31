@@ -4,7 +4,6 @@ import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
 import { spotifyAuthentication } from "../redux-store/actions/authActions"
 import { logout } from "../redux-store/reducers/authSlice"
 import { setErrorMessage } from "../redux-store/reducers/uiSlice"
-import ErrorMessageInterface from "../interfaces/ErrorMessageInterface"
 
 const useAuth = () => {
   const location = useLocation()
@@ -15,6 +14,7 @@ const useAuth = () => {
   const didMountRef = useRef(true)
   const authData = authState.data
   const error = authState.error
+
   const code = new URLSearchParams(location.search).get('code')
 
   useEffect(() => {
@@ -34,10 +34,7 @@ const useAuth = () => {
 
     const interval = setInterval(() => {
       dispatch(logout())
-      const errorMessage = {
-        title: 'Session Expired',
-        error: 'Your session has expired. Please log in.'
-      } as ErrorMessageInterface
+      const errorMessage = 'Your session has expired. Please log in.'
 
       dispatch(setErrorMessage(errorMessage))
     }, (authData.expires_in - 60) * 1000)
@@ -48,7 +45,8 @@ const useAuth = () => {
     }
   }, [authData, error, dispatch])
 
-  return null
+  return error
+
 }
 
 export default useAuth

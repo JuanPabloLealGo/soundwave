@@ -1,22 +1,28 @@
 import axios from "axios"
+import AuthPayloadInterface from "../interfaces/AuthPayloadInterface"
+import AxiosErrorInterface from "../interfaces/AxiosErrorInterface"
+
+interface ParamsInterface {
+  [key: string]: unknown
+}
 
 const apiClient = axios.create()
 
-const commonParams = {
+const commonParams: ParamsInterface = {
   redirect_uri: process.env.REACT_APP_SPOTIFY_REDIRECT_URL,
   client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
   client_secret: process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
 }
 
-export const spotifyAuth = async (requiredParams: any) => {
+export const spotifyAuth = async (requiredParams: AuthPayloadInterface) => {
   try {
-    const params: any = {
+    const params: ParamsInterface = {
       ...requiredParams,
       ...commonParams
     }
 
-    const searchParams = Object.keys(params).map((key: any) =>
-      encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+    const searchParams = Object.keys(params).map((key) =>
+      encodeURIComponent(key) + '=' + encodeURIComponent(params[key] as string)
     ).join('&')
 
     const response = await apiClient({
@@ -28,6 +34,6 @@ export const spotifyAuth = async (requiredParams: any) => {
 
     return response
   } catch (error) {
-    throw (error)
+    throw ((error as AxiosErrorInterface).response.data)
   }
 }

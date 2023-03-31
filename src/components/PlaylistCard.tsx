@@ -7,15 +7,16 @@ import { useAppDispatch } from "../redux-store"
 import { updateCurrentPlaylist } from "../redux-store/reducers/playlistsSlice"
 
 interface Props {
+  categoryId: string
   playlist: PlaylistInterface
 }
 
-const PlaylistCard = ({ playlist }: Props) => {
+const PlaylistCard = ({ categoryId, playlist }: Props) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const handleClick = () => navigate(`/playlist/${playlist.id}`)
-  const handlePlaylistSelect = () => dispatch(updateCurrentPlaylist(playlist))
+  const handleClick = () => navigate(`/playlist/${categoryId}/${playlist.id}`)
+  const handlePlaylistSelect = () => dispatch(updateCurrentPlaylist(playlist.uri))
 
   const cardStyle = {
     'backgroundImage': `url(${playlist.images[0].url})`

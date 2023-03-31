@@ -7,13 +7,14 @@ import { TbDragDrop } from "react-icons/tb"
 
 interface Props {
   isDraggable?: boolean
+  showPicture?: boolean
 }
 
-const Player = ({ isDraggable }: Props) => {
+const Player = ({ isDraggable, showPicture }: Props) => {
 
   const nodeRef = useRef(null)
   const token = store.getState().auth.data?.access_token
-  const currentPlaylist = useAppSelector((state: RootState) => state.playlists.currentPlaylist)
+  const currentUris = useAppSelector((state: RootState) => state.playlists.currentUris)
 
   const handleDrag = () => {
     // Dragging
@@ -23,7 +24,7 @@ const Player = ({ isDraggable }: Props) => {
     // Stop Drag
   }
 
-  if (!currentPlaylist) return null
+  if (!currentUris) return null
 
   return (
     <Draggable
@@ -33,17 +34,20 @@ const Player = ({ isDraggable }: Props) => {
       onDrag={handleDrag}
       onStop={handleStopDrag}
     >
-      <div ref={nodeRef} className={styles.Player}>
+      <div ref={nodeRef} className={isDraggable ? styles.DraggablePlayer : styles.Player}>
         <div className={`shadowed blurred-background ${styles.PlayerContent}`}>
           {isDraggable && (
-            <span className={styles.PlayerDrag}>
+            <span className={styles.PlayerContentDrag}>
               <TbDragDrop />
             </span>
+          )}
+          {showPicture && (
+            <div>Image</div>
           )}
           <SpotifyWebPlayer
             autoPlay
             token={token ?? ''}
-            uris={currentPlaylist?.uri}
+            uris={currentUris}
             showSaveIcon
             styles={{
               activeColor: '#1DB954',

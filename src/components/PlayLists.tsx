@@ -52,7 +52,7 @@ const Playlists = ({ categoryId }: Props) => {
     <div onScroll={handleScroll} className={styles.Playlists} >
       {playlists.map((playlist, i) => {
         return playlist?.id
-          ? <PlaylistCard key={i} playlist={playlist} />
+          ? <PlaylistCard key={i} categoryId={categoryId} playlist={playlist} />
           : null
       })}
     </div>

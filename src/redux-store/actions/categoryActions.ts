@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const getCategoryPage = createAsyncThunk(
-  'categories',
+  'category/getCategoryPage',
   async ({ limit, offset }: Props, thunkAPI) => {
     try {
       const response = await getAllCategories(limit, offset)

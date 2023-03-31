@@ -6,7 +6,7 @@ import Favorites from "./components/pages/Favorites"
 import Home from "./components/pages/Home"
 import Landing from "./components/pages/Landing"
 import NotFound from "./components/pages/NotFount"
-import { RootState, useAppSelector } from "./redux-store"
+import { RootState, useAppDispatch, useAppSelector } from "./redux-store"
 import Services from "./components/pages/Services"
 import StyleGuide from "./components/pages/StyleGuide"
 import useAuth from "./hooks/useAuth"
@@ -15,13 +15,22 @@ import TermsOfServices from "./components/pages/TermsOfService"
 import PrivacyPolicy from "./components/pages/PrivacyPolicy"
 import Playlist from "./components/pages/Playlist"
 import ErrorMessage from "./components/common/ErrorMessage"
+import { setErrorMessage } from "./redux-store/reducers/uiSlice"
+import { logout } from "./redux-store/reducers/authSlice"
 
 const App = () => {
-  useAuth()
+  const authError = useAuth()
+  const dispatch = useAppDispatch()
   const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
   const isDarkTheme = useAppSelector((state: RootState) => state.ui.isDarkTheme)
   const errorMessage = useAppSelector((state: RootState) => state.ui.errorMessage)
   let initialScreen = isAuthenticated ? <Home /> : <Landing />
+  const error = authError || errorMessage
+
+  const clickHandler = () => {
+    dispatch(setErrorMessage(null))
+    dispatch(logout())
+  }
 
   const element = useRoutes([
     {
@@ -35,7 +44,7 @@ const App = () => {
         { path: 'privacy-policy', element: <PrivacyPolicy /> },
         { path: 'services', element: <Services /> },
         { path: 'terms-of-service', element: <TermsOfServices /> },
-        { path: 'playlist/:id', element: <Playlist /> }
+        { path: 'playlist/:categoryId/:playlistId', element: <Playlist /> }
       ]
     },
 
@@ -51,9 +60,10 @@ const App = () => {
 
   return (
     <div className={isDarkTheme ? 'dark' : 'light'}>
-      {errorMessage && (
+      {error && (
         <ErrorMessage
-          errorMessage={errorMessage}
+          error={error}
+          onClick={clickHandler}
         />
       )}
       {element}
