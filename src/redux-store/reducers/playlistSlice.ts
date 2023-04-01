@@ -22,7 +22,7 @@ const playlistSlice = createSlice({
       state.currentUris = action.payload
     }
   },
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(getPlaylistPage.pending, (state) => {
         state.isLoading = true
@@ -51,6 +51,8 @@ const playlistSlice = createSlice({
   }
 })
 
-export const { updateCurrentPlaylist } = playlistSlice.actions
+const { actions, reducer } = playlistSlice
 
-export default playlistSlice.reducer
+export const { updateCurrentPlaylist } = actions
+
+export default reducer

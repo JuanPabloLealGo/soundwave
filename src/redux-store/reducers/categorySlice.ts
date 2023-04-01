@@ -14,7 +14,7 @@ const categorySlice = createSlice({
   name: 'category',
   initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(getCategoryPage.pending, (state) => {
         state.isLoading = true
@@ -33,4 +33,6 @@ const categorySlice = createSlice({
   }
 })
 
-export default categorySlice.reducer
+const { reducer } = categorySlice
+
+export default reducer

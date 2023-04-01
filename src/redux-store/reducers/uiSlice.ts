@@ -19,6 +19,8 @@ export const uiSlice = createSlice({
   }
 })
 
-export const { toogleTheme, setErrorMessage } = uiSlice.actions
+const { actions, reducer } = uiSlice
 
-export default uiSlice.reducer
+export const { toogleTheme, setErrorMessage } = actions
+
+export default reducer

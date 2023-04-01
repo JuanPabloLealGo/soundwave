@@ -20,7 +20,7 @@ const authSlice = createSlice({
       state.isLoading = false
     }
   },
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(spotifyAuthentication.pending, (state) => {
         state.isLoading = true
@@ -52,5 +52,8 @@ const authSlice = createSlice({
   }
 })
 
-export const { logout } = authSlice.actions
-export default authSlice.reducer
+const { actions, reducer } = authSlice
+
+export const { logout } = actions
+
+export default reducer

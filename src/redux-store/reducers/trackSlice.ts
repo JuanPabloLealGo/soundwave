@@ -14,7 +14,7 @@ const tracksSlice = createSlice({
   name: 'track',
   initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(getTrackPage.pending, (state) => {
         state.isLoading = true
@@ -30,4 +30,6 @@ const tracksSlice = createSlice({
   }
 })
 
-export default tracksSlice.reducer
+const { reducer } = tracksSlice
+
+export default reducer
