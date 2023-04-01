@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from "../utils/methods"
 import { BsPlayFill } from "react-icons/bs"
 import styles from "./PlaylistCard.module.scss"
 import { useAppDispatch } from "../redux-store"
-import { updateCurrentPlaylist } from "../redux-store/reducers/playlistsSlice"
+import { updateCurrentPlaylist } from "../redux-store/reducers/playlistSlice"
 
 interface Props {
   categoryId: string

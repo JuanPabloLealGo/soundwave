@@ -1,21 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import PlaylistsPageInterface from "../../interfaces/PlaylistPageInterface";
-import PlaylistsStateInterface from "../../interfaces/state/PlayListsStateInterface";
-import { getPlaylistsPage } from "../actions/playlistsActions";
+import PlaylistStateInterface from "../../interfaces/state/PlaylistStateInterface";
+import { getPlaylistPage } from "../actions/playlistActions";
+import CategoryByPlaylistInterface from "../../interfaces/CategoryByPlaylistInterface";
+import { ErrorType } from "../../types";
 
 const initialState = {
   data: null,
   isLoading: false,
   error: null,
   currentUris: null,
-} as PlaylistsStateInterface
+} as PlaylistStateInterface
 
-const playlistsSlice = createSlice({
-  name: 'playlists',
+const playlistSlice = createSlice({
+  name: 'playlist',
   initialState,
   reducers: {
     updateCurrentPlaylist: (
-      state: PlaylistsStateInterface,
+      state: PlaylistStateInterface,
       action: PayloadAction<string | string[]>
     ) => {
       state.currentUris = action.payload
@@ -23,15 +24,15 @@ const playlistsSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getPlaylistsPage.pending, (state) => {
+      .addCase(getPlaylistPage.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getPlaylistsPage.fulfilled, (state, { payload }) => {
+      .addCase(getPlaylistPage.fulfilled, (state, { payload }: PayloadAction<CategoryByPlaylistInterface>) => {
         state.isLoading = false
         const categoryId = Object.keys(payload)[0]
         const payloadData = payload[categoryId]
         const exists = Object.keys({ ...state.data }).includes(categoryId)
-        const stateClone = { ...state.data } ?? {} as null | { [key: string]: PlaylistsPageInterface }
+        const stateClone = { ...state.data } ?? {} as CategoryByPlaylistInterface
 
         if (exists && stateClone[categoryId]) {
           stateClone[categoryId] = {
@@ -43,13 +44,13 @@ const playlistsSlice = createSlice({
           state.data = { ...state.data, ...payload }
         }
       })
-      .addCase(getPlaylistsPage.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(getPlaylistPage.rejected, (state, action: PayloadAction<ErrorType>) => {
         state.isLoading = false
         state.error = action.payload
       })
   }
 })
 
-export const { updateCurrentPlaylist } = playlistsSlice.actions
+export const { updateCurrentPlaylist } = playlistSlice.actions
 
-export default playlistsSlice.reducer
+export default playlistSlice.reducer

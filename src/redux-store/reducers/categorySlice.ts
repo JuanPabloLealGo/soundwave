@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import CategoryPageInterface from "../../interfaces/CategoryInterface";
 import CategoryListStateInterface from "../../interfaces/state/CategoryListStateInterface";
 import { getCategoryPage } from "../actions/categoryActions";
+import { ErrorType } from "../../types";
 
 const initialState = {
   data: null,
@@ -12,9 +13,7 @@ const initialState = {
 const categorySlice = createSlice({
   name: 'category',
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(getCategoryPage.pending, (state) => {
@@ -27,7 +26,7 @@ const categorySlice = createSlice({
           items: [...state.data?.items ?? [], ...action.payload.items]
         }
       })
-      .addCase(getCategoryPage.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(getCategoryPage.rejected, (state, action: PayloadAction<ErrorType>) => {
         state.isLoading = false
         state.error = action.payload
       })

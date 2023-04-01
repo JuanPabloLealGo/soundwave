@@ -1,9 +1,10 @@
 import { useRef } from "react"
 import Draggable from "react-draggable"
 import SpotifyWebPlayer from "react-spotify-web-playback/lib"
-import store, { RootState, useAppSelector } from "../../redux-store"
+import store, { useAppSelector } from "../../redux-store"
 import styles from "./Player.module.scss"
 import { TbDragDrop } from "react-icons/tb"
+import { playlistSelector } from "../../redux-store/selectors"
 
 interface Props {
   isDraggable?: boolean
@@ -14,7 +15,7 @@ const Player = ({ isDraggable, showPicture }: Props) => {
 
   const nodeRef = useRef(null)
   const token = store.getState().auth.data?.access_token
-  const currentUris = useAppSelector((state: RootState) => state.playlists.currentUris)
+  const { currentUris } = useAppSelector(playlistSelector)
 
   const handleDrag = () => {
     // Dragging

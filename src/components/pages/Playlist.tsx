@@ -1,19 +1,20 @@
 import { useEffect, useRef } from "react"
 import { useParams } from "react-router-dom"
-import { RootState, useAppDispatch, useAppSelector } from "../../redux-store"
-import { getTracksPage } from "../../redux-store/actions/tracksActions"
+import { useAppDispatch, useAppSelector } from "../../redux-store"
+import { getTrackPage } from "../../redux-store/actions/trackActions"
 import Player from "../common/Player"
 import Spinner from "../common/Spinner"
 import Tracklist from "../Tracklist"
+import { playlistSelector, trackSelector } from "../../redux-store/selectors"
 import styles from "./Playlist.module.scss"
 
 const Playlist = () => {
   const { playlistId, categoryId } = useParams()
   const didMountRef = useRef(true)
   const dispatch = useAppDispatch()
-  const { data: TrackData, isLoading } = useAppSelector((state: RootState) => state.tracks)
+  const { data: TrackData, isLoading } = useAppSelector(trackSelector)
 
-  const { data: playlistdata } = useAppSelector((state: RootState) => state.playlists)
+  const { data: playlistdata } = useAppSelector(playlistSelector)
 
   //const description = playlistdata && categoryId && playlistdata[categoryId].
 
@@ -30,7 +31,7 @@ const Playlist = () => {
     }
 
     if (playlistId) {
-      dispatch(getTracksPage({ playlistId, limit: 20, offset: 0 }))
+      dispatch(getTrackPage({ playlistId, limit: 20, offset: 0 }))
     }
 
   }, [playlistId, dispatch])

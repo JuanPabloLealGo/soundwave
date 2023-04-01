@@ -2,10 +2,10 @@ import { combineReducers } from "redux"
 import AppStateInterface from "../../interfaces/state/AppStateInterface"
 import authReducer from "./authSlice"
 import categoryReducer from "./categorySlice"
-import playlistsReducer from "./playlistsSlice"
+import playlistReducer from "./playlistSlice"
 import uiReducer from "./uiSlice"
 import storage from "redux-persist/lib/storage"
-import tracksReducer from "./tracksSlice"
+import trackReducer from "./trackSlice"
 import persistReducer from "redux-persist/es/persistReducer"
 
 const persistConfig = {
@@ -18,8 +18,8 @@ const rootReducer = combineReducers<AppStateInterface>({
   auth: authReducer,
   category: categoryReducer,
   ui: uiReducer,
-  playlists: playlistsReducer,
-  tracks: tracksReducer
+  playlist: playlistReducer,
+  track: trackReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

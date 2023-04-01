@@ -1,5 +1,6 @@
 import { Size } from '../../enums/SizeEnum'
-import { RootState, useAppSelector } from '../../redux-store'
+import { useAppSelector } from '../../redux-store'
+import { uiSelector } from '../../redux-store/selectors'
 import styles from './Logo.module.scss'
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const Logo = ({ size = Size.s }: Props) => {
-  const isDarkTheme = useAppSelector((state: RootState) => state.ui.isDarkTheme)
+  const { isDarkTheme } = useAppSelector(uiSelector)
 
   return (
     <div className={`${styles.Logo} logo--${size}`}>

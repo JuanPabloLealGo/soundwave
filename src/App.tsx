@@ -6,26 +6,26 @@ import Favorites from "./components/pages/Favorites"
 import Home from "./components/pages/Home"
 import Landing from "./components/pages/Landing"
 import NotFound from "./components/pages/NotFount"
-import { RootState, useAppDispatch, useAppSelector } from "./redux-store"
+import { useAppDispatch, useAppSelector } from "./redux-store"
 import Services from "./components/pages/Services"
 import StyleGuide from "./components/pages/StyleGuide"
 import useAuth from "./hooks/useAuth"
-import "./scss/main.scss"
 import TermsOfServices from "./components/pages/TermsOfService"
 import PrivacyPolicy from "./components/pages/PrivacyPolicy"
 import Playlist from "./components/pages/Playlist"
 import ErrorMessage from "./components/common/ErrorMessage"
 import { setErrorMessage } from "./redux-store/reducers/uiSlice"
 import { logout } from "./redux-store/reducers/authSlice"
+import { authSelector, uiSelector } from "./redux-store/selectors"
+import "./scss/main.scss"
 
 const App = () => {
   const authError = useAuth()
   const dispatch = useAppDispatch()
-  const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
-  const isDarkTheme = useAppSelector((state: RootState) => state.ui.isDarkTheme)
-  const errorMessage = useAppSelector((state: RootState) => state.ui.errorMessage)
-  let initialScreen = isAuthenticated ? <Home /> : <Landing />
+  const { data: isAuthenticated } = useAppSelector(authSelector)
+  const { isDarkTheme, errorMessage } = useAppSelector(uiSelector)
   const error = authError || errorMessage
+  let initialScreen = isAuthenticated ? <Home /> : <Landing />
 
   const clickHandler = () => {
     dispatch(setErrorMessage(null))

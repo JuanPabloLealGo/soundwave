@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { PaginationEnum } from "../enums/PaginationEnum"
-import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
+import { useAppDispatch, useAppSelector } from "../redux-store"
 import { getCategoryPage } from "../redux-store/actions/categoryActions"
 import CategoryItem from "./CategoryItem"
+import { categorySelector } from "../redux-store/selectors"
 
 import styles from "./CategoryList.module.scss"
 
@@ -13,7 +14,7 @@ const CategoryList = () => {
   const {
     data: categories,
     isLoading
-  } = useAppSelector((state: RootState) => state.category)
+  } = useAppSelector(categorySelector)
   const [currentOffset, setCurrentOffset] = useState(0)
   const hasNextPage = !!categories?.next
 

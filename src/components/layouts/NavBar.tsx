@@ -5,16 +5,17 @@ import { HiMenu } from 'react-icons/hi'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Logo from '../common/Logo'
 import MainButton, { MainButtonType } from '../common/MainButton'
-import { RootState, useAppDispatch, useAppSelector } from '../../redux-store'
+import { useAppDispatch, useAppSelector } from '../../redux-store'
 import { logout } from '../../redux-store/reducers/authSlice'
 import { AUTH_URL } from '../../environment/appEnvironment'
 import { Size } from '../../enums/SizeEnum'
+import { authSelector } from '../../redux-store/selectors'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [isActive, setIsActive] = useState(false)
-  const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
+  const { data: isAuthenticated } = useAppSelector(authSelector)
 
   const onClickHandler = () => setIsActive(!isActive)
   const onClickLogoHandler = () => setIsActive(false)

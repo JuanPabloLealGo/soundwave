@@ -3,7 +3,7 @@ import TrackInterface from "../interfaces/TrackInterface"
 import TrackItemInterface from "../interfaces/TrackItemInterface"
 import TrackCard from "./TrackCard"
 import styles from "./Tracklist.module.scss"
-import { updateCurrentPlaylist } from "../redux-store/reducers/playlistsSlice"
+import { updateCurrentPlaylist } from "../redux-store/reducers/playlistSlice"
 
 interface Props {
   tracks: TrackInterface[],

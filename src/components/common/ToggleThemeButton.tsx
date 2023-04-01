@@ -1,5 +1,6 @@
-import { RootState, useAppDispatch, useAppSelector } from "../../redux-store"
+import { useAppDispatch, useAppSelector } from "../../redux-store"
 import { toogleTheme } from "../../redux-store/reducers/uiSlice"
+import { uiSelector } from "../../redux-store/selectors"
 import styles from "./ToggleThemeButton.module.scss"
 import { WiMoonAltFirstQuarter } from "react-icons/wi"
 
@@ -9,7 +10,7 @@ interface Props {
 
 const ToggleThemeButton = ({ className }: Props) => {
   const dispatch = useAppDispatch()
-  const isDarkTheme = useAppSelector((state: RootState) => state.ui.isDarkTheme)
+  const { isDarkTheme } = useAppSelector(uiSelector)
 
   const onToggleThemeHandler = () => {
     dispatch(toogleTheme())

@@ -1,9 +1,10 @@
 import { UIEvent, useEffect, useRef, useState } from "react"
 import { PaginationEnum } from "../enums/PaginationEnum"
-import { RootState, useAppDispatch, useAppSelector } from "../redux-store"
-import { getPlaylistsPage } from "../redux-store/actions/playlistsActions"
+import { useAppDispatch, useAppSelector } from "../redux-store"
+import { getPlaylistPage } from "../redux-store/actions/playlistActions"
 import PlaylistCard from "./PlaylistCard"
 import styles from "./Playlists.module.scss"
+import { playlistSelector } from "../redux-store/selectors"
 
 interface Props {
   categoryId: string
@@ -14,7 +15,7 @@ const Playlists = ({ categoryId }: Props) => {
   const dispatch = useAppDispatch()
   const [currentOffset, setCurrentOffset] = useState(0)
   const didMountRef = useRef(true)
-  const { data } = useAppSelector((state: RootState) => state.playlists)
+  const { data } = useAppSelector(playlistSelector)
   const playlists = data && data[categoryId] ? data[categoryId].items : []
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const Playlists = ({ categoryId }: Props) => {
     }
 
     if (categoryId) {
-      dispatch(getPlaylistsPage({
+      dispatch(getPlaylistPage({
         categoryId: categoryId,
         limit: PaginationEnum.playlistsLimit,
         offset: currentOffset
