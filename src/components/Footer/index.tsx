@@ -4,7 +4,7 @@ import styles from './Footer.module.scss'
 
 const Footer = () => {
   return (
-    <div className={styles.Footer}>
+    <footer className={styles.Footer}>
       <div className={styles.FooterContainer}>
         <div className={styles.FooterLogo}>
           <Logo />
@@ -15,7 +15,7 @@ const Footer = () => {
         </div>
         <span>{`© ${new Date().getFullYear()} Music Box`}</span>
       </div>
-    </div>
+    </footer>
   )
 }
 

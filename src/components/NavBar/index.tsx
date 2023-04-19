@@ -41,7 +41,7 @@ const NavBar = () => {
   const links = isAuthenticated ? privateLinks : publicLinks
 
   return (
-    <nav className={`background-theme ${styles.NavBar}`}>
+    <header className={`background-theme ${styles.NavBar}`}>
       <div className={styles.NavBarContainer}>
         <NavLink onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
           <Logo size={Size.m} />
@@ -80,7 +80,7 @@ const NavBar = () => {
           {isActive ? <IoMdClose /> : <HiMenu />}
         </button>
       </div>
-    </nav>
+    </header>
   )
 }
 

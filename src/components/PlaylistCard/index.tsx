@@ -23,7 +23,7 @@ const PlaylistCard = ({ categoryId, playlist }: Props) => {
   }
 
   return (
-    <div className={styles.PlayListItem}>
+    <article className={styles.PlayListItem}>
       <div style={cardStyle} onClick={handleClick} className={`shadowed ${styles.PlaylistCard}`}>
         <div className={styles.PlaylistCardBlurredContainer}></div>
         <div className={styles.PlaylistCardDescription}>
@@ -41,8 +41,7 @@ const PlaylistCard = ({ categoryId, playlist }: Props) => {
       >
         <BsPlayFill className={styles.PlaylistCardButtonIcon} />
       </button>
-    </div>
-
+    </article>
   )
 }
 
