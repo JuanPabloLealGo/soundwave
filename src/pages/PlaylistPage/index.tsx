@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react"
 import { useParams } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../redux-store"
+import { RootState, useAppDispatch, useAppSelector } from "../../redux-store"
 import { getTrackPage } from "../../redux-store/actions/trackActions"
 import Player from "../../components/Player"
 import Spinner from "../../components/Spinner"
 import Tracklist from "../../components/Tracklist"
 import { playlistSelector, trackSelector } from "../../redux-store/selectors"
 import styles from "./PlaylistPage.module.scss"
+import { useSelector } from "react-redux"
+import { getPlaylistById } from "../../redux-store/reducers/playlistSlice"
 
 const PlaylistPage = () => {
   const { playlistId, categoryId } = useParams()
@@ -16,10 +18,10 @@ const PlaylistPage = () => {
 
   const { data: playlistdata } = useAppSelector(playlistSelector)
 
-  //const description = playlistdata && categoryId && playlistdata[categoryId].
+  const item = useSelector((state: RootState) =>
+    getPlaylistById(state.playlist, categoryId, playlistId))
 
-  //const playlists = playlistdata && playlistdata[categoryId] ? playlistdata[categoryId].items : []
-
+  console.log('description: ', item?.description);
 
   console.log('playlistdata: ', playlistdata ? playlistdata[categoryId ?? ''] : {})
 
@@ -47,6 +49,8 @@ const PlaylistPage = () => {
                 <div className={styles.PlaylistPlayerContent}>
                   Player with image
                   <Player showPicture />
+                  <div>{item?.name}</div>
+                  <div>{item?.description}</div>
                 </div>
               </div>
               <Tracklist tracks={TrackData.items} />

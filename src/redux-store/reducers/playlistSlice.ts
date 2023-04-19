@@ -20,7 +20,7 @@ const playlistSlice = createSlice({
       action: PayloadAction<string | string[]>
     ) => {
       state.currentUris = action.payload
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,6 +50,9 @@ const playlistSlice = createSlice({
       })
   }
 })
+
+export const getPlaylistById = (state: PlaylistStateInterface, categoryId?: string, playlistId?: string) =>
+  state.data && categoryId && playlistId ? state.data[categoryId].items.find((p) => p.id === playlistId) : null;
 
 const { actions, reducer } = playlistSlice
 
