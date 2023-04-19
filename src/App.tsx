@@ -6,31 +6,30 @@ import FavoritesPage from "./pages/FavoritesPage"
 import HomePage from "./pages/HomePage"
 import LandingPage from "./pages/LandingPage"
 import NotFoundPage from "./pages/NotFoundPage"
-import { useAppDispatch, useAppSelector } from "./redux-store"
+import { useAppSelector } from "./redux-store"
 import ServicesPage from "./pages/ServicesPage"
-import useAuth from "./hooks/useAuth"
 import TermsOfServicesPage from "./pages/TermsOfServicePage"
 import PrivacyPolicyPage from "./pages/PricacityPolicyPage"
-import { setErrorMessage } from "./redux-store/reducers/uiSlice"
-import { logout } from "./redux-store/reducers/authSlice"
 import { authSelector, uiSelector } from "./redux-store/selectors"
 import "./scss/main.scss"
 import PlaylistPage from "./pages/PlaylistPage"
 import StyleGuidePage from "./pages/StyleGuidePage"
-import ErrorMessage from "./components/ErrorMessage"
+import { useEffect } from "react"
 
 const App = () => {
-  const authError = useAuth()
-  const dispatch = useAppDispatch()
   const { data: isAuthenticated } = useAppSelector(authSelector)
-  const { isDarkTheme, errorMessage } = useAppSelector(uiSelector)
-  const error = authError || errorMessage
+  const { isDarkTheme } = useAppSelector(uiSelector)
   let initialScreen = isAuthenticated ? <HomePage /> : <LandingPage />
 
-  const clickHandler = () => {
-    dispatch(setErrorMessage(null))
-    dispatch(logout())
-  }
+  useEffect(() => {
+    if (isDarkTheme) {
+      document.body.classList.remove('light');
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+      document.body.classList.add('light');
+    }
+  }, [isDarkTheme])
 
   const element = useRoutes([
     {
@@ -58,17 +57,7 @@ const App = () => {
     }
   ])
 
-  return (
-    <div className={isDarkTheme ? 'dark' : 'light'}>
-      {error && (
-        <ErrorMessage
-          error={error}
-          onClick={clickHandler}
-        />
-      )}
-      {element}
-    </div>
-  )
+  return element
 }
 
 // OTHER WAY:
