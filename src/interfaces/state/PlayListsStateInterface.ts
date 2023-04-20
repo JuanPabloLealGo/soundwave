@@ -1,4 +1,4 @@
-import PlaylistInterface from "../PlaylistInterface";
+import PlaylistInterface from "../PlayListInterface";
 import PlaylistsPageInterface from "../PlaylistPageInterface";
 import CommonStateInterface from "./CommonStateInterface";
 

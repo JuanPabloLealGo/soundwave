@@ -1,6 +1,6 @@
 import AuthStateInterface from "./AuthStateInterface";
 import CategoryListStateInterface from "./CategoryListStateInterface";
-import PlaylistsStateInterface from "./PlaylistsStateInterface";
+import PlaylistsStateInterface from "./PlayListsStateInterface";
 import TracksStateInterface from "./TracksStateInterface";
 import UiStateInterface from "./UiStateInterface";
 

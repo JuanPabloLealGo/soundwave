@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import PlaylistInterface from "../../interfaces/PlaylistInterface";
+import PlaylistInterface from "../../interfaces/PlayListInterface";
 import PlaylistsPageInterface from "../../interfaces/PlaylistPageInterface";
-import PlaylistsStateInterface from "../../interfaces/state/PlaylistsStateInterface";
+import PlaylistsStateInterface from "../../interfaces/state/PlayListsStateInterface";
 import { getPlaylistsPage } from "../actions/playlistsActions";
 
 const initialState = {

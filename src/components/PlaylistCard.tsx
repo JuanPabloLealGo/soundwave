@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import PlaylistInterface from "../interfaces/PlaylistInterface"
+import PlaylistInterface from "../interfaces/PlayListInterface"
 import { capitalizeFirstLetter } from "../utils/methods"
 import { BsPlayFill } from "react-icons/bs"
 import styles from "./PlaylistCard.module.scss"
