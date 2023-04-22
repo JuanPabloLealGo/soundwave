@@ -1,7 +1,7 @@
-import PlaylistPageInterface from "../PlaylistPageInterface";
+import PlaylistByCategoryInterface from "../PlaylistByCategoryInterface";
 import CommonStateInterface from "./CommonStateInterface";
 
 export default interface PlaylistStateInterface extends CommonStateInterface {
-  data: null | { [key: string]: PlaylistPageInterface }
+  data: null | PlaylistByCategoryInterface
   currentUris: null | string | string[]
 }

@@ -1,5 +1,5 @@
 import PlaylistPageInterface from "./PlaylistPageInterface";
 
-export default interface CategoryByPlaylistInterface {
+export default interface PlaylistByCategoryInterface {
   [key: string]: PlaylistPageInterface
 }

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import PlaylistStateInterface from "../../interfaces/state/PlaylistStateInterface";
 import { getPlaylistPage } from "../actions/playlistActions";
-import CategoryByPlaylistInterface from "../../interfaces/CategoryByPlaylistInterface";
+import PlaylistByCategoryInterface from "../../interfaces/PlaylistByCategoryInterface";
 import { ErrorType } from "../../types";
 
 const initialState = {
@@ -27,12 +27,12 @@ const playlistSlice = createSlice({
       .addCase(getPlaylistPage.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getPlaylistPage.fulfilled, (state, { payload }: PayloadAction<CategoryByPlaylistInterface>) => {
+      .addCase(getPlaylistPage.fulfilled, (state, { payload }: PayloadAction<PlaylistByCategoryInterface>) => {
         state.isLoading = false
         const categoryId = Object.keys(payload)[0]
         const payloadData = payload[categoryId]
         const exists = Object.keys({ ...state.data }).includes(categoryId)
-        const stateClone = { ...state.data } ?? {} as CategoryByPlaylistInterface
+        const stateClone = { ...state.data } ?? {} as PlaylistByCategoryInterface
 
         if (exists && stateClone[categoryId]) {
           stateClone[categoryId] = {
