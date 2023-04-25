@@ -32,8 +32,7 @@ const playlistSlice = createSlice({
         const categoryId = Object.keys(payload)[0]
         const payloadData = payload[categoryId]
         const exists = Object.keys({ ...state.data }).includes(categoryId)
-        const stateClone = { ...state.data } ?? {} as PlaylistByCategoryInterface
-
+        const stateClone = { ...state.data }
         if (exists && stateClone[categoryId]) {
           stateClone[categoryId] = {
             ...payloadData,

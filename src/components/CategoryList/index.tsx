@@ -9,7 +9,6 @@ import styles from "./CategoryList.module.scss"
 
 const CategoryList = () => {
   const dispatch = useAppDispatch()
-  const didMountRef = useRef(true)
 
   const {
     data: categories,
@@ -19,11 +18,6 @@ const CategoryList = () => {
   const hasNextPage = !!categories?.next
 
   useEffect(() => {
-    if (didMountRef.current) {
-      didMountRef.current = false
-      return
-    }
-
     dispatch(getCategoryPage({ limit: PaginationEnum.commonLimit, offset: currentOffset }))
   }, [currentOffset, dispatch])
 

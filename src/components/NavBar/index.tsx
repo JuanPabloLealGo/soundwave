@@ -43,7 +43,7 @@ const NavBar = () => {
   return (
     <header className={`background-theme ${styles.NavBar}`}>
       <div className={styles.NavBarContainer}>
-        <NavLink onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
+        <NavLink reloadDocument onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
           <Logo size={Size.m} />
         </NavLink>
         <ul
@@ -59,6 +59,7 @@ const NavBar = () => {
                     end
                     className={({ isActive }) => `link ${styles.NavBarMenuLink} ${isActive && styles.NavBarMenuLinkActive}`}
                     to={link}
+                    reloadDocument
                   >
                     {label}
                   </NavLink>

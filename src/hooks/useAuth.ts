@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../redux-store"
 import { spotifyAuthentication } from "../redux-store/actions/authActions"
@@ -10,17 +10,11 @@ const useAuth = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const didMountRef = useRef(true)
   const { data, error } = useAppSelector(authSelector)
 
   const code = new URLSearchParams(location.search).get('code')
 
   useEffect(() => {
-    if (didMountRef.current) {
-      didMountRef.current = false
-      return
-    }
-
     if (code && (!data || !data.refresh_token)) {
       dispatch(spotifyAuthentication(code))
       navigate('/')

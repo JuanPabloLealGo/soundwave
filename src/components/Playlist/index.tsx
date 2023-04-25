@@ -1,4 +1,4 @@
-import { UIEvent, useEffect, useRef, useState } from "react"
+import { UIEvent, useEffect, useState } from "react"
 import { PaginationEnum } from "../../enums/PaginationEnum"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
 import { getPlaylistPage } from "../../redux-store/actions/playlistActions"
@@ -14,16 +14,10 @@ const Playlist = ({ categoryId }: Props) => {
 
   const dispatch = useAppDispatch()
   const [currentOffset, setCurrentOffset] = useState(0)
-  const didMountRef = useRef(true)
   const { data } = useAppSelector(playlistSelector)
   const playlist = data && data[categoryId] ? data[categoryId].items : []
 
   useEffect(() => {
-    if (didMountRef.current) {
-      didMountRef.current = false
-      return
-    }
-
     if (categoryId) {
       dispatch(getPlaylistPage({
         categoryId: categoryId,
