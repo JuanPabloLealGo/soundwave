@@ -1,5 +1,6 @@
 import AuthStateInterface from "./AuthStateInterface";
 import CategoryListStateInterface from "./CategoryListStateInterface";
+import PlaylistPageStateInterface from "./PlaylistPageStateInterface";
 import PlaylistStateInterface from "./PlaylistStateInterface";
 import TrackStateInterface from "./TrackStateInterface";
 import UiStateInterface from "./UiStateInterface";
@@ -9,5 +10,6 @@ export default interface AppStateInterface {
   category: CategoryListStateInterface
   ui: UiStateInterface
   playlist: PlaylistStateInterface
+  playlistPage: PlaylistPageStateInterface
   track: TrackStateInterface
 }

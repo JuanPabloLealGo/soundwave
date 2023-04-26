@@ -1,23 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { getCategorysPlaylists } from "../../api/playListApi"
+import { getPlaylistById } from "../../api/playListApi"
 import { ErrorType } from "../../types"
 import ErrorInterface from "../../interfaces/ErrorInterface"
-import PlaylistByCategoryInterface from "../../interfaces/PlaylistByCategoryInterface"
+import PlaylistInterface from "../../interfaces/PlaylistInterface"
 
-interface PlaylistPagePayload {
-  categoryId: string
-  limit: number
-  offset: number
-}
-
-export const getPlaylistPage = createAsyncThunk<PlaylistByCategoryInterface, PlaylistPagePayload, { rejectValue: ErrorType }>(
-  'playlist/getPlaylistPage',
-  async ({ categoryId, limit, offset }: PlaylistPagePayload, thunkAPI) => {
+export const getPlaylist = createAsyncThunk<PlaylistInterface, string, { rejectValue: ErrorType }>(
+  'playlist/getPlaylist',
+  async (playlistId: string, thunkAPI) => {
     try {
-      const response = await getCategorysPlaylists(categoryId, limit, offset)
-      const playlistByCategory = {} as PlaylistByCategoryInterface
-      playlistByCategory[categoryId] = response.data.playlists
-      return playlistByCategory
+      const response = await getPlaylistById(playlistId)
+      return response.data
     } catch (error) {
       const { message } = (error as ErrorInterface).error
       return thunkAPI.rejectWithValue(message)

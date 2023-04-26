@@ -13,3 +13,15 @@ export const getCategorysPlaylists = async (categoryId: string, limit: number, o
     throw (error)
   }
 }
+
+export const getPlaylistById = async (playlistId: string) => {
+  try {
+    const response = await api({
+      method: 'GET',
+      url: `${BACKEND_URL}/playlists/${playlistId}`
+    })
+    return response
+  } catch (error) {
+    throw (error)
+  }
+}

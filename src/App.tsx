@@ -1,4 +1,8 @@
+import { useEffect } from "react"
 import { useRoutes } from "react-router-dom"
+
+import { useAppSelector } from "./redux-store"
+import { authSelector, uiSelector } from "./redux-store/selectors"
 import MainLayout from "./components/MainLayout"
 import AboutPage from "./pages/AboutPage"
 import ContactPage from "./pages/ContactPage"
@@ -6,15 +10,12 @@ import FavoritesPage from "./pages/FavoritesPage"
 import HomePage from "./pages/HomePage"
 import LandingPage from "./pages/LandingPage"
 import NotFoundPage from "./pages/NotFoundPage"
-import { useAppSelector } from "./redux-store"
 import ServicesPage from "./pages/ServicesPage"
 import TermsOfServicesPage from "./pages/TermsOfServicePage"
 import PrivacyPolicyPage from "./pages/PricacityPolicyPage"
-import { authSelector, uiSelector } from "./redux-store/selectors"
-import "./scss/main.scss"
 import PlaylistPage from "./pages/PlaylistPage"
 import StyleGuidePage from "./pages/StyleGuidePage"
-import { useEffect } from "react"
+import "./scss/main.scss"
 
 const App = () => {
   const { data: isAuthenticated } = useAppSelector(authSelector)
@@ -43,7 +44,7 @@ const App = () => {
         { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
         { path: 'services', element: <ServicesPage /> },
         { path: 'terms-of-service', element: <TermsOfServicesPage /> },
-        { path: 'playlist/:categoryId/:playlistId', element: <PlaylistPage /> }
+        { path: 'playlist/:playlistId', element: <PlaylistPage /> }
       ]
     },
 

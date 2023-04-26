@@ -15,7 +15,7 @@ const PlaylistCard = ({ categoryId, playlist }: Props) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const handleClick = () => navigate(`/playlist/${categoryId}/${playlist.id}`)
+  const handleClick = () => navigate(`/playlist/${playlist.id}`)
   const handlePlaylistSelect = () => dispatch(updateCurrentPlaylist(playlist.uri))
 
   const cardStyle = {
