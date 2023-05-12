@@ -1,6 +1,6 @@
 import { LegacyRef } from "react"
 import CategoryItemInterface from "../../interfaces/CategoryItemIterface"
-import { capitalizeFirstLetter } from "../../utils/methods"
+import { capitalizeFirstLetter } from "../../utils"
 import styles from "./CategoryItem.module.scss"
 import Playlist from "../Playlist"
 

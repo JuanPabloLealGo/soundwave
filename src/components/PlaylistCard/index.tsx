@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { capitalizeFirstLetter } from "../../utils/methods"
+import { capitalizeFirstLetter } from "../../utils"
 import { BsPlayFill } from "react-icons/bs"
 import styles from "./PlaylistCard.module.scss"
 import { useAppDispatch } from "../../redux-store"

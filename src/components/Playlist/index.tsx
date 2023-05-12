@@ -3,7 +3,7 @@ import { PaginationEnum } from "../../enums/PaginationEnum"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
 import PlaylistCard from "../PlaylistCard"
 import styles from "./Playlist.module.scss"
-import { playlistPageSelector } from "../../redux-store/selectors"
+import { playlistPageSelector, uiSelector } from "../../redux-store/selectors"
 import { getPlaylistPageByCategory } from "../../redux-store/actions/playlistPageActions"
 
 interface Props {
@@ -15,6 +15,7 @@ const Playlist = ({ categoryId }: Props) => {
   const dispatch = useAppDispatch()
   const [currentOffset, setCurrentOffset] = useState(0)
   const { data } = useAppSelector(playlistPageSelector)
+  const { isDragging } = useAppSelector(uiSelector)
   const playlist = data && data[categoryId] ? data[categoryId].items : []
 
   useEffect(() => {
@@ -44,7 +45,11 @@ const Playlist = ({ categoryId }: Props) => {
   }
 
   return (
-    <div onScroll={handleScroll} className={styles.Playlists} >
+    <div
+      onScroll={handleScroll}
+      style={{ 'overflowX': `${isDragging ? 'hidden' : 'auto'}` }}
+      className={styles.Playlists}
+    >
       {playlist.map((playlist, i) => {
         return playlist?.id
           ? <PlaylistCard key={i} categoryId={categoryId} playlist={playlist} />

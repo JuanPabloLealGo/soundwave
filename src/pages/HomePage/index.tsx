@@ -5,14 +5,14 @@ import styles from './HomePage.module.scss'
 
 const HomePage = () => {
   return (
-    <>
+    <div>
       <div className={styles.HomeDragZone}>
         <Player isDraggable />
       </div>
       <div className={`grid`}>
         <CategoryList />
       </div>
-    </>
+    </div>
   )
 }
 

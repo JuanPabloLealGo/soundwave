@@ -1,15 +1,19 @@
 .TrackCard {
   display: flex;
-  border: 1px solid black;
   width: 100%;
   padding: 10px;
   align-items: center;
+  font-size: 1rem;
+  font-weight: 300;
+  justify-content: space-around;
+  border-radius: 5px;
+  cursor: pointer;
 
   &Description {
     align-items: center;
     display: flex;
-    border: 1px solid red;
     white-space: nowrap;
+    width: 50%;
 
     &Image {
       background-repeat: no-repeat;
@@ -21,8 +25,8 @@
 
     &Text {
       padding: 0 10px;
-      width: 330px;
-      min-width: 330px;
+      overflow: hidden;
+      width: 100%;
 
       &Name {
         display: block;
@@ -43,9 +47,19 @@
     }
   }
 
-  &Stars {}
+  &Album {
+    padding-right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 30%;
+  }
 
-  &Time {}
+  &Time {
+    width: 10%;
+  }
 
-  &Favorite {}
+  &Popularity {
+    width: 10%;
+  }
 }

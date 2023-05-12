@@ -1,4 +1,6 @@
 import TrackItemInterface from "../../interfaces/TrackItemInterface"
+import { convertMsToMinSec } from "../../utils"
+import PopularityStars from "../PopularityStars"
 import styles from "./TrackCard.module.scss"
 
 interface Props {
@@ -15,8 +17,10 @@ const TrackCard = ({ track, onTrackSelect }: Props) => {
 
   const getArtists = () => track.artists.map((artist) => artist.name).join(', ')
 
+  const duration = convertMsToMinSec(track.duration_ms)
+
   return (
-    <div className={styles.TrackCard} onClick={handleClick}>
+    <div className={`applyHover ${styles.TrackCard}`} onClick={handleClick}>
       <div className={styles.TrackCardDescription}>
         <div style={imageStyle} className={styles.TrackCardDescriptionImage} />
         <div className={styles.TrackCardDescriptionText}>
@@ -28,9 +32,11 @@ const TrackCard = ({ track, onTrackSelect }: Props) => {
           </span>
         </div>
       </div>
-      <div className={styles.TrackCardStars}>points</div>
-      <div className={styles.TrackCardTime}>duration</div>
-      <div className={styles.TrackCardFavorite}>favorite</div>
+      <div className={styles.TrackCardAlbum}>{track.album.name}</div>
+      <div className={styles.TrackCardTime}>{`${duration.minutes}:${duration.seconds}`}</div>
+      <div className={styles.TrackCardPopularity}>
+        <PopularityStars value={track.popularity} />
+      </div>
     </div>
   )
 }

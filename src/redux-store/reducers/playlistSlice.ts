@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import PlaylistStateInterface from "../../interfaces/state/PlaylistStateInterface"
 import { ErrorType } from "../../types"
-import PlaylistInterface from "../../interfaces/PlaylistInterface"
 import { getPlaylist } from "../actions/playlistActions"
+import PlaylistInterface from "../../interfaces/PlayListInterface"
 
 const initialState = {
   data: null,

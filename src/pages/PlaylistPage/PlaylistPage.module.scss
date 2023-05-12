@@ -1,10 +1,22 @@
 .Playlist {
 
-  grid-column: 1;
-  display: flex;
+  &Title {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &Description {
+    font-size: 1.25rem;
+    font-weight: 300;
+    padding-top: 16px;
+  }
 
   &Player {
-    width: 40%;
+    grid-column: 1/5;
+  }
+
+  &Items {
+    grid-column: 6/-1;
   }
 
 }

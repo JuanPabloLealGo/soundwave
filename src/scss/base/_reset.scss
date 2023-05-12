@@ -126,6 +126,11 @@ a {
     box-shadow: $dark-shadow;
   }
 
+  .applyHover {
+    &:hover {
+      background-color: $light-hover;
+    }
+  }
 }
 
 .dark {
@@ -147,5 +152,11 @@ a {
 
   .shadowed {
     box-shadow: $light-shadow;
+  }
+
+  .applyHover {
+    &:hover {
+      background-color: $dark-hover;
+    }
   }
 }

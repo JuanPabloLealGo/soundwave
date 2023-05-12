@@ -2,8 +2,8 @@
   &Content {
     grid-column: 1/-1;
     min-height: calc(100vh - 300px);
+    padding-top: 80px;
     position: relative;
-    top: 80px;
   }
 
   &ThemeButton {

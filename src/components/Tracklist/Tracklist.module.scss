@@ -1,0 +1,32 @@
+@import "../../scss/main.scss";
+
+.Tracklist {
+  &Header {
+    color: $secondary;
+    display: flex;
+    font-size: 0.8rem;
+    font-weight: 700;
+    justify-content: space-around;
+    padding: 20px 10px;
+
+    &Title {
+      width: 50%;
+      padding-left: 80px;
+    }
+
+    &Album {
+      width: 30%;
+    }
+
+    &GeneralItem {
+      width: 10%;
+    }
+
+  }
+
+  &Body {
+    height: 550px;
+    overflow-y: auto;
+  }
+
+}
