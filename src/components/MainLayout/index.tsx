@@ -23,14 +23,14 @@ const MainLayout = () => {
 
   return (
     <>
+      {error && (
+        <ErrorMessage
+          error={error}
+          onClick={clickHandler}
+        />
+      )}
       <NavBar />
       <main className={styles.MainLayoutContent}>
-        {error && (
-          <ErrorMessage
-            error={error}
-            onClick={clickHandler}
-          />
-        )}
         <Outlet />
         <ToggleThemeButton className={styles.MainLayoutThemeButton} />
       </main>
