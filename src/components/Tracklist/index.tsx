@@ -26,7 +26,7 @@ const Tracklist = ({ playlistId }: Props) => {
       offset: currentOffset,
       playlistId
     }))
-  }, [currentOffset, dispatch])
+  }, [currentOffset, dispatch, playlistId])
 
   const handleLoadMore = () => {
     if (hasMoreData) {

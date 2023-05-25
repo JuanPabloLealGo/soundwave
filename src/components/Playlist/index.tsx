@@ -51,7 +51,7 @@ const Playlist = ({ categoryId }: Props) => {
     >
       {playlist.map((playlist, i) => {
         return playlist?.id
-          ? <PlaylistCard key={i} categoryId={categoryId} playlist={playlist} />
+          ? <PlaylistCard key={i} playlist={playlist} />
           : null
       })}
     </div>

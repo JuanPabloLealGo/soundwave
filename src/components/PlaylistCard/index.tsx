@@ -4,14 +4,13 @@ import { BsPlayFill } from "react-icons/bs"
 import styles from "./PlaylistCard.module.scss"
 import { useAppDispatch } from "../../redux-store"
 import { updateCurrentPlaylist } from "../../redux-store/reducers/playlistSlice"
-import PlaylistInterface from "../../interfaces/PlayListInterface"
+import PlaylistInterface from "../../interfaces/PlaylistInterface"
 
 interface Props {
-  categoryId: string
   playlist: PlaylistInterface
 }
 
-const PlaylistCard = ({ categoryId, playlist }: Props) => {
+const PlaylistCard = ({ playlist }: Props) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
