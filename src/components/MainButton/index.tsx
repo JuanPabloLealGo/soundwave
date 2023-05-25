@@ -10,7 +10,7 @@ interface Props {
   icon?: JSX.Element
   label?: string
   type: MainButtonType
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLElement>
 }
 
 const MainButton = ({ className, icon, label, onClick, type }: Props) => {

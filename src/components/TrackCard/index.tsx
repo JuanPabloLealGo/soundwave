@@ -1,4 +1,6 @@
 import TrackItemInterface from "../../interfaces/TrackItemInterface"
+import { useAppSelector } from "../../redux-store"
+import { uiSelector } from "../../redux-store/selectors"
 import { convertMsToMinSec } from "../../utils"
 import PopularityStars from "../PopularityStars"
 import styles from "./TrackCard.module.scss"
@@ -9,7 +11,7 @@ interface Props {
 }
 
 const TrackCard = ({ track, onTrackSelect }: Props) => {
-
+  const { isDarkTheme } = useAppSelector(uiSelector)
   const handleClick = () => onTrackSelect(track)
   const imageStyle = {
     'backgroundImage': `url(${track.album.images[0].url})`
@@ -20,7 +22,15 @@ const TrackCard = ({ track, onTrackSelect }: Props) => {
   const duration = convertMsToMinSec(track.duration_ms)
 
   return (
-    <div className={`applyHover ${styles.TrackCard}`} onClick={handleClick}>
+    <div
+      className={`
+        ${styles.TrackCard} 
+        ${isDarkTheme
+          ? styles.TrackCardDark
+          : styles.TrackCardLight
+        } 
+      `}
+      onClick={handleClick}>
       <div className={styles.TrackCardDescription}>
         <div style={imageStyle} className={styles.TrackCardDescriptionImage} />
         <div className={styles.TrackCardDescriptionText}>

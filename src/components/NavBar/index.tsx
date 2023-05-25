@@ -42,7 +42,7 @@ const NavBar = () => {
 
   return (
     <header className={`background-theme ${styles.NavBar}`}>
-      <div className={styles.NavBarContainer}>
+      <nav className={styles.NavBarContainer}>
         <NavLink reloadDocument onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
           <Logo size={Size.m} />
         </NavLink>
@@ -50,23 +50,21 @@ const NavBar = () => {
           className={`${styles.NavBarMenu} ${isActive && `${styles.NavBarMenuActive} background-theme`}`}
           onClick={onClickHandler}
         >
-          {
-            links.map((item, index) => {
-              const { label, link } = item
-              return (
-                <li key={index}>
-                  <NavLink
-                    end
-                    className={({ isActive }) => `link ${styles.NavBarMenuLink} ${isActive && styles.NavBarMenuLinkActive}`}
-                    to={link}
-                    reloadDocument
-                  >
-                    {label}
-                  </NavLink>
-                </li>
-              )
-            })
-          }
+          {links.map((item, index) => {
+            const { label, link } = item
+            return (
+              <li key={index}>
+                <NavLink
+                  end
+                  className={({ isActive }) => `link ${styles.NavBarMenuLink} ${isActive && styles.NavBarMenuLinkActive}`}
+                  to={link}
+                  reloadDocument
+                >
+                  {label}
+                </NavLink>
+              </li>
+            )
+          })}
           <MainButton
             label={isAuthenticated ? 'Sign Out' : 'Sign In'}
             onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
@@ -80,7 +78,7 @@ const NavBar = () => {
         >
           {isActive ? <IoMdClose /> : <HiMenu />}
         </button>
-      </div>
+      </nav>
     </header>
   )
 }

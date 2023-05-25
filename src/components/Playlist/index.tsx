@@ -21,7 +21,7 @@ const Playlist = ({ categoryId }: Props) => {
   useEffect(() => {
     if (categoryId) {
       dispatch(getPlaylistPageByCategory({
-        categoryId: categoryId,
+        categoryId,
         limit: PaginationEnum.playlistsLimit,
         offset: currentOffset
       }))
@@ -36,7 +36,6 @@ const Playlist = ({ categoryId }: Props) => {
       setCurrentOffset(prev => prev + PaginationEnum.playlistsLimit)
     }
   }
-
 
   if (data && data[categoryId] && (data[categoryId].total === 0 || data[categoryId].items.length === 0)) {
     return (

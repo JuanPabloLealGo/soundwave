@@ -20,8 +20,14 @@ const tracksSlice = createSlice({
         state.isLoading = true
       })
       .addCase(getTrackPage.fulfilled, (state, action: PayloadAction<TrackPageInterface>) => {
+        const isLoadMore = action.payload.offset > 0
         state.isLoading = false
-        state.data = action.payload
+        state.data = {
+          ...action.payload,
+          items: isLoadMore
+            ? [...state.data?.items ?? [], ...action.payload.items]
+            : action.payload.items
+        }
       })
       .addCase(getTrackPage.rejected, (state, action: PayloadAction<ErrorType>) => {
         state.isLoading = false
