@@ -1,13 +1,15 @@
 import AuthStateInterface from "./AuthStateInterface";
 import CategoryListStateInterface from "./CategoryListStateInterface";
-import PlaylistsStateInterface from "./PlayListsStateInterface";
-import TracksStateInterface from "./TracksStateInterface";
+import PlaylistPageStateInterface from "./PlaylistPageStateInterface";
+import PlaylistStateInterface from "./PlaylistStateInterface";
+import TrackStateInterface from "./TrackStateInterface";
 import UiStateInterface from "./UiStateInterface";
 
 export default interface AppStateInterface {
   auth: AuthStateInterface
   category: CategoryListStateInterface
   ui: UiStateInterface
-  playlists: PlaylistsStateInterface
-  tracks: TracksStateInterface
+  playlist: PlaylistStateInterface
+  playlistPage: PlaylistPageStateInterface
+  track: TrackStateInterface
 }

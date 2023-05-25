@@ -1,6 +1,6 @@
 import PaginatedListInterface from "./PaginatedListInterface"
-import PlaylistInterface from "./PlayListInterface"
+import PlaylistInterface from "./PlaylistInterface"
 
-export default interface PlaylistsPageInterface extends PaginatedListInterface {
+export default interface PlaylistPageInterface extends PaginatedListInterface {
   items: PlaylistInterface[]
 }

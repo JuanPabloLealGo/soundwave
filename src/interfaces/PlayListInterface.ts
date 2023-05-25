@@ -2,7 +2,7 @@ import { TypeEnum } from "../enums/TypeEnum"
 import ExternalUrlsInterface from "./ExternalUrlsInterface"
 import ImageInterface from "./ImageInterface"
 import OwnerInterface from "./OwnerInterface"
-import TracksInterface from "./TracksInterface"
+import TrackListInterface from "./TrackListInterface"
 
 export default interface PlaylistInterface {
   collaborative: boolean
@@ -15,7 +15,7 @@ export default interface PlaylistInterface {
   owner: OwnerInterface
   public: boolean | null
   snapshot_id: string
-  tracks: TracksInterface
+  tracks: TrackListInterface
   type: TypeEnum
   uri: string
 }

@@ -35,8 +35,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -52,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@types/redux-persist": "^4.3.1"
+    "@types/redux-persist": "^4.3.1",
+    "eslint-config-react-app": "^7.0.1"
   }
 }

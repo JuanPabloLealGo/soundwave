@@ -1,0 +1,97 @@
+@import "../../scss/main.scss";
+
+.PlayListItem {
+  position: relative;
+}
+
+.PlaylistCard {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  height: 160px;
+  margin: 10px;
+  min-width: 145px;
+  position: relative;
+  width: 145px;
+
+  &BlurredContainer,
+  &Description {
+    bottom: 0;
+    border-radius: 0px 0px 20px 20px;
+    height: 35%;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+  }
+
+  &BlurredContainer {
+    backdrop-filter: blur(16px);
+  }
+
+  &Description {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    justify-content: center;
+
+    &Title {
+      width: 100%;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+
+    &Tracks {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  &Button {
+    align-items: center;
+    background-color: $primary;
+    bottom: 20px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    position: absolute;
+    right: 10px;
+    width: 40px;
+
+    &Icon {
+      height: 30px;
+      width: 25px;
+    }
+  }
+
+  @include for-size(m) {
+    border-radius: 30px;
+    font-size: 1rem;
+    height: 215px;
+    min-width: 200px;
+    width: 200px;
+
+    &BlurredContainer,
+    &Description {
+      padding: 16px;
+    }
+
+    &Button {
+      bottom: 25px;
+      height: 50px;
+      width: 50px;
+
+      &Icon {
+        height: 40px;
+        width: 30px;
+      }
+    }
+  }
+}

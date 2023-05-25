@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import AuthDataInterface from "../../interfaces/AuthDataInterface"
 import AuthStateInterface from "../../interfaces/state/AuthStateInterface"
+import { ErrorType } from "../../types"
 import { refreshSpotifyToken, spotifyAuthentication } from "../actions/authActions"
 
 const initialState = {
@@ -15,9 +16,11 @@ const authSlice = createSlice({
   reducers: {
     logout: (state: AuthStateInterface) => {
       state.data = null
+      state.error = null
+      state.isLoading = false
     }
   },
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(spotifyAuthentication.pending, (state) => {
         state.isLoading = true
@@ -27,10 +30,13 @@ const authSlice = createSlice({
         state.data = action.payload
         state.error = null
       })
-      .addCase(spotifyAuthentication.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(spotifyAuthentication.rejected, (state, action: PayloadAction<ErrorType>) => {
         state.isLoading = false
-        state.error = action.payload
         state.data = null
+        state.error = action.payload
+      })
+      .addCase(refreshSpotifyToken.pending, (state) => {
+        state.isLoading = true
       })
       .addCase(refreshSpotifyToken.fulfilled, (state, action: PayloadAction<AuthDataInterface>) => {
         state.data = {
@@ -39,12 +45,15 @@ const authSlice = createSlice({
         }
         state.error = null
       })
-      .addCase(refreshSpotifyToken.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(refreshSpotifyToken.rejected, (state, action: PayloadAction<ErrorType>) => {
         state.error = action.payload
         state.data = null
       })
   }
 })
 
-export const { logout } = authSlice.actions
-export default authSlice.reducer
+const { actions, reducer } = authSlice
+
+export const { logout } = actions
+
+export default reducer
