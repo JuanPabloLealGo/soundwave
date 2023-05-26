@@ -7,18 +7,20 @@ import { updateCurrentPlaylist } from "../../redux-store/reducers/playlistSlice"
 import PlaylistInterface from "../../interfaces/PlaylistInterface"
 
 interface Props {
-  playlist: PlaylistInterface
+  playlist?: PlaylistInterface
 }
 
 const PlaylistCard = ({ playlist }: Props) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const handleClick = () => navigate(`/playlist/${playlist.id}`)
-  const handlePlaylistSelect = () => dispatch(updateCurrentPlaylist(playlist.uri))
+  const handleClick = () => playlist && navigate(`/playlist/${playlist.id}`)
+  const handlePlaylistSelect = () => playlist && dispatch(updateCurrentPlaylist(playlist.uri))
+
+  const skeletonText = <span className='skeleton skeleton_text' />
 
   const cardStyle = {
-    'backgroundImage': `url(${playlist.images[0].url})`
+    'backgroundImage': `url(${playlist?.images[0].url})`
   }
 
   return (
@@ -26,16 +28,20 @@ const PlaylistCard = ({ playlist }: Props) => {
       <div style={cardStyle} onClick={handleClick} className={`shadowed ${styles.PlaylistCard}`}>
         <div className={styles.PlaylistCardBlurredContainer}></div>
         <div className={styles.PlaylistCardDescription}>
-          <div className={styles.PlaylistCardDescriptionTitle}>
-            <span>{capitalizeFirstLetter(playlist.name)}</span>
-          </div>
-          <span className={styles.PlaylistCardDescriptionTracks}>
-            {`${playlist.tracks.total} Tracks`}
-          </span>
+          {playlist ? (
+            <span className={styles.PlaylistCardDescriptionTitle}>
+              {capitalizeFirstLetter(playlist.name)}
+            </span>
+          ) : skeletonText}
+          {playlist ? (
+            <span className={styles.PlaylistCardDescriptionTracks}>
+              {`${playlist.tracks.total} Tracks`}
+            </span>
+          ) : skeletonText}
         </div>
       </div>
       <button
-        className={`shadowed ${styles.PlaylistCardButton}`}
+        className={`shadowed ${styles.PlaylistCardButton} ${playlist ? null : 'skeleton'}`}
         onClick={handlePlaylistSelect}
       >
         <BsPlayFill className={styles.PlaylistCardButtonIcon} />
