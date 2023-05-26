@@ -1,10 +1,11 @@
 import { UIEvent, useEffect, useState } from "react"
-import { PaginationEnum } from "../../enums/PaginationEnum"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
 import PlaylistCard from "../PlaylistCard"
-import styles from "./Playlist.module.scss"
+import { PaginationEnum } from "../../enums/PaginationEnum"
 import { playlistPageSelector, uiSelector } from "../../redux-store/selectors"
 import { getPlaylistPageByCategory } from "../../redux-store/actions/playlistPageActions"
+
+import styles from "./Playlist.module.scss"
 
 interface Props {
   categoryId: string
@@ -14,9 +15,10 @@ const Playlist = ({ categoryId }: Props) => {
 
   const dispatch = useAppDispatch()
   const [currentOffset, setCurrentOffset] = useState(0)
-  const { data } = useAppSelector(playlistPageSelector)
+  const { data, isLoading } = useAppSelector(playlistPageSelector)
   const { isDragging } = useAppSelector(uiSelector)
   const playlist = data && data[categoryId] ? data[categoryId].items : []
+  const hasMoreData = data && data[categoryId] && data[categoryId].next !== null
 
   useEffect(() => {
     if (categoryId) {
@@ -30,7 +32,6 @@ const Playlist = ({ categoryId }: Props) => {
 
   const handleScroll = (e: UIEvent<HTMLElement>) => {
     const { scrollLeft, scrollWidth, clientWidth } = e.currentTarget
-    const hasMoreData = data && data[categoryId] && data[categoryId].next !== null
 
     if (hasMoreData && (Math.floor(scrollWidth - scrollLeft) <= clientWidth)) {
       setCurrentOffset(prev => prev + PaginationEnum.playlistsLimit)
@@ -43,17 +44,21 @@ const Playlist = ({ categoryId }: Props) => {
     )
   }
 
+  let emptyPlayList = Array.from(Array(PaginationEnum.playlistsLimit))
+    .map((item, i) => <PlaylistCard key={i} />)
+
   return (
     <div
       onScroll={handleScroll}
       style={{ 'overflowX': `${isDragging ? 'hidden' : 'auto'}` }}
       className={styles.Playlists}
     >
-      {playlist.map((playlist, i) => {
-        return playlist?.id
-          ? <PlaylistCard key={i} playlist={playlist} />
+      {playlist.map((item, i) => {
+        return item?.id
+          ? <PlaylistCard key={i} playlist={item} />
           : null
       })}
+      {hasMoreData && isLoading && emptyPlayList}
     </div>
   )
 }
