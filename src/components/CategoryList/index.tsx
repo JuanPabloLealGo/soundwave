@@ -39,23 +39,27 @@ const CategoryList = () => {
     if (categoryElement) intObserver.current.observe(categoryElement)
   }, [isLoading, hasNextPage])
 
-  const content = categories?.items.map((category, i) => {
-
-    if (categories.items.length === i + 1) {
-      return (
-        <CategoryItem
-          key={`${category.id}_${i}`}
-          categoryRef={lastCategoryRef}
-          item={category}
-        />)
-    }
-
-    return <CategoryItem key={`${category.id}_${i}`} item={category} />
-  })
+  let emptyCategoryList = Array.from(Array(PaginationEnum.commonLimit))
+    .map((item, i) => <CategoryItem key={i} />)
 
   return (
     <div className={styles.CategoryList}>
-      {!categories && isLoading ? <div>Loading...</div> : content}
+      {
+        categories?.items.map((category, i) => {
+
+          if (categories.items.length === i + 1) {
+            return (
+              <CategoryItem
+                key={`${category.id}_${i}`}
+                categoryRef={lastCategoryRef}
+                item={category}
+              />)
+          }
+
+          return <CategoryItem key={`${category.id}_${i}`} item={category} />
+        })
+      }
+      {isLoading && emptyCategoryList}
     </div>
   )
 }

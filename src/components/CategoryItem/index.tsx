@@ -5,7 +5,7 @@ import styles from "./CategoryItem.module.scss"
 import Playlist from "../Playlist"
 
 interface Props {
-  item: CategoryItemInterface
+  item?: CategoryItemInterface
   categoryRef?: LegacyRef<HTMLDivElement>
 }
 
@@ -15,12 +15,14 @@ const CategoryItem = ({ item, categoryRef }: Props) => {
     <div
       ref={categoryRef}
       className={styles.CategoryItem}
-      key={item.id}
+      key={item?.id}
     >
-      <span className={styles.CategoryItemName}>
-        {capitalizeFirstLetter(item.name)}
-      </span>
-      <Playlist categoryId={item.id} />
+      {item ? (
+        <span className={styles.CategoryItemName}>
+          {capitalizeFirstLetter(item.name)}
+        </span>
+      ) : <div className={`skeleton ${styles.SkeletonTile}`} />}
+      <Playlist categoryId={item?.id} />
     </div>
   )
 }

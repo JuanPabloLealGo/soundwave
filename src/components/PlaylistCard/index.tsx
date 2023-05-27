@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { capitalizeFirstLetter } from "../../utils"
 import { BsPlayFill } from "react-icons/bs"
-import styles from "./PlaylistCard.module.scss"
 import { useAppDispatch } from "../../redux-store"
 import { updateCurrentPlaylist } from "../../redux-store/reducers/playlistSlice"
 import PlaylistInterface from "../../interfaces/PlaylistInterface"
+
+import styles from "./PlaylistCard.module.scss"
 
 interface Props {
   playlist?: PlaylistInterface
@@ -17,7 +18,7 @@ const PlaylistCard = ({ playlist }: Props) => {
   const handleClick = () => playlist && navigate(`/playlist/${playlist.id}`)
   const handlePlaylistSelect = () => playlist && dispatch(updateCurrentPlaylist(playlist.uri))
 
-  const skeletonText = <span className='skeleton skeleton_text' />
+  const skeletonText = <span className={`skeleton ${styles.SkeletonDescription}`} />
 
   const cardStyle = {
     'backgroundImage': `url(${playlist?.images[0].url})`
