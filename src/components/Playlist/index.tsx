@@ -8,7 +8,7 @@ import { getPlaylistPageByCategory } from "../../redux-store/actions/playlistPag
 import styles from "./Playlist.module.scss"
 
 interface Props {
-  categoryId: string
+  categoryId?: string
 }
 
 const Playlist = ({ categoryId }: Props) => {
@@ -17,8 +17,9 @@ const Playlist = ({ categoryId }: Props) => {
   const [currentOffset, setCurrentOffset] = useState(0)
   const { data, isLoading } = useAppSelector(playlistPageSelector)
   const { isDragging } = useAppSelector(uiSelector)
-  const playlist = data && data[categoryId] ? data[categoryId].items : []
-  const hasMoreData = data && data[categoryId] && data[categoryId].next !== null
+
+  const playlist = data && categoryId && data[categoryId] ? data[categoryId].items : []
+  const hasMoreData = data && categoryId && data[categoryId] && data[categoryId].next !== null
 
   useEffect(() => {
     if (categoryId) {
@@ -33,12 +34,12 @@ const Playlist = ({ categoryId }: Props) => {
   const handleScroll = (e: UIEvent<HTMLElement>) => {
     const { scrollLeft, scrollWidth, clientWidth } = e.currentTarget
 
-    if (hasMoreData && (Math.floor(scrollWidth - scrollLeft) <= clientWidth)) {
+    if (hasMoreData && (Math.floor(scrollWidth - scrollLeft - 30) <= clientWidth)) {
       setCurrentOffset(prev => prev + PaginationEnum.playlistsLimit)
     }
   }
 
-  if (data && data[categoryId] && (data[categoryId].total === 0 || data[categoryId].items.length === 0)) {
+  if (data && categoryId && data[categoryId] && (data[categoryId].total === 0 || data[categoryId].items.length === 0)) {
     return (
       <div>No playlists</div>
     )
@@ -58,7 +59,7 @@ const Playlist = ({ categoryId }: Props) => {
           ? <PlaylistCard key={i} playlist={item} />
           : null
       })}
-      {hasMoreData && isLoading && emptyPlayList}
+      {(!categoryId || (hasMoreData && isLoading)) && emptyPlayList}
     </div>
   )
 }
