@@ -6,6 +6,7 @@ import { playlistPageSelector, uiSelector } from "../../redux-store/selectors"
 import { getPlaylistPageByCategory } from "../../redux-store/actions/playlistPageActions"
 
 import styles from "./Playlist.module.scss"
+import { getList } from "../../utils"
 
 interface Props {
   categoryId?: string
@@ -34,7 +35,7 @@ const Playlist = ({ categoryId }: Props) => {
   const handleScroll = (e: UIEvent<HTMLElement>) => {
     const { scrollLeft, scrollWidth, clientWidth } = e.currentTarget
 
-    if (hasMoreData && (Math.floor(scrollWidth - scrollLeft - 30) <= clientWidth)) {
+    if (hasMoreData && (Math.floor(scrollWidth - scrollLeft) <= clientWidth)) {
       setCurrentOffset(prev => prev + PaginationEnum.playlistsLimit)
     }
   }
@@ -45,8 +46,7 @@ const Playlist = ({ categoryId }: Props) => {
     )
   }
 
-  let emptyPlayList = Array.from(Array(PaginationEnum.playlistsLimit))
-    .map((item, i) => <PlaylistCard key={i} />)
+  const skeletonList = getList(PaginationEnum.playlistsLimit)
 
   return (
     <div
@@ -59,7 +59,9 @@ const Playlist = ({ categoryId }: Props) => {
           ? <PlaylistCard key={i} playlist={item} />
           : null
       })}
-      {(!categoryId || (hasMoreData && isLoading)) && emptyPlayList}
+      {(!categoryId || (hasMoreData && isLoading)) && (
+        skeletonList.map((item, i) => <PlaylistCard key={i} />)
+      )}
     </div>
   )
 }

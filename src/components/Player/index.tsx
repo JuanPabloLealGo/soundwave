@@ -9,10 +9,11 @@ import { playerDragging } from "../../redux-store/reducers/uiSlice"
 
 interface Props {
   isDraggable?: boolean
+  isLoading: boolean
   urlImage?: string
 }
 
-const Player = ({ isDraggable, urlImage }: Props) => {
+const Player = ({ isDraggable, isLoading, urlImage }: Props) => {
 
   const dispatch = useAppDispatch()
   const nodeRef = useRef(null)
@@ -21,7 +22,7 @@ const Player = ({ isDraggable, urlImage }: Props) => {
   const imageStyle = urlImage ? { 'backgroundImage': `url(${urlImage})` } : {}
   const draggablePlayerClasses = isDraggable ? styles.DraggablePlayer : ''
   const playerContentClasses = currentUris ? styles.PlayerContent : ''
-  const playerImageClasses = urlImage ? styles.PlayerImage : ''
+  const playerImageClasses = !isDraggable && `${styles.PlayerImage} ${isLoading && !urlImage && 'skeleton'}`
 
   const handleDrag = () => {
     dispatch(playerDragging(true))

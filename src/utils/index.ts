@@ -12,3 +12,5 @@ export const convertMsToMinSec = (ms: number) => {
     seconds: seconds.toString().padStart(2, '0')
   }
 }
+
+export const getList = (numberOfItems: number) => Array.from(Array(numberOfItems))

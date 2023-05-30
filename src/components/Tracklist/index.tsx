@@ -10,7 +10,7 @@ import { getTrackPage } from "../../redux-store/actions/trackActions"
 import { PaginationEnum } from "../../enums/PaginationEnum"
 
 interface Props {
-  playlistId: string
+  playlistId?: string
 }
 
 const Tracklist = ({ playlistId }: Props) => {
@@ -21,11 +21,13 @@ const Tracklist = ({ playlistId }: Props) => {
   const hasMoreData = data && data.next !== null
 
   useEffect(() => {
-    dispatch(getTrackPage({
-      limit: PaginationEnum.tracklistLimit,
-      offset: currentOffset,
-      playlistId
-    }))
+    if (playlistId) {
+      dispatch(getTrackPage({
+        limit: PaginationEnum.tracklistLimit,
+        offset: currentOffset,
+        playlistId
+      }))
+    }
   }, [currentOffset, dispatch, playlistId])
 
   const handleLoadMore = () => {
@@ -37,7 +39,7 @@ const Tracklist = ({ playlistId }: Props) => {
   const handleTrackSelect = (track: TrackItemInterface) =>
     dispatch(updateCurrentPlaylist(track.uri))
 
-  if (!data) return null
+  if (!data?.items) return null
 
   return (
     <div>
@@ -50,6 +52,9 @@ const Tracklist = ({ playlistId }: Props) => {
       <div className={styles.TracklistBody}>
         {data.items.map((item) => {
           const { track } = item
+
+          if (!track) return null
+
           return (
             <TrackCard
               key={track.id}

@@ -12,6 +12,24 @@
     font-weight: 700;
   }
 
+  &SkeletonTitle {
+    border-radius: 4px;
+    height: 2.5rem;
+    width: 80%;
+  }
+
+  &SkeletonDescription {
+    border-radius: 4px;
+    height: 1.25rem;
+    width: 100%;
+    margin-bottom: 6px;
+
+    &:last-child {
+      width: 60%;
+      margin-bottom: 0px;
+    }
+  }
+
   &Description {
     font-size: 1.25rem;
     font-weight: 300;

@@ -6,6 +6,7 @@ import CategoryItem from "../CategoryItem"
 import { categorySelector } from "../../redux-store/selectors"
 
 import styles from "./CategoryList.module.scss"
+import { getList } from "../../utils"
 
 const CategoryList = () => {
   const dispatch = useAppDispatch()
@@ -39,8 +40,7 @@ const CategoryList = () => {
     if (categoryElement) intObserver.current.observe(categoryElement)
   }, [isLoading, hasNextPage])
 
-  let emptyCategoryList = Array.from(Array(PaginationEnum.commonLimit))
-    .map((item, i) => <CategoryItem key={i} />)
+  const skeletonList = getList(PaginationEnum.commonLimit)
 
   return (
     <div className={styles.CategoryList}>
@@ -59,7 +59,7 @@ const CategoryList = () => {
           return <CategoryItem key={`${category.id}_${i}`} item={category} />
         })
       }
-      {isLoading && emptyCategoryList}
+      {isLoading && skeletonList.map((item, i) => <CategoryItem key={i} />)}
     </div>
   )
 }
