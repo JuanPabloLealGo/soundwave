@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <div>
       <div className={styles.HomeDragZone}>
-        <Player isDraggable />
+        <Player isDraggable isLoading />
       </div>
       <div className={`grid`}>
         <CategoryList />

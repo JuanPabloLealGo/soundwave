@@ -8,7 +8,7 @@ import PlaylistInterface from "../../interfaces/PlaylistInterface"
 import styles from "./PlaylistCard.module.scss"
 
 interface Props {
-  playlist?: PlaylistInterface
+  playlist: PlaylistInterface
 }
 
 const PlaylistCard = ({ playlist }: Props) => {
@@ -18,10 +18,8 @@ const PlaylistCard = ({ playlist }: Props) => {
   const handleClick = () => playlist && navigate(`/playlist/${playlist.id}`)
   const handlePlaylistSelect = () => playlist && dispatch(updateCurrentPlaylist(playlist.uri))
 
-  const skeletonText = <span className={`skeleton ${styles.SkeletonDescription}`} />
-
   const cardStyle = {
-    'backgroundImage': `url(${playlist?.images[0].url})`
+    'backgroundImage': `url(${playlist?.images[0]?.url})`
   }
 
   return (
@@ -29,20 +27,16 @@ const PlaylistCard = ({ playlist }: Props) => {
       <div style={cardStyle} onClick={handleClick} className={`shadowed ${styles.PlaylistCard}`}>
         <div className={styles.PlaylistCardBlurredContainer}></div>
         <div className={styles.PlaylistCardDescription}>
-          {playlist ? (
-            <span className={styles.PlaylistCardDescriptionTitle}>
-              {capitalizeFirstLetter(playlist.name)}
-            </span>
-          ) : skeletonText}
-          {playlist ? (
-            <span className={styles.PlaylistCardDescriptionTracks}>
-              {`${playlist.tracks.total} Tracks`}
-            </span>
-          ) : skeletonText}
+          <span className={styles.PlaylistCardDescriptionTitle}>
+            {capitalizeFirstLetter(playlist.name)}
+          </span>
+          <span className={styles.PlaylistCardDescriptionTracks}>
+            {`${playlist.tracks.total} Tracks`}
+          </span>
         </div>
       </div>
       <button
-        className={`shadowed ${styles.PlaylistCardButton} ${playlist ? null : 'skeleton'}`}
+        className={`shadowed ${styles.PlaylistCardButton}`}
         onClick={handlePlaylistSelect}
       >
         <BsPlayFill className={styles.PlaylistCardButtonIcon} />

@@ -1,0 +1,27 @@
+  .Loader {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    border-radius: 50%;
+    background-color: #ccc;
+    box-shadow: 32px 0 #ccc, -32px 0 #ccc;
+    position: relative;
+    animation: light-flash 0.5s ease-out infinite alternate;
+  }
+
+  @keyframes light-flash {
+    0% {
+      background-color: #ccc2;
+      box-shadow: 32px 0 #ccc2, -32px 0 #ccc;
+    }
+
+    50% {
+      background-color: #ccc;
+      box-shadow: 32px 0 #ccc2, -32px 0 #ccc;
+    }
+
+    100% {
+      background-color: #ccc2;
+      box-shadow: 32px 0 #ccc, -32px 0 #ccc2;
+    }
+  }
