@@ -11,7 +11,7 @@ export const getPlaylist = createAsyncThunk<PlaylistInterface, string, { rejectV
       const response = await getPlaylistById(playlistId)
       return response.data
     } catch (error) {
-      const { message } = (error as ErrorInterface).error
+      const { message } = (error as ErrorInterface).response.data.error
       return thunkAPI.rejectWithValue(message)
     }
   }

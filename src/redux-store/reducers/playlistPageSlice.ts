@@ -18,9 +18,11 @@ const playlistPageSlice = createSlice({
     builder
       .addCase(getPlaylistPageByCategory.pending, (state) => {
         state.isLoading = true
+        state.error = null
       })
       .addCase(getPlaylistPageByCategory.fulfilled, (state, { payload }: PayloadAction<PlaylistByCategoryInterface>) => {
         state.isLoading = false
+        state.error = null
         const categoryId = Object.keys(payload)[0]
         const payloadData = payload[categoryId]
         const isLoadMore = payloadData.offset > 0
@@ -42,6 +44,7 @@ const playlistPageSlice = createSlice({
         state.isLoading = false
         state.error = action.payload
       })
+
   }
 })
 

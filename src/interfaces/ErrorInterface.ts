@@ -1,8 +1,15 @@
+interface ErrorResponse {
+  data: ErrorData
+}
+
+interface ErrorData {
+  error: Error
+}
+
 interface Error {
-  status: number
   message: string
 }
 
 export default interface ErrorInterface {
-  error: Error
+  response: ErrorResponse
 }

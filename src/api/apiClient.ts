@@ -16,13 +16,14 @@ api.interceptors.request.use((config: any) => {
 api.interceptors.response.use(response => {
   return response
 }, error => {
+  console.log('error from interceptor: ', error)
   if (error.response.status === 401) {
     const errorMessage = 'Your token has expired'
 
     store.dispatch(setErrorMessage(errorMessage))
     console.log('[Error] Unauthorized user: ', error)
-    return Promise.reject(error)
   }
+  return Promise.reject(error)
 })
 
 export default api

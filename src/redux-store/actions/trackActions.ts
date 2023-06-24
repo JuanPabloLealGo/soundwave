@@ -17,7 +17,7 @@ export const getTrackPage = createAsyncThunk<TrackPageInterface, TrackPagePayloa
       const response = await getAllTracks(playlistId, limit, offset)
       return response.data
     } catch (error) {
-      const { message } = (error as ErrorInterface).error
+      const { message } = (error as ErrorInterface).response.data.error
       return thunkAPI.rejectWithValue(message)
     }
   }
