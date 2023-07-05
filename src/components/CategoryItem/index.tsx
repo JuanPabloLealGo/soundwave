@@ -1,4 +1,4 @@
-import { LegacyRef, useEffect, useState, UIEvent } from "react"
+import { useEffect, useState, UIEvent } from "react"
 import CategoryItemInterface from "../../interfaces/CategoryItemIterface"
 import { capitalizeFirstLetter } from "../../utils"
 import styles from "./CategoryItem.module.scss"
@@ -10,10 +10,9 @@ import { PaginationEnum } from "../../enums/PaginationEnum"
 
 interface Props {
   item: CategoryItemInterface
-  categoryRef?: LegacyRef<HTMLDivElement>
 }
 
-const CategoryItem = ({ item, categoryRef }: Props) => {
+const CategoryItem = ({ item }: Props) => {
   const dispatch = useAppDispatch()
   const {
     data: playlistsByCategory,
@@ -69,7 +68,6 @@ const CategoryItem = ({ item, categoryRef }: Props) => {
 
   return (
     <div
-      ref={categoryRef}
       className={styles.CategoryItem}
       key={item?.id}
     >

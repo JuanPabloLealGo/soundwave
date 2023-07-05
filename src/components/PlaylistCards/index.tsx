@@ -22,11 +22,11 @@ const PlaylistCards = ({ isLoading, onScrollHandle, playlists }: Props) => {
       style={{ 'overflowX': `${isDragging ? 'hidden' : 'auto'}` }}
       className={styles.Playlists}
     >
-      {playlists.items.map((item) => {
+      {playlists.items.map((item, index) => {
         if (item) {
-          return <PlaylistCard key={item.id} playlist={item} />
+          return <PlaylistCard key={`${item.id}_${index}`} playlist={item} />
         }
-        return null
+        return <p>empty card</p>
       })}
       {isLoading && <p>Loading...</p>}
     </div>
