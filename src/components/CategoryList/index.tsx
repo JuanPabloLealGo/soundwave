@@ -16,6 +16,7 @@ const CategoryList = () => {
     isLoading
   } = useAppSelector(categorySelector)
   const [currentOffset, setCurrentOffset] = useState(0)
+  const [categoryWithErrorIds, setCategoryWithErrorIds] = useState<string[]>([]);
   const hasNextPage = !!categories?.next
 
   useEffect(() => {
@@ -26,10 +27,14 @@ const CategoryList = () => {
     setCurrentOffset(prev => prev + PaginationEnum.commonLimit)
   }
 
+  const handleCategoryWithError = (categoryId: string) => {
+    setCategoryWithErrorIds((prev: string[]) => [...prev, categoryId] )
+  }
+
   return (
     <div className={styles.CategoryList}>
       {categories?.items.map((category, i) => {
-        return <CategoryItem key={`${category.id}_${i}`} item={category} />
+        return <CategoryItem key={`${category.id}_${i}`} hasError={categoryWithErrorIds.includes(category.id)} item={category} onAddCategoryWithError={handleCategoryWithError}/>
       })}
       {!isLoading && hasNextPage && (
         <button onClick={handleLoadMoreClick}>Load More</button>

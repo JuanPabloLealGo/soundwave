@@ -9,10 +9,12 @@ import { playlistPageSelector } from "../../redux-store/selectors"
 import { PaginationEnum } from "../../enums/PaginationEnum"
 
 interface Props {
+  hasError: boolean
   item: CategoryItemInterface
+  onAddCategoryWithError: (categoryId: string) => void
 }
 
-const CategoryItem = ({ item }: Props) => {
+const CategoryItem = ({ hasError, item, onAddCategoryWithError }: Props) => {
   const dispatch = useAppDispatch()
   const {
     data: playlistsByCategory,
@@ -30,6 +32,12 @@ const CategoryItem = ({ item }: Props) => {
     }))
   }, [currentOffset, item, dispatch])
 
+  useEffect(() => {
+    if (error) {
+      onAddCategoryWithError(item.id)
+    }
+  }, [error, item, onAddCategoryWithError])
+
   let content = null
 
   const handleScroll = (e: UIEvent<HTMLElement>) => {
@@ -41,7 +49,7 @@ const CategoryItem = ({ item }: Props) => {
   }
 
   if (!playlistsByCategory || !playlistsByCategory[item.id]) {
-    if (error) {
+    if (hasError) {
       content = <p>Something went wrong!</p>
     } else if (isLoading) {
       content = <p>Loading</p>
