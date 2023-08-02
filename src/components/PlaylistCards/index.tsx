@@ -25,10 +25,9 @@ const PlaylistCards = ({ isLoading, onScrollHandle, playlists }: Props) => {
       className={styles.Playlists}
     >
       {playlists.items.map((item, index) => {
-        if (item) {
-          return <PlaylistCard key={`${item.id}_${index}`} playlist={item} />
-        }
-        return <p key={index}>empty card</p>
+        let key = item ? `${item.id}_${index}` : index
+
+        return <PlaylistCard key={key} playlist={item} />
       })}
       {isLoading && <SkeletonElement type={SkeletonTypes.PlaylistCards} />}
     </div>
