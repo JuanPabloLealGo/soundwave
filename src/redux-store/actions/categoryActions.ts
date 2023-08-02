@@ -16,7 +16,7 @@ export const getCategoryPage = createAsyncThunk<CategoryPageInterface, CategoryP
       const response = await getAllCategories(limit, offset)
       return response.data.categories
     } catch (error) {
-      const { message } = (error as ErrorInterface).error
+      const { message } = (error as ErrorInterface).response.data.error
       return thunkAPI.rejectWithValue(message)
     }
   }

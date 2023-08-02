@@ -12,3 +12,13 @@ export const convertMsToMinSec = (ms: number) => {
     seconds: seconds.toString().padStart(2, '0')
   }
 }
+
+export const convertToRange = (length: number) => {
+  var result = []
+
+  for (let i = 1; i <= length; i++) {
+    result.push(i)
+  }
+
+  return result
+}
