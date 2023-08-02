@@ -25,7 +25,7 @@ const PlaylistCard = ({ playlist }: Props) => {
   return (
     <article className={styles.PlayListItem}>
       <div style={cardStyle} onClick={handleClick} className={`shadowed ${styles.PlaylistCard}`}>
-        <div className={styles.PlaylistCardBlurredContainer}></div>
+        <div className={styles.PlaylistCardBlurredContainer} />
         <div className={styles.PlaylistCardDescription}>
           <span className={styles.PlaylistCardDescriptionTitle}>
             {capitalizeFirstLetter(playlist.name)}

@@ -1,0 +1,57 @@
+.CategoryListSkeleton {
+  padding-top: 40px;
+  width: 100%;
+
+  &Title {
+    background-color: white;
+    border-radius: 6px;
+    height: 1.75rem;
+    width: 20%;
+  }
+}
+
+.CategoryItemSkeleton {
+  display: flex;
+  flex-direction: row;
+  height: 280px;
+  overflow-x: auto;
+  padding-top: 12px;
+  width: 100%;
+}
+
+.PlaylistCardsSkeleton {
+  border-radius: 30px;
+  height: 215px;
+  margin: 10px;
+  min-width: 200px;
+  position: relative;
+  width: 200px;
+
+  &BlurredContainer {
+    background-color: rgb(0, 0, 0, 6%);
+    border-radius: 0px 0px 30px 30px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 35%;
+    justify-content: space-around;
+    padding: 16px;
+    position: absolute;
+    width: 100%;
+  }
+
+  &Tracks,
+  &Name {
+    border-radius: 4px;
+    height: 1rem;
+  }
+
+  &Name {
+    width: 100%;
+  }
+
+  &Tracks {
+    width: 40%;
+  }
+
+}

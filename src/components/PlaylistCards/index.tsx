@@ -5,6 +5,8 @@ import { uiSelector } from "../../redux-store/selectors"
 
 import styles from "./PlaylistCards.module.scss"
 import PlaylistPageInterface from "../../interfaces/PlaylistPageInterface"
+import SkeletonElement from "../SkeletonElement"
+import { SkeletonTypes } from "../../enums/SkeletonTypes"
 
 interface Props {
   isLoading: boolean
@@ -26,9 +28,9 @@ const PlaylistCards = ({ isLoading, onScrollHandle, playlists }: Props) => {
         if (item) {
           return <PlaylistCard key={`${item.id}_${index}`} playlist={item} />
         }
-        return <p>empty card</p>
+        return <p key={index}>empty card</p>
       })}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <SkeletonElement type={SkeletonTypes.PlaylistCards} />}
     </div>
   )
 }

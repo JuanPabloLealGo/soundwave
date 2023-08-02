@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from "../../redux-store"
 import { getPlaylistPageByCategory } from "../../redux-store/actions/playlistPageActions"
 import { playlistPageSelector } from "../../redux-store/selectors"
 import { PaginationEnum } from "../../enums/PaginationEnum"
+import SkeletonElement from "../SkeletonElement"
+import { SkeletonTypes } from "../../enums/SkeletonTypes"
 
 interface Props {
   hasError: boolean
@@ -48,12 +50,14 @@ const CategoryItem = ({ hasError, item, onAddCategoryWithError }: Props) => {
     }
   }
 
-  if (!playlistsByCategory || !playlistsByCategory[item.id]) {
-    if (hasError) {
-      content = <p>Something went wrong!</p>
-    } else if (isLoading) {
-      content = <p>Loading</p>
-    }
+  const categoryIsLoading = !playlistsByCategory?.[item.id] || isLoading
+
+  if (categoryIsLoading) {
+    content = <SkeletonElement type={SkeletonTypes.CategoryItem} />
+  }
+
+  if (hasError && !isLoading) {
+    content = <p>Something went wrong!</p>
   }
 
   if (playlistsByCategory && playlistsByCategory[item.id]) {
@@ -75,10 +79,7 @@ const CategoryItem = ({ hasError, item, onAddCategoryWithError }: Props) => {
   }
 
   return (
-    <div
-      className={styles.CategoryItem}
-      key={item?.id}
-    >
+    <div className={styles.CategoryItem}>
       <span className={styles.CategoryItemName}>
         {capitalizeFirstLetter(item.name)}
       </span>
