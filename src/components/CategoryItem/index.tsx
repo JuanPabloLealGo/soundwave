@@ -9,6 +9,7 @@ import { playlistPageSelector } from "../../redux-store/selectors"
 import { PaginationEnum } from "../../enums/PaginationEnum"
 import SkeletonElement from "../SkeletonElement"
 import { SkeletonTypes } from "../../enums/SkeletonTypes"
+import { PiSmileySad } from "react-icons/pi"
 
 interface Props {
   hasError: boolean
@@ -56,8 +57,13 @@ const CategoryItem = ({ hasError, item, onAddCategoryWithError }: Props) => {
     content = <SkeletonElement type={SkeletonTypes.CategoryItem} />
   }
 
-  if (hasError && !isLoading) {
-    content = <p>Something went wrong!</p>
+  if (hasError) {
+    content = (
+      <article className={styles.ErrorMessage}>
+        <PiSmileySad className={styles.ErrorMessageIcon} />
+        <span>{`The category ${item.name} couldn't be loaded.`}</span>
+      </article>
+    )
   }
 
   if (playlistsByCategory && playlistsByCategory[item.id]) {
