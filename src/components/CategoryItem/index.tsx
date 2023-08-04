@@ -9,7 +9,7 @@ import { playlistPageSelector } from "../../redux-store/selectors"
 import { PaginationEnum } from "../../enums/PaginationEnum"
 import SkeletonElement from "../SkeletonElement"
 import { SkeletonTypes } from "../../enums/SkeletonTypes"
-import { PiSmileySad } from "react-icons/pi"
+import FeedbackMessage, { FeedbackMessageType } from "../FeedbackMessage"
 
 interface Props {
   hasError: boolean
@@ -59,10 +59,10 @@ const CategoryItem = ({ hasError, item, onAddCategoryWithError }: Props) => {
 
   if (hasError) {
     content = (
-      <article className={styles.ErrorMessage}>
-        <PiSmileySad className={styles.ErrorMessageIcon} />
-        <span>{`The category ${item.name} couldn't be loaded.`}</span>
-      </article>
+      <FeedbackMessage
+        type={FeedbackMessageType.Error}
+        message={`The category ${item.name} couldn't be loaded.`}
+      />
     )
   }
 
@@ -80,7 +80,12 @@ const CategoryItem = ({ hasError, item, onAddCategoryWithError }: Props) => {
       )
 
     } else {
-      content = <p>No items</p>
+      content = (
+        <FeedbackMessage
+          type={FeedbackMessageType.Information}
+          message={`The category ${item.name} is empty.`}
+        />
+      )
     }
   }
 
