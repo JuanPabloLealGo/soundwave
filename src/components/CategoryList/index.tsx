@@ -8,6 +8,8 @@ import { categorySelector } from "../../redux-store/selectors"
 import styles from "./CategoryList.module.scss"
 import SkeletonElement from "../SkeletonElement"
 import { SkeletonTypes } from "../../enums/SkeletonTypes"
+import Button, { ButtonType } from "../Button"
+import { FaArrowDown } from 'react-icons/fa'
 
 const CategoryList = () => {
   const dispatch = useAppDispatch()
@@ -48,7 +50,9 @@ const CategoryList = () => {
       })}
       {categoryListIsLoading && <SkeletonElement type={SkeletonTypes.CategoryList} />}
       {!isLoading && hasNextPage && (
-        <button onClick={handleLoadMoreClick}>Load More</button>
+        <div className={styles.LoadMoreButtonContainer}>
+          <Button onClick={handleLoadMoreClick} type={ButtonType.Filled} label='Load more' icon={<FaArrowDown />} />
+        </div>
       )}
     </div>
   )

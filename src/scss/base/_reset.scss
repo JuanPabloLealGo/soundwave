@@ -88,18 +88,6 @@ a {
   }
 }
 
-.btn {
-  border-radius: 18px;
-  border: none;
-  height: 40px;
-  padding: 8px;
-
-  &--primary {
-    background-color: $primary;
-    color: $white;
-  }
-}
-
 .blurred-background {
   background-color: $blurred-background;
   backdrop-filter: blur(16px);
@@ -137,6 +125,13 @@ a {
     animation: light-skeleton-loading 1s linear infinite alternate;
   }
 
+  .btn {
+    &--filled {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
   @keyframes light-skeleton-loading {
     0% {
       background-color: rgb(231, 231, 231, 70%);
@@ -171,6 +166,13 @@ a {
 
   .skeleton {
     animation: dark-skeleton-loading 1s linear infinite alternate;
+  }
+
+  .btn {
+    &--filled {
+      background-color: $primary;
+      color: $white;
+    }
   }
 
   @keyframes dark-skeleton-loading {

@@ -1,4 +1,4 @@
-import MainButton, { MainButtonType } from '../../components/MainButton'
+import Button, { ButtonType } from '../../components/Button'
 import ToggleThemeButton from '../../components/ToggleThemeButton'
 import styles from './StyleGuidePage.module.scss'
 
@@ -63,8 +63,8 @@ const Grid = () => {
 const Buttons = () => {
   return (
     <>
-      <MainButton className={`${styles.StyleGuideButton}`} type={MainButtonType.Primary} label='Primary!' />
-      <MainButton className={`${styles.StyleGuideButton}`} type={MainButtonType.Secondary} label='Secondary' />
+      <Button className={`${styles.StyleGuideButton}`} type={ButtonType.Filled} label='Primary!' />
+      <Button className={`${styles.StyleGuideButton}`} type={ButtonType.Filled} label='Secondary' />
     </>
   )
 }

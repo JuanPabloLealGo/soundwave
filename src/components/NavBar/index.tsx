@@ -4,12 +4,12 @@ import { IoMdClose } from 'react-icons/io'
 import { HiMenu } from 'react-icons/hi'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Logo from '../Logo'
-import MainButton, { MainButtonType } from '../MainButton'
 import { useAppDispatch, useAppSelector } from '../../redux-store'
 import { logout } from '../../redux-store/reducers/authSlice'
 import { AUTH_URL } from '../../environment/appEnvironment'
 import { Size } from '../../enums/SizeEnum'
 import { authSelector } from '../../redux-store/selectors'
+import Button, { ButtonType } from '../Button'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
@@ -64,11 +64,10 @@ const NavBar = () => {
               </li>
             )
           })}
-          <MainButton
+          <Button
             label={isAuthenticated ? 'Sign Out' : 'Sign In'}
             onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
-            className={styles.NavBarSignOnButton}
-            type={MainButtonType.Primary}
+            type={ButtonType.Filled}
           />
         </ul>
         <button
