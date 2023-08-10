@@ -1,0 +1,25 @@
+.Button {
+  max-width: 250px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  align-items: center;
+  display: flex;
+  padding: 18px 40px;
+
+  &Filled {
+    border-radius: 50px;
+    transition: transform .12s ease-in-out;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  &Icon {
+    display: flex;
+    padding-right: 6px;
+  }
+}
