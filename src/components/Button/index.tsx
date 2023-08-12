@@ -23,6 +23,14 @@ const Button = ({ className, icon, label, onClick, type }: Props) => {
       className = styles.ButtonFilled
     }
 
+    if (type === ButtonType.Outlined) {
+      className = styles.ButtonOutlined
+    }
+
+    if (type === ButtonType.Text) {
+      className = styles.ButtonText
+    }
+
     return className
   }
 
