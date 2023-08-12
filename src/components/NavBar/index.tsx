@@ -67,7 +67,7 @@ const NavBar = () => {
           <Button
             label={isAuthenticated ? 'Sign Out' : 'Sign In'}
             onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
-            type={ButtonType.Filled}
+            type={ButtonType.Outlined}
           />
         </ul>
         <button

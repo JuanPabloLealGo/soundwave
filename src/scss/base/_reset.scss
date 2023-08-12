@@ -130,6 +130,16 @@ a {
       background-color: $black;
       color: $white;
     }
+
+    &--text,
+    &--outlined {
+      background-color: transparent;
+      color: $black;
+    }
+
+    &--outlined {
+      border: 2px solid $black;
+    }
   }
 
   @keyframes light-skeleton-loading {
@@ -171,7 +181,17 @@ a {
   .btn {
     &--filled {
       background-color: $primary;
+      color: $black;
+    }
+
+    &--text,
+    &--outlined {
+      background-color: transparent;
       color: $white;
+    }
+
+    &--outlined {
+      border: 2px solid $white;
     }
   }
 
