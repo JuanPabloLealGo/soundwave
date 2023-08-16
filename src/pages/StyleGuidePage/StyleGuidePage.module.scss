@@ -78,13 +78,20 @@
     }
   }
 
-  &Button {
-    display: block;
-    margin-bottom: 30px;
+  &Buttons {
+    display: flex;
+    flex-direction: column;
 
-    @include for-size(l) {
-      margin-right: 30px;
-      display: inline-block;
+    @include for-size(m) {
+      flex-direction: row;
+    }
+
+    &Item {
+      margin-bottom: 30px;
+
+      @include for-size(m) {
+        margin-right: 30px;
+      }
     }
   }
 

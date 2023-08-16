@@ -35,7 +35,7 @@ const Button = ({ className, icon, label, onClick, type }: Props) => {
   }
 
   return (
-    <button className={`${styles.Button} ${_getClassName(type)} btn--${type}`} onClick={onClick}>
+    <button className={`${className} ${styles.Button} ${_getClassName(type)} btn--${type}`} onClick={onClick}>
       {icon && (
         <div className={styles.ButtonIcon}>{icon}</div>
       )}

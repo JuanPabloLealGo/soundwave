@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  font-family: $font-primary;
 }
 
 #root {
@@ -131,14 +132,19 @@ a {
       color: $white;
     }
 
-    &--text,
     &--outlined {
-      background-color: transparent;
+      background-color: $white;
+      border: 2px solid $black;
       color: $black;
+
+      &:hover {
+        background-color: $black;
+        color: $white;
+      }
     }
 
-    &--outlined {
-      border: 2px solid $black;
+    &--text {
+      border: none;
     }
   }
 
@@ -167,7 +173,7 @@ a {
   }
 
   .color-theme {
-    color: $white;
+    color: $primary;
   }
 
   .shadowed {
@@ -184,14 +190,19 @@ a {
       color: $black;
     }
 
-    &--text,
     &--outlined {
-      background-color: transparent;
+      background-color: $black;
+      border: 2px solid $white;
       color: $white;
+
+      &:hover {
+        background-color: $white;
+        color: $black;
+      }
     }
 
-    &--outlined {
-      border: 2px solid $white;
+    &--text {
+      border: none;
     }
   }
 
