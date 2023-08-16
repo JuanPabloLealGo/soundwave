@@ -62,10 +62,11 @@ const Grid = () => {
 
 const Buttons = () => {
   return (
-    <>
-      <Button className={`${styles.StyleGuideButton}`} type={ButtonType.Filled} label='Primary!' />
-      <Button className={`${styles.StyleGuideButton}`} type={ButtonType.Filled} label='Secondary' />
-    </>
+    <div className={styles.StyleGuideButtons} >
+      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Filled} label='Filled' />
+      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Outlined} label='Outlined' />
+      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Text} label='Text' />
+    </div>
   )
 }
 

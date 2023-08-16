@@ -40,8 +40,8 @@ const PlaylistCard = ({ playlist }: Props) => {
           </>
         ) : (
           <div className={styles.PlaylistCardError}>
-            <div>Oops..!</div>
-            <div>Something went wrong...</div>
+            <p>Oops..!</p>
+            <p>Something went wrong...</p>
           </div>
         )}
       </div>
