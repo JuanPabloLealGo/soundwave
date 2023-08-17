@@ -1,6 +1,8 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { capitalizeFirstLetter } from "../../utils"
 import { BsPlayFill } from "react-icons/bs"
+import { MdReadMore } from "react-icons/md"
 import { useAppDispatch } from "../../redux-store"
 import { updateCurrentPlaylist } from "../../redux-store/reducers/playlistSlice"
 import PlaylistInterface from "../../interfaces/PlaylistInterface"
@@ -15,6 +17,7 @@ interface Props {
 const PlaylistCard = ({ playlist }: Props) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const [isHovering, setIsHovering] = useState(false)
 
   const handleClick = () => playlist && navigate(`/playlist/${playlist.id}`)
   const handlePlaylistSelect = () => playlist && dispatch(updateCurrentPlaylist(playlist.uri))
@@ -23,9 +26,12 @@ const PlaylistCard = ({ playlist }: Props) => {
     'backgroundImage': `url(${playlist ? playlist.images[0]?.url : errorImage})`
   }
 
+  const handleMouseOver = () => setIsHovering(true);
+  const handleMouseOut = () => setIsHovering(false);
+
   return (
     <article className={styles.PlayListItem}>
-      <div style={cardStyle} onClick={handleClick} className={`shadowed ${styles.PlaylistCard}`}>
+      <div style={cardStyle} className={`shadowed ${styles.PlaylistCard}`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
         {playlist ? (
           <>
             <div className={styles.PlaylistCardBlurredContainer} />
@@ -37,6 +43,22 @@ const PlaylistCard = ({ playlist }: Props) => {
                 {`${playlist.tracks.total} Tracks`}
               </span>
             </div>
+            {isHovering && (
+              <div className={styles.PlaylistCardActions}>
+                <button
+                  className={styles.PlaylistCardButton}
+                  onClick={handlePlaylistSelect}
+                >
+                  <BsPlayFill />
+                </button>
+                <button
+                  className={styles.PlaylistCardButton}
+                  onClick={handleClick}
+                >
+                  <MdReadMore />
+                </button>
+              </div>
+            )}
           </>
         ) : (
           <div className={styles.PlaylistCardError}>
@@ -45,12 +67,6 @@ const PlaylistCard = ({ playlist }: Props) => {
           </div>
         )}
       </div>
-      <button
-        className={`shadowed ${styles.PlaylistCardButton}`}
-        onClick={handlePlaylistSelect}
-      >
-        <BsPlayFill className={styles.PlaylistCardButtonIcon} />
-      </button>
     </article>
   )
 }
