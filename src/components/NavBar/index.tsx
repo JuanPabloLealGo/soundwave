@@ -1,6 +1,8 @@
 import styles from './NavBar.module.scss'
 import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
+import { BiSolidMoon } from 'react-icons/bi'
+import { IoMdSunny } from 'react-icons/io'
 import { HiMenu } from 'react-icons/hi'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Logo from '../Logo'
@@ -8,14 +10,16 @@ import { useAppDispatch, useAppSelector } from '../../redux-store'
 import { logout } from '../../redux-store/reducers/authSlice'
 import { AUTH_URL } from '../../environment/appEnvironment'
 import { Size } from '../../enums/SizeEnum'
-import { authSelector } from '../../redux-store/selectors'
+import { authSelector, uiSelector } from '../../redux-store/selectors'
 import Button, { ButtonType } from '../Button'
+import { toogleTheme } from '../../redux-store/reducers/uiSlice'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [isActive, setIsActive] = useState(false)
   const { data: isAuthenticated } = useAppSelector(authSelector)
+  const { isDarkTheme } = useAppSelector(uiSelector)
 
   const onClickHandler = () => setIsActive(!isActive)
   const onClickLogoHandler = () => setIsActive(false)
@@ -24,6 +28,10 @@ const NavBar = () => {
   const onLogoutHandler = () => {
     dispatch(logout())
     return navigate('/')
+  }
+
+  const onToggleThemeHandler = () => {
+    dispatch(toogleTheme())
   }
 
   const privateLinks = [
@@ -64,6 +72,11 @@ const NavBar = () => {
               </li>
             )
           })}
+          <Button
+            onClick={onToggleThemeHandler}
+            type={ButtonType.Text}
+            icon={isDarkTheme ? <IoMdSunny /> : <BiSolidMoon />}
+          />
           <Button
             className={styles.NavBarButton}
             label={isAuthenticated ? 'Sign Out' : 'Sign In'}

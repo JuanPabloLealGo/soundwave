@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "../NavBar"
 import Footer from "../Footer"
-import ToggleThemeButton from "../ToggleThemeButton"
 import styles from "./MainLayout.module.scss"
 import useAuth from "../../hooks/useAuth"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
@@ -32,7 +31,6 @@ const MainLayout = () => {
       <NavBar />
       <main className={styles.MainLayoutContent}>
         <Outlet />
-        <ToggleThemeButton className={styles.MainLayoutThemeButton} />
       </main>
       <Footer />
     </>

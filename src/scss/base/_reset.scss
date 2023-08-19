@@ -144,7 +144,11 @@ a {
     }
 
     &--text {
-      border: none;
+      color: $black;
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
     }
   }
 
@@ -206,7 +210,11 @@ a {
     }
 
     &--text {
-      border: none;
+      color: $white;
+
+      &:hover {
+        background-color: #374151;
+      }
     }
   }
 
