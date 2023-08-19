@@ -1,5 +1,4 @@
 import Button, { ButtonType } from '../../components/Button'
-import ToggleThemeButton from '../../components/ToggleThemeButton'
 import styles from './StyleGuidePage.module.scss'
 
 const Colors = () => {
@@ -72,11 +71,6 @@ const Buttons = () => {
 
 const StyleGuidePage = () => {
   const content = [
-    {
-      "title": "Theme Toggle",
-      "subtitle": "Our project includes a button to switch the theme mode",
-      "component": <ToggleThemeButton />
-    },
     {
       "title": "Colors",
       "subtitle": "This is the color palette we use in our project",

@@ -39,7 +39,7 @@ const Button = ({ className, icon, label, onClick, type }: Props) => {
       {icon && (
         <div className={styles.ButtonIcon}>{icon}</div>
       )}
-      <span>{label ?? ''}</span>
+      {label && <span className={icon && styles.ButtonLabel}>{label}</span>}
     </button>
   )
 }
