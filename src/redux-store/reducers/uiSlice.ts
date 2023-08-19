@@ -1,25 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import ErrorMessageInterface from "../../interfaces/ErrorMessageInterface";
 import UiStateInterface from "../../interfaces/state/UiStateInterface";
 
 const initialState = {
   isDarkTheme: false,
-  errorMessage: null
+  isDragging: false,
+  errorMessage: null,
 } as UiStateInterface
 
 export const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
+    playerDragging: (state: UiStateInterface, action: PayloadAction<boolean>) => {
+      state.isDragging = action.payload
+    },
+    setErrorMessage: (state: UiStateInterface, action: PayloadAction<string | null>) => {
+      state.errorMessage = action.payload
+    },
     toogleTheme: (state: UiStateInterface) => {
       state.isDarkTheme = !state.isDarkTheme
-    },
-    setErrorMessage: (state: UiStateInterface, action: PayloadAction<ErrorMessageInterface | null>) => {
-      state.errorMessage = action.payload
     }
   }
 })
 
-export const { toogleTheme, setErrorMessage } = uiSlice.actions
+const { actions, reducer } = uiSlice
 
-export default uiSlice.reducer
+export const { playerDragging, setErrorMessage, toogleTheme } = actions
+
+export default reducer

@@ -1,0 +1,96 @@
+@import "../../scss/main.scss";
+
+.CategoryListSkeleton {
+  padding-top: 20px;
+  width: 100%;
+
+  &Title {
+    background-color: white;
+    border-radius: 6px;
+    height: 1.25rem;
+    width: 20%;
+  }
+}
+
+.CategoryItemSkeleton {
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  overflow-x: auto;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.PlaylistCardsSkeleton {
+  border-radius: 20px;
+  height: 160px;
+  margin: 8px;
+  min-width: 145px;
+  position: relative;
+  width: 145px;
+
+  &BlurredContainer {
+    background-color: rgb(0, 0, 0, 6%);
+    border-radius: 0px 0px 30px 30px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 35%;
+    justify-content: space-around;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+  }
+
+  &Tracks,
+  &Name {
+    border-radius: 4px;
+  }
+
+  &Name {
+    height: 1rem;
+    width: 100%;
+  }
+
+  &Tracks {
+    height: 0.875rem;
+    width: 40%;
+  }
+}
+
+@include for-size(m) {
+
+  .CategoryListSkeleton {
+    padding-top: 40px;
+
+    &Title {
+      height: 1.75rem;
+    }
+  }
+
+  .CategoryItemSkeleton {
+    height: 280px;
+    padding-top: 12px;
+  }
+
+  .PlaylistCardsSkeleton {
+    border-radius: 30px;
+    height: 215px;
+    margin: 10px;
+    min-width: 200px;
+    width: 200px;
+
+    &BlurredContainer {
+      padding: 16px;
+    }
+
+    &Name {
+      height: 1.125rem;
+    }
+
+    &Tracks {
+      height: 1rem;
+    }
+  }
+
+}

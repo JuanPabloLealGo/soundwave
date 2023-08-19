@@ -1,0 +1,18 @@
+@import "../../scss/main.scss";
+
+.PopularStars {
+  width: 100%;
+
+  &Item {
+    width: 12px;
+  }
+
+}
+
+.FilledStar {
+  color: $tertiary
+}
+
+.EmptyStar {
+  color: $secondary;
+}

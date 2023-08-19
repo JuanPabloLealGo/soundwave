@@ -1,0 +1,47 @@
+import styles from './Button.module.scss'
+
+export enum ButtonType {
+  Filled = 'filled',
+  Outlined = 'outlined',
+  Text = 'text'
+}
+
+interface Props {
+  className?: Object
+  icon?: JSX.Element
+  label?: string
+  onClick?: React.MouseEventHandler<HTMLElement>
+  type: ButtonType
+}
+
+const Button = ({ className, icon, label, onClick, type }: Props) => {
+
+  const _getClassName = (type: ButtonType) => {
+    let className = ''
+
+    if (type === ButtonType.Filled) {
+      className = styles.ButtonFilled
+    }
+
+    if (type === ButtonType.Outlined) {
+      className = styles.ButtonOutlined
+    }
+
+    if (type === ButtonType.Text) {
+      className = styles.ButtonText
+    }
+
+    return className
+  }
+
+  return (
+    <button className={`${className} ${styles.Button} ${_getClassName(type)} btn--${type}`} onClick={onClick}>
+      {icon && (
+        <div className={styles.ButtonIcon}>{icon}</div>
+      )}
+      {label && <span className={icon && styles.ButtonLabel}>{label}</span>}
+    </button>
+  )
+}
+
+export default Button

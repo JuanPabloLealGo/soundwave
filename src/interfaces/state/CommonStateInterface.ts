@@ -1,4 +1,4 @@
 export default interface CommonStateInterface {
   isLoading: boolean
-  error: null | string
+  error?: null | string
 }

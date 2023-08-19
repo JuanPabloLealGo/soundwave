@@ -14,9 +14,9 @@ $font-size-medium: 2rem;
 $font-size-large: 3rem;
 $font-size-extra-large: 4rem;
 
-body {
+* {
   font-family: $font-primary;
-  font-size: $font-size-medium;
+  font-size: $font-size-small;
 }
 
 h1,

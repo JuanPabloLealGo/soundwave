@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  font-family: $font-primary;
 }
 
 #root {
@@ -88,21 +89,11 @@ a {
   }
 }
 
-.btn {
-  border-radius: 18px;
-  border: none;
-  height: 40px;
-  padding: 8px;
-
-  &--primary {
-    background-color: $primary;
-    color: $white;
-  }
+.blurred-background {
+  background-color: $blurred-background;
+  backdrop-filter: blur(16px);
 }
 
-.shadowed {
-  box-shadow: $dark-shadow;
-}
 
 .light {
   background-color: $white;
@@ -121,6 +112,59 @@ a {
     color: $black;
   }
 
+  .shadowed {
+    box-shadow: $dark-shadow;
+  }
+
+  .applyHover {
+    &:hover {
+      background-color: $light-hover;
+    }
+  }
+
+  .skeleton {
+    animation: light-skeleton-loading 1s linear infinite alternate;
+  }
+
+  .btn {
+    &--filled {
+      background-color: $black;
+      color: $white;
+    }
+
+    &--outlined {
+      background-color: $white;
+      border: 2px solid $black;
+      color: $black;
+
+      &:hover {
+        background-color: $black;
+        color: $white;
+      }
+    }
+
+    &--text {
+      color: $black;
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
+    }
+  }
+
+  .nav-icon {
+    color: $black;
+  }
+
+  @keyframes light-skeleton-loading {
+    0% {
+      background-color: rgb(231, 231, 231, 70%);
+    }
+
+    100% {
+      background-color: rgb(231, 231, 231);
+    }
+  }
 }
 
 .dark {
@@ -137,6 +181,54 @@ a {
   }
 
   .color-theme {
+    color: $primary;
+  }
+
+  .shadowed {
+    box-shadow: $light-shadow;
+  }
+
+  .skeleton {
+    animation: dark-skeleton-loading 1s linear infinite alternate;
+  }
+
+  .btn {
+    &--filled {
+      background-color: $primary;
+      color: $black;
+    }
+
+    &--outlined {
+      background-color: $black;
+      border: 2px solid $white;
+      color: $white;
+
+      &:hover {
+        background-color: $white;
+        color: $black;
+      }
+    }
+
+    &--text {
+      color: $white;
+
+      &:hover {
+        background-color: #374151;
+      }
+    }
+  }
+
+  .nav-icon {
     color: $white;
+  }
+
+  @keyframes dark-skeleton-loading {
+    0% {
+      background-color: rgb(81, 82, 88, 50%);
+    }
+
+    100% {
+      background-color: rgb(81, 82, 88);
+    }
   }
 }

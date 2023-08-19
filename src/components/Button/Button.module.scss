@@ -1,0 +1,67 @@
+@import "../../scss/main.scss";
+
+.Button {
+  max-width: 250px;
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 18px;
+  align-items: center;
+  display: flex;
+  border-radius: 50px;
+  transition: background-color 0.2s ease;
+
+  &Filled {
+    font-size: 1rem;
+    border: none;
+    padding: 16px 28px;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &Outlined {
+    min-width: 110px;
+    text-align: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: 50px;
+
+    span {
+      font-size: 14px;
+    }
+  }
+
+  &Text {
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+
+    &:hover {
+      background-color: #f3f4f6;
+    }
+  }
+
+  &Icon {
+    display: flex;
+  }
+
+  &Label {
+    padding-left: 6px;
+  }
+
+  @include for-size(m) {
+    line-height: 24px;
+
+    &Filled {
+      font-size: 1.125rem;
+      padding: 18px 40px;
+    }
+
+  }
+}

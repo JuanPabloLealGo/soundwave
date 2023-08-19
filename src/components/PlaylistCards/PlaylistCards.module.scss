@@ -1,0 +1,13 @@
+@import "../../scss/main.scss";
+
+.Playlists {
+  display: flex;
+  flex-direction: row;
+  height: 210px;
+  padding-top: 10px;
+
+  @include for-size(m) {
+    height: 280px;
+    padding-top: 12px;
+  }
+}

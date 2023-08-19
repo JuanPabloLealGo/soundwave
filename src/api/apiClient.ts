@@ -1,5 +1,4 @@
 import axios from "axios"
-import ErrorMessageInterface from "../interfaces/ErrorMessageInterface"
 import store from "../redux-store"
 import { setErrorMessage } from "../redux-store/reducers/uiSlice"
 
@@ -17,17 +16,14 @@ api.interceptors.request.use((config: any) => {
 api.interceptors.response.use(response => {
   return response
 }, error => {
+  console.log('error from interceptor: ', error)
   if (error.response.status === 401) {
-    const errorMessage = {
-      title: 'Token Expired',
-      error: 'Your token has expired',
-      showLoginAgainButton: true
-    } as ErrorMessageInterface
+    const errorMessage = 'Your token has expired'
 
     store.dispatch(setErrorMessage(errorMessage))
     console.log('[Error] Unauthorized user: ', error)
-    return Promise.reject(error)
   }
+  return Promise.reject(error)
 })
 
 export default api

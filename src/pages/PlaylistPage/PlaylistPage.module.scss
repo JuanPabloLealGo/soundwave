@@ -1,0 +1,48 @@
+.Playlist {
+
+  &BackButton {
+    align-items: center;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &Title {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &SkeletonTitle {
+    border-radius: 4px;
+    height: 2.5rem;
+    width: 80%;
+  }
+
+  &SkeletonDescription {
+    border-radius: 4px;
+    height: 1.25rem;
+    width: 100%;
+    margin-bottom: 6px;
+
+    &:last-child {
+      width: 60%;
+      margin-bottom: 0px;
+    }
+  }
+
+  &Description {
+    font-size: 1.25rem;
+    font-weight: 300;
+    padding-top: 16px;
+    width: 100%;
+  }
+
+  &Player {
+    grid-column: 1/5;
+  }
+
+  &Items {
+    grid-column: 6/-1;
+  }
+
+}

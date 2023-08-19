@@ -1,33 +1,36 @@
+import { useEffect } from "react"
 import { useRoutes } from "react-router-dom"
-import MainLayout from "./components/layouts/MainLayout"
-import About from "./components/pages/About"
-import Contact from "./components/pages/Contact"
-import Favorites from "./components/pages/Favorites"
-import Home from "./components/pages/Home"
-import Landing from "./components/pages/Landing"
-import NotFound from "./components/pages/NotFount"
-import { RootState, useAppDispatch, useAppSelector } from "./redux-store"
-import Services from "./components/pages/Services"
-import StyleGuide from "./components/pages/StyleGuide"
-import useAuth from "./hooks/useAuth"
+
+import { useAppSelector } from "./redux-store"
+import { authSelector, uiSelector } from "./redux-store/selectors"
+import MainLayout from "./components/MainLayout"
+import AboutPage from "./pages/AboutPage"
+import ContactPage from "./pages/ContactPage"
+import FavoritesPage from "./pages/FavoritesPage"
+import HomePage from "./pages/HomePage"
+import LandingPage from "./pages/LandingPage"
+import NotFoundPage from "./pages/NotFoundPage"
+import ServicesPage from "./pages/ServicesPage"
+import TermsOfServicesPage from "./pages/TermsOfServicePage"
+import PrivacyPolicyPage from "./pages/PricacityPolicyPage"
+import PlaylistPage from "./pages/PlaylistPage"
+import StyleGuidePage from "./pages/StyleGuidePage"
 import "./scss/main.scss"
-import TermsOfServices from "./components/pages/TermsOfService"
-import PrivacyPolicy from "./components/pages/PrivacyPolicy"
-import Playlist from "./components/pages/Playlist"
-import { setErrorMessage } from "./redux-store/reducers/uiSlice"
-import ErrorMessage from "./components/common/ErrorMessage"
 
 const App = () => {
-  useAuth()
-  const isAuthenticated = useAppSelector((state: RootState) => state.auth.data)
-  const isDarkTheme = useAppSelector((state: RootState) => state.ui.isDarkTheme)
-  const errorMessage = useAppSelector((state: RootState) => state.ui.errorMessage)
-  const dispatch = useAppDispatch()
-  let initialScreen = isAuthenticated ? <Home /> : <Landing />
+  const { data: isAuthenticated } = useAppSelector(authSelector)
+  const { isDarkTheme } = useAppSelector(uiSelector)
+  let initialScreen = isAuthenticated ? <HomePage /> : <LandingPage />
 
-  const closeErrorMessage = () => {
-    dispatch(setErrorMessage(null));
-  }
+  useEffect(() => {
+    if (isDarkTheme) {
+      document.body.classList.remove('light');
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+      document.body.classList.add('light');
+    }
+  }, [isDarkTheme])
 
   const element = useRoutes([
     {
@@ -35,38 +38,27 @@ const App = () => {
       element: <MainLayout />,
       children: [
         { index: true, element: initialScreen },
-        { path: 'about', element: <About /> },
-        { path: 'contact', element: <Contact /> },
-        { path: 'favorites', element: <Favorites /> },
-        { path: 'privacy-policy', element: <PrivacyPolicy /> },
-        { path: 'services', element: <Services /> },
-        { path: 'terms-of-service', element: <TermsOfServices /> },
-        { path: 'playlist/:id', element: <Playlist /> }
+        { path: 'about', element: <AboutPage /> },
+        { path: 'contact', element: <ContactPage /> },
+        { path: 'favorites', element: <FavoritesPage /> },
+        { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
+        { path: 'services', element: <ServicesPage /> },
+        { path: 'terms-of-service', element: <TermsOfServicesPage /> },
+        { path: 'playlist/:playlistId', element: <PlaylistPage /> }
       ]
     },
 
     {
       path: '/styleguide',
-      element: <StyleGuide />,
+      element: <StyleGuidePage />,
     },
     {
       path: '*',
-      element: <NotFound />
+      element: <NotFoundPage />
     }
   ])
 
-  return (
-    <div className={isDarkTheme ? 'dark' : 'light'}>
-      {errorMessage && (
-        <ErrorMessage
-          onClick={closeErrorMessage}
-          title='Session Expired'
-          errorMessage={'Your session has expired. Please log in.'}
-        />
-      )}
-      {element}
-    </div>
-  )
+  return element
 }
 
 // OTHER WAY:

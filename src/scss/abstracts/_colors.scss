@@ -1,8 +1,11 @@
-$black: #1C1B1B;
+$black: #111827;
 $white: #FAFAFA;
-$primary: #1DB954;
+$primary: #F5FB9B;
 $secondary: #7D7D7D;
 $tertiary: #FFE600;
 
 $dark-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px 0px;
-$light-shadow: 0 2px 22px 0 rgba(255, 255, 255, 0.2);
+$light-shadow: rgb(224 224 224 / 20%) 0px 2px 6px 0px;
+$blurred-background: rgb(255 255 255 / 20%);
+$dark-hover: rgb(255 255 255 / 20%);
+$light-hover: rgb(180 180 180 / 20%);

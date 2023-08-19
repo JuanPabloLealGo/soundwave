@@ -1,0 +1,65 @@
+@import '../../scss/main.scss';
+
+.ErrorMessage {
+  display: flex;
+  justify-content: center;
+
+  &Popup {
+    background-color: $primary;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    position: fixed;
+    padding: 16px;
+    top: 100px;
+    width: 250px;
+    z-index: 101;
+
+    &Title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    &Message {
+      padding: 30px 0 10px 0;
+      text-align: end;
+    }
+
+    &Button {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: .875rem;
+        font-weight: 600;
+        padding: 8px 16px;
+        line-height: 1.25rem;
+        min-width: 100px;
+
+        &:hover {
+          background-color: rgb(0, 0, 0, 75%);
+        }
+      }
+
+    }
+  }
+
+  &Backdrop {
+    background-color: rgb(0, 0, 0, 45%);
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    z-index: 101;
+  }
+
+  @include for-size(m) {
+    &Popup {
+      width: 600px;
+      padding: 20px;
+    }
+  }
+
+}
