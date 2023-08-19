@@ -4,11 +4,22 @@
   grid-column: 1/-1;
   position: relative;
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 
 .LoadMoreButtonContainer {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 20px;
+}
+
+@include for-size(m) {
+
+  .CategoryList {
+    padding-bottom: 50px;
+  }
+
+  .LoadMoreButtonContainer {
+    margin-top: 40px;
+  }
 }

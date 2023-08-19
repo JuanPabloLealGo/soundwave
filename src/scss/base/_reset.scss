@@ -148,6 +148,10 @@ a {
     }
   }
 
+  .nav-icon {
+    color: $black;
+  }
+
   @keyframes light-skeleton-loading {
     0% {
       background-color: rgb(231, 231, 231, 70%);
@@ -204,6 +208,10 @@ a {
     &--text {
       border: none;
     }
+  }
+
+  .nav-icon {
+    color: $white;
   }
 
   @keyframes dark-skeleton-loading {

@@ -53,15 +53,19 @@ const PlaylistCardsSkeleton = () => {
   return (
     <>
       {convertToRange(PaginationEnum.playlistsLimit).map((item) => {
-        return (<article key={`playlist-${item}`} className={`skeleton ${styles.PlaylistCardsSkeleton}`}>
-          <div className={styles.PlaylistCardsSkeletonBlurredContainer}>
-            <div className={`skeleton ${styles.PlaylistCardsSkeletonName}`} />
-            <div className={`skeleton ${styles.PlaylistCardsSkeletonTracks}`} />
-          </div>
-        </article>)
+        return PlaylistCardSkeleton(item)
       })}
     </>
   )
+}
+
+const PlaylistCardSkeleton = (item: number) => {
+  return (<article key={`playlist-${item}`} className={`skeleton ${styles.PlaylistCardsSkeleton}`}>
+    <div className={styles.PlaylistCardsSkeletonBlurredContainer}>
+      <div className={`skeleton ${styles.PlaylistCardsSkeletonName}`} />
+      <div className={`skeleton ${styles.PlaylistCardsSkeletonTracks}`} />
+    </div>
+  </article>)
 }
 
 export default SkeletonElement
