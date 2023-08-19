@@ -1,17 +1,19 @@
+@import "../../scss/main.scss";
+
 .Button {
   max-width: 250px;
   cursor: pointer;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 18px;
   align-items: center;
   display: flex;
   border-radius: 50px;
   transition: background-color 0.2s ease;
 
   &Filled {
-    font-size: 18px;
+    font-size: 1rem;
     border: none;
-    padding: 18px 40px;
+    padding: 16px 28px;
 
     &:hover {
       opacity: 0.9;
@@ -37,5 +39,15 @@
   &Icon {
     display: flex;
     padding-right: 6px;
+  }
+
+  @include for-size(m) {
+    line-height: 24px;
+
+    &Filled {
+      font-size: 1.125rem;
+      padding: 18px 40px;
+    }
+
   }
 }

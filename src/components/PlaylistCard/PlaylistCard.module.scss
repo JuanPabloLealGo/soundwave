@@ -11,7 +11,7 @@
   border-radius: 20px;
   font-size: 0.75rem;
   height: 160px;
-  margin: 10px;
+  margin: 8px;
   min-width: 145px;
   position: relative;
   width: 145px;
@@ -19,7 +19,7 @@
   &BlurredContainer,
   &Description {
     bottom: 0;
-    border-radius: 0px 0px 30px 30px;
+    border-radius: 0px 0px 20px 20px;
     height: 35%;
     padding: 10px;
     position: absolute;
@@ -49,6 +49,7 @@
 
     &Tracks {
       color: rgba(255, 255, 255, 0.6);
+      font-size: 0.875rem;
     }
   }
 
@@ -94,7 +95,7 @@
   &Actions {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.45);
-    border-radius: 30px;
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
     height: 100%;
@@ -110,10 +111,23 @@
     height: 215px;
     min-width: 200px;
     width: 200px;
+    margin: 10px;
 
     &BlurredContainer,
     &Description {
       padding: 16px;
+      border-radius: 0px 0px 30px 30px;
+    }
+
+    &Description {
+      &Title {
+        font-size: 1.125rem;
+        font-weight: 500;
+      }
+
+      &Tracks {
+        font-size: 1rem;
+      }
     }
 
     &Button {
@@ -121,5 +135,11 @@
       height: 60px;
       width: 60px;
     }
+
+    &Actions {
+      border-radius: 30px;
+    }
   }
+
+
 }

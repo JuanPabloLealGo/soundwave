@@ -65,13 +65,14 @@ const NavBar = () => {
             )
           })}
           <Button
+            className={styles.NavBarButton}
             label={isAuthenticated ? 'Sign Out' : 'Sign In'}
             onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
             type={ButtonType.Outlined}
           />
         </ul>
         <button
-          className={`color-theme ${styles.NavBarMenuIcon}`}
+          className={`nav-icon ${styles.NavBarMenuIcon}`}
           onClick={onClickHandler}
         >
           {isActive ? <IoMdClose /> : <HiMenu />}
