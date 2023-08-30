@@ -47,44 +47,44 @@ a {
 .logo {
 
   &--xs {
-    height: 18px;
+    height: 60px;
   }
 
   &--s {
-    height: 20px;
+    height: 80px;
   }
 
   &--m {
-    height: 24px;
+    height: 110px;
   }
 
   &--l {
-    height: 28px;
+    height: 130px;
   }
 
   &--xl {
-    height: 30px;
+    height: 150px;
   }
 
   @include for-size(m) {
     &--xs {
-      height: 16px;
+      height: 80px;
     }
 
     &--s {
-      height: 24px;
+      height: 100px;
     }
 
     &--m {
-      height: 30px;
+      height: 130px;
     }
 
     &--l {
-      height: 32px;
+      height: 150px;
     }
 
     &--xl {
-      height: 36px;
+      height: 180px;
     }
   }
 }
