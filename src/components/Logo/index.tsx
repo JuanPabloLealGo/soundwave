@@ -13,7 +13,7 @@ const Logo = ({ size = Size.s }: Props) => {
   return (
     <div className={`${styles.Logo} logo--${size}`}>
       <img
-        src={isDarkTheme ? '/images/green_logo.png' : '/images/black_logo.png'}
+        src={isDarkTheme ? '/images/soundwave_principal_logo_dark_theme.png' : '/images/soundwave_principal_logo.png'}
         alt='spotify'
       />
     </div>
