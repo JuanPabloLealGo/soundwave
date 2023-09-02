@@ -9,25 +9,22 @@ const Colors = () => {
   ]
 
   return (
-    <div className={styles.StyleGuideColors}>
+    <article className={styles.StyleGuideColors}>
       {colors.map((item, index) => {
         const colorClassName = `${styles[`StyleGuideColor${index}`]} ${styles.StyleGuideColor}`
         return (
-          <span
-            key={index}
-            className={colorClassName}
-          >
+          <p key={index} className={colorClassName}>
             {item}
-          </span>
+          </p>
         )
       })}
-    </div>
+    </article>
   )
 }
 
 const Tipography = () => {
   return (
-    <div className={`${styles.StyleGuideTipography} subgrid`}>
+    <article className={`${styles.StyleGuideTipography} subgrid`}>
       <p className={styles.StyleGuideTipographyTitle}>Poppins - Sans Serif</p>
       <h1 className={styles.StyleGuideTipographyItem}>Headline 1</h1>
       <h2 className={styles.StyleGuideTipographyItem}>Headline 2</h2>
@@ -35,7 +32,7 @@ const Tipography = () => {
       <h4 className={styles.StyleGuideTipographyItem}>Headline 4</h4>
       <h5 className={styles.StyleGuideTipographyItem}>Headline 5</h5>
       <p className={styles.StyleGuideTipographyItem}>Body</p>
-    </div>
+    </article>
   )
 }
 
@@ -43,25 +40,25 @@ const Grid = () => {
   const columns = Array.from(Array(12).keys());
 
   return (
-    <div className={`${styles.StyleGuideGrid} subgrid`}>
+    <article className={`${styles.StyleGuideGrid} subgrid`}>
       {columns.map((item, index) => {
         return (
-          <span key={index} className={styles.StyleGuideGridColumn}>
+          <p key={index} className={styles.StyleGuideGridColumn}>
             {item + 1}
-          </span>
+          </p>
         )
       })}
-    </div>
+    </article>
   )
 }
 
 const Buttons = () => {
   return (
-    <div className={styles.StyleGuideButtons} >
+    <article className={styles.StyleGuideButtons} >
       <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Filled} label='Filled' />
       <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Outlined} label='Outlined' />
       <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Text} label='Text' />
-    </div>
+    </article>
   )
 }
 
@@ -88,18 +85,15 @@ const StyleGuidePage = () => {
   const Sections = content.map((item, index) => {
     return (
       <section key={index} className={styles.StyleGuideSection}>
-        <div className={styles.StyleGuideMasthead}>
-          <h1>{item.title}</h1>
-        </div>
-        <div className={styles.StyleGuideWrapper}>
-          {item.component}
-        </div>
+        <h2>{item.title}</h2>
+        {item.component}
       </section>
     )
   })
 
   return (
     <div className='grid'>
+      <h1 className={styles.StyleGuideTitle}>Style Guide</h1>
       {Sections}
     </div>
   )

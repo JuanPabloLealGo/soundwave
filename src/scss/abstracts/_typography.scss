@@ -12,22 +12,13 @@ $headline4-size: 1.8rem;
 $headline5-size: 1.4rem;
 $body-size: 1.8rem;
 
-html {
-  font-size: 62.5%;
-}
-
 * {
   font-family: $font-primary;
   font-size: $body-size;
   line-height: 1.6;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  margin: 0;
-}
+
 
 h1 {
   font-size: $headline1-size;

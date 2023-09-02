@@ -2,6 +2,10 @@
 @use '../abstracts/typography' as *;
 @use '../abstracts/layout' as *;
 
+html {
+  font-size: 62.5%;
+}
+
 html,
 body {
   height: 100%;

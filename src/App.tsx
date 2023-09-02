@@ -43,19 +43,12 @@ const App = () => {
         { path: 'favorites', element: <FavoritesPage /> },
         { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
         { path: 'services', element: <ServicesPage /> },
+        { path: '/styleguide', element: <StyleGuidePage /> },
         { path: 'terms-of-service', element: <TermsOfServicesPage /> },
         { path: 'playlist/:playlistId', element: <PlaylistPage /> }
       ]
     },
-
-    {
-      path: '/styleguide',
-      element: <StyleGuidePage />,
-    },
-    {
-      path: '*',
-      element: <NotFoundPage />
-    }
+    { path: '*', element: <NotFoundPage /> }
   ])
 
   return element
