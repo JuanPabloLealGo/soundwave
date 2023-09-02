@@ -20,7 +20,7 @@
   &Description {
     bottom: 0;
     border-radius: 0px 0px 20px 20px;
-    height: 35%;
+    height: 40%;
     padding: 10px;
     position: absolute;
     width: 100%;
@@ -39,6 +39,7 @@
     justify-content: center;
 
     &Title {
+      font-size: 1.4rem;
       width: 100%;
       overflow: hidden;
       display: -webkit-box;
@@ -49,7 +50,7 @@
 
     &Tracks {
       color: rgba(255, 255, 255, 0.6);
-      font-size: 0.875rem;
+      font-size: 1.2rem;
     }
   }
 
@@ -121,12 +122,12 @@
 
     &Description {
       &Title {
-        font-size: 1.125rem;
+        font-size: 1.8rem;
         font-weight: 500;
       }
 
       &Tracks {
-        font-size: 1rem;
+        font-size: 1.4rem;
       }
     }
 
