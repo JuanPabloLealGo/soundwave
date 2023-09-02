@@ -3,18 +3,7 @@
 .CategoryItem {
   padding-top: 20px;
 
-  &Name {
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-
   @include for-size(m) {
-
     padding-top: 30px;
-
-    &Name {
-      font-size: 1.75rem;
-    }
-
   }
 }

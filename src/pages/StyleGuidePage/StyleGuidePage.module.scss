@@ -45,20 +45,11 @@
       color: $black;
     }
 
-    &3 {
-      background-color: $secondary;
-      color: $black;
-    }
-
-    &4 {
-      background-color: $tertiary;
-      color: $black;
-    }
   }
 
   &Tipography {
 
-    &Heading,
+    &Item,
     &Title {
       grid-column: 1/-1;
       margin: 20px 0;

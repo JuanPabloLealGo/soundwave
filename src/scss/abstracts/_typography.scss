@@ -1,22 +1,25 @@
 @use './layout' as *;
 @use './colors' as *;
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-$font-primary: 'Montserrat', sans-serif;
-$font-secondary: 'Comfortaa', cursive;
-$font-tertiary: 'Pacifico', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-$font-size-extra-small: 0.875rem;
-$font-size-small: 1rem;
-$font-size-medium: 2rem;
-$font-size-large: 3rem;
-$font-size-extra-large: 4rem;
+$font-primary: 'Poppins', sans-serif;
+
+$headline1-size: 3.6rem;
+$headline2-size: 3rem;
+$headline3-size: 2.4rem;
+$headline4-size: 1.8rem;
+$headline5-size: 1.4rem;
+$body-size: 1.8rem;
+
+html {
+  font-size: 62.5%;
+}
 
 * {
   font-family: $font-primary;
-  font-size: $font-size-small;
+  font-size: $body-size;
+  line-height: 1.6;
 }
 
 h1,
@@ -27,51 +30,35 @@ h4 {
 }
 
 h1 {
-  font-family: $font-primary;
-  font-size: $font-size-extra-large;
-  font-weight: 700;
-  line-height: 1.2;
-
-  @include for-size(m) {
-    font-size: $font-size-extra-large;
-  }
-
-  &.h1--primary {
-    color: $primary;
-  }
+  font-size: $headline1-size;
 }
 
 h2 {
-  font-family: $font-primary;
-  font-size: $font-size-large;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: $headline2-size;
 }
 
 h3 {
-  font-family: $font-primary;
-  font-size: $font-size-medium;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: $headline3-size;
 }
 
 h4 {
-  font-family: $font-secondary;
-  font-size: $font-size-medium;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: $headline4-size;
+}
+
+h5 {
+  font-size: $headline5-size;
 }
 
 li {
-  font-size: $font-size-small;
+  font-size: $body-size;
 }
 
 .btn,
 .toggle {
-  font-size: $font-size-small;
+  font-size: $body-size;
 }
 
 .logo {
-  font-family: $font-tertiary;
+  font-family: $font-primary;
   font-weight: 700;
 }

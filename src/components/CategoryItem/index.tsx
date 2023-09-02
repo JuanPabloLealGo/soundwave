@@ -91,9 +91,9 @@ const CategoryItem = ({ hasError, item, onAddCategoryWithError }: Props) => {
 
   return (
     <div className={styles.CategoryItem}>
-      <span className={`${styles.CategoryItemName} color-theme`}>
+      <h2>
         {capitalizeFirstLetter(item.name)}
-      </span>
+      </h2>
       {content}
     </div>
   )
