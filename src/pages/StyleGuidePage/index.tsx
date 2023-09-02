@@ -93,7 +93,7 @@ const StyleGuidePage = () => {
 
   return (
     <div className='grid'>
-      <h1 className={styles.StyleGuideTitle}>Style Guide</h1>
+      <h1 className={styles.StyleGuideTitle}>Discover our design patterns</h1>
       {Sections}
     </div>
   )

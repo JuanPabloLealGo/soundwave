@@ -16,13 +16,7 @@
     flex-direction: column;
     height: 100%;
     justify-content: center;
-    margin: 20px 0;
     width: 100%;
-  }
-
-  &Logo {
-    text-decoration: none;
-    font-size: 1.5rem;
   }
 
   &Menu {
@@ -43,22 +37,17 @@
       left: 0px;
       opacity: 1;
       transition: all 0.5s ease;
-      z-index: 1;
-    }
-
-    li {
-      width: 100%;
     }
 
     &Link {
       display: flex;
-      font-size: 0.875rem;
+      font-size: 1.6rem;
       font-weight: 500;
       height: 100%;
       justify-content: center;
       opacity: 0.5;
-      padding-bottom: 1rem;
-      padding-top: 1rem;
+      padding-bottom: 16px;
+      padding-top: 16px;
       text-decoration: none;
       width: 100%;
     }
@@ -66,29 +55,23 @@
     &LinkActive {
       opacity: 1;
     }
-  }
 
-  &SignOnButton {
-    margin-left: 0;
-    margin-top: 40px;
-  }
+    &Icon {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      position: absolute;
+      right: 10px;
 
-  &MenuIcon {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 20px;
-
-    svg {
-      font-size: 1.75rem;
+      svg {
+        font-size: 3rem;
+      }
     }
   }
 
   &Button {
-    margin-top: 1rem;
+    margin-top: 20px;
   }
 
   @include for-size(m) {
@@ -103,7 +86,7 @@
 
     &Menu {
       flex-direction: row;
-      max-width: 90%;
+      max-width: 80%;
       left: auto;
       padding-bottom: 0;
       padding-top: 0;
@@ -113,23 +96,17 @@
       width: auto;
 
       &Link {
-        display: inline;
-        padding: 0.5rem 1.5rem;
+        padding: 8px 16px;
       }
-    }
 
-    &MenuIcon {
-      display: none;
-    }
-
-    &SignOnButton {
-      margin-left: 30px;
-      margin-top: 0;
+      &Icon {
+        display: none;
+      }
     }
 
     &Button {
       margin-top: 0;
-      margin-left: 1rem;
+      margin-left: 20px;
     }
   }
 }

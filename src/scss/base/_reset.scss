@@ -13,6 +13,7 @@ body {
   overflow-x: hidden;
   position: relative;
   font-family: $font-primary;
+  margin: 0;
 }
 
 #root {
@@ -49,47 +50,16 @@ a {
 }
 
 .logo {
-
-  &--xs {
-    height: 60px;
-  }
-
   &--s {
-    height: 80px;
+    height: 30px;
   }
 
   &--m {
-    height: 110px;
+    height: 40px;
   }
 
   &--l {
-    height: 130px;
-  }
-
-  &--xl {
-    height: 150px;
-  }
-
-  @include for-size(m) {
-    &--xs {
-      height: 80px;
-    }
-
-    &--s {
-      height: 100px;
-    }
-
-    &--m {
-      height: 130px;
-    }
-
-    &--l {
-      height: 150px;
-    }
-
-    &--xl {
-      height: 180px;
-    }
+    height: 60px;
   }
 }
 
@@ -97,7 +67,6 @@ a {
   background-color: $blurred-background;
   backdrop-filter: blur(16px);
 }
-
 
 .light {
   background-color: $white;
@@ -156,10 +125,6 @@ a {
     }
   }
 
-  .nav-icon {
-    color: $black;
-  }
-
   @keyframes light-skeleton-loading {
     0% {
       background-color: rgb(231, 231, 231, 70%);
@@ -185,7 +150,7 @@ a {
   }
 
   .color-theme {
-    color: $primary;
+    color: $white;
   }
 
   .shadowed {
@@ -220,10 +185,6 @@ a {
         background-color: #374151;
       }
     }
-  }
-
-  .nav-icon {
-    color: $white;
   }
 
   @keyframes dark-skeleton-loading {

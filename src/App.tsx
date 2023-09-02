@@ -54,20 +54,4 @@ const App = () => {
   return element
 }
 
-// OTHER WAY:
-/*
-const App = () => {
-  return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/playlists' element={<MainLayout />} >
-        <Route index element={<Playlists />} />
-        <Route path=':id' element={<Playlist />} />
-      </Route>
-      <Route path='*' element={<NotFound />} />
-    </Routes>
-  );
-}
-*/
-
 export default App;
