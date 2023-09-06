@@ -35,7 +35,7 @@ const NavBar = () => {
   }
 
   const privateLinks = [
-    { label: 'Home', link: '/' },
+    { label: 'Explore', link: '/' },
     { label: 'Favorites', link: '/favorites' },
   ]
 
@@ -44,6 +44,7 @@ const NavBar = () => {
     { label: 'About', link: '/about' },
     { label: 'Services', link: '/services' },
     { label: 'Contact', link: '/contact' },
+    { label: 'Style Guide', link: '/styleguide' },
   ]
 
   const links = isAuthenticated ? privateLinks : publicLinks
@@ -51,7 +52,7 @@ const NavBar = () => {
   return (
     <header className={`background-theme ${styles.NavBar}`}>
       <nav className={styles.NavBarContainer}>
-        <NavLink onClick={onClickLogoHandler} to={'/'} className={`link ${styles.NavBarLogo}`}>
+        <NavLink onClick={onClickLogoHandler} to={'/'}>
           <Logo size={Size.m} />
         </NavLink>
         <ul
@@ -85,7 +86,7 @@ const NavBar = () => {
           />
         </ul>
         <button
-          className={`nav-icon ${styles.NavBarMenuIcon}`}
+          className={`color-theme ${styles.NavBarMenuIcon}`}
           onClick={onClickHandler}
         >
           {isActive ? <IoMdClose /> : <HiMenu />}

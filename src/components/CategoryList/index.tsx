@@ -37,7 +37,7 @@ const CategoryList = () => {
   const categoryListIsLoading = !categories || isLoading
 
   return (
-    <div className={styles.CategoryList}>
+    <article className={styles.CategoryList}>
       {categories?.items.map((category, i) => {
         return (
           <CategoryItem
@@ -50,11 +50,11 @@ const CategoryList = () => {
       })}
       {categoryListIsLoading && <SkeletonElement type={SkeletonTypes.CategoryList} />}
       {!isLoading && hasNextPage && (
-        <div className={styles.LoadMoreButtonContainer}>
+        <section className={styles.LoadMoreButtonContainer}>
           <Button onClick={handleLoadMoreClick} type={ButtonType.Filled} label='Load more' icon={<FaArrowDown />} />
-        </div>
+        </section>
       )}
-    </div>
+    </article>
   )
 }
 

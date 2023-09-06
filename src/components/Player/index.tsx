@@ -40,7 +40,7 @@ const Player = ({ isDraggable, isLoading, urlImage }: Props) => {
       onDrag={handleDrag}
       onStop={handleStopDrag}
     >
-      <div ref={nodeRef} className={draggablePlayerClasses}>
+      <article ref={nodeRef} className={draggablePlayerClasses}>
         <div
           style={imageStyle}
           className={`shadowed ${playerContentClasses} ${playerImageClasses}`}
@@ -70,7 +70,7 @@ const Player = ({ isDraggable, isLoading, urlImage }: Props) => {
             </div>
           )}
         </div>
-      </div>
+      </article>
     </Draggable>
   )
 }

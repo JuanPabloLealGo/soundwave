@@ -6,7 +6,6 @@ import { MdReadMore } from "react-icons/md"
 import { useAppDispatch } from "../../redux-store"
 import { updateCurrentPlaylist } from "../../redux-store/reducers/playlistSlice"
 import PlaylistInterface from "../../interfaces/PlaylistInterface"
-import errorImage from "../../assets/images/error_file.png"
 
 import styles from "./PlaylistCard.module.scss"
 
@@ -17,21 +16,21 @@ interface Props {
 const PlaylistCard = ({ playlist }: Props) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [isHovering, setIsHovering] = useState(false)
+  //const [isHovering, setIsHovering] = useState(false)
 
   const handleClick = () => playlist && navigate(`/playlist/${playlist.id}`)
-  const handlePlaylistSelect = () => playlist && dispatch(updateCurrentPlaylist(playlist.uri))
+  //const handlePlaylistSelect = () => playlist && dispatch(updateCurrentPlaylist(playlist.uri))
 
   const cardStyle = {
-    'backgroundImage': `url(${playlist ? playlist.images[0]?.url : errorImage})`
+    'backgroundImage': `url(${playlist ? playlist.images[0]?.url : '/images/error_file.png'})`
   }
 
-  const handleMouseOver = () => setIsHovering(true);
-  const handleMouseOut = () => setIsHovering(false);
+  //const handleMouseOver = () => setIsHovering(true);
+  //const handleMouseOut = () => setIsHovering(false);
 
   return (
     <article className={styles.PlayListItem}>
-      <div style={cardStyle} className={`shadowed ${styles.PlaylistCard}`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+      <div style={cardStyle} className={`shadowed ${styles.PlaylistCard}`} onClick={handleClick}/*onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}*/>
         {playlist ? (
           <>
             <div className={styles.PlaylistCardBlurredContainer} />
@@ -43,7 +42,7 @@ const PlaylistCard = ({ playlist }: Props) => {
                 {`${playlist.tracks.total} Tracks`}
               </span>
             </div>
-            {isHovering && (
+            {/*isHovering && (
               <div className={styles.PlaylistCardActions}>
                 <button
                   className={styles.PlaylistCardButton}
@@ -58,7 +57,7 @@ const PlaylistCard = ({ playlist }: Props) => {
                   <MdReadMore />
                 </button>
               </div>
-            )}
+            )*/}
           </>
         ) : (
           <div className={styles.PlaylistCardError}>

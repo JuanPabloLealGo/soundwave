@@ -43,38 +43,15 @@ const App = () => {
         { path: 'favorites', element: <FavoritesPage /> },
         { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
         { path: 'services', element: <ServicesPage /> },
+        { path: '/styleguide', element: <StyleGuidePage /> },
         { path: 'terms-of-service', element: <TermsOfServicesPage /> },
         { path: 'playlist/:playlistId', element: <PlaylistPage /> }
       ]
     },
-
-    {
-      path: '/styleguide',
-      element: <StyleGuidePage />,
-    },
-    {
-      path: '*',
-      element: <NotFoundPage />
-    }
+    { path: '*', element: <NotFoundPage /> }
   ])
 
   return element
 }
-
-// OTHER WAY:
-/*
-const App = () => {
-  return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/playlists' element={<MainLayout />} >
-        <Route index element={<Playlists />} />
-        <Route path=':id' element={<Playlist />} />
-      </Route>
-      <Route path='*' element={<NotFound />} />
-    </Routes>
-  );
-}
-*/
 
 export default App;

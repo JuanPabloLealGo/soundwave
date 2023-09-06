@@ -1,19 +1,32 @@
 import { Link } from 'react-router-dom'
+import { AiFillLinkedin, AiFillGithub } from 'react-icons/ai'
+
 import Logo from '../Logo'
 import styles from './Footer.module.scss'
+import { Size } from '../../enums/SizeEnum'
 
 const Footer = () => {
   return (
     <footer className={styles.Footer}>
       <div className={styles.FooterContainer}>
-        <div className={styles.FooterLogo}>
-          <Logo />
+        <Logo size={Size.m} />
+        <Link className={`${styles.FooterLink}`} to='/'>SERVICES</Link>
+        <div>
+          <Link
+            className={styles.FooterSocialMediaItem}
+            target='_blank'
+            to='https://linkedin.com/in/juan-pablo-leal-gonzalez-0a9321195'
+          >
+            <AiFillLinkedin />
+          </Link>
+          <Link
+            className={styles.FooterSocialMediaItem}
+            target='_blank'
+            to='https://github.com/JuanPabloLealGo'
+          >
+            <AiFillGithub />
+          </Link>
         </div>
-        <div className={styles.FooterLinks}>
-          <Link className={`${styles.FooterLink}`} to='/terms-of-service'>Terms of Service</Link>
-          <Link className={`${styles.FooterLink}`} to='/privacy-policy'>Privacy Policy</Link>
-        </div>
-        <span>{`© ${new Date().getFullYear()} Music Box`}</span>
       </div>
     </footer>
   )
