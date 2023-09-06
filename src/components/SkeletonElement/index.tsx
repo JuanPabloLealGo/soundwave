@@ -31,7 +31,7 @@ const CategoryListSkeleton = () => {
       {convertToRange(PaginationEnum.commonLimit).map((item) => {
         return (
           <section key={item} className={styles.CategoryListSkeleton}>
-            <header className={`skeleton ${styles.CategoryListSkeletonTitle}`} />
+            <div className={`skeleton ${styles.CategoryListSkeletonTitle}`} />
             <CategoryItemSkeleton />
           </section>
         )
@@ -60,12 +60,14 @@ const PlaylistCardsSkeleton = () => {
 }
 
 const PlaylistCardSkeleton = (item: number) => {
-  return (<article key={`playlist-${item}`} className={`skeleton ${styles.PlaylistCardsSkeleton}`}>
-    <div className={styles.PlaylistCardsSkeletonBlurredContainer}>
-      <div className={`skeleton ${styles.PlaylistCardsSkeletonName}`} />
-      <div className={`skeleton ${styles.PlaylistCardsSkeletonTracks}`} />
-    </div>
-  </article>)
+  return (
+    <article key={`playlist-${item}`} className={`skeleton ${styles.PlaylistCardsSkeleton}`}>
+      <div className={styles.PlaylistCardsSkeletonBlurredContainer}>
+        <div className={`skeleton ${styles.PlaylistCardsSkeletonName}`} />
+        <div className={`skeleton ${styles.PlaylistCardsSkeletonTracks}`} />
+      </div>
+    </article>
+  )
 }
 
 export default SkeletonElement

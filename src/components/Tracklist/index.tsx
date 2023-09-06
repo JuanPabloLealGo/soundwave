@@ -42,13 +42,13 @@ const Tracklist = ({ playlistId }: Props) => {
   if (!data?.items) return null
 
   return (
-    <div>
-      <div className={styles.TracklistHeader}>
-        <span className={styles.TracklistHeaderTitle}>Track / Artist</span>
-        <span className={styles.TracklistHeaderAlbum}>Album</span>
-        <span className={styles.TracklistHeaderGeneralItem}>Time</span>
-        <span className={styles.TracklistHeaderGeneralItem}>Popularity</span>
-      </div>
+    <article>
+      <header className={styles.TracklistHeader}>
+        <p className={styles.TracklistHeaderTitle}>Track / Artist</p>
+        <p className={styles.TracklistHeaderAlbum}>Album</p>
+        <p className={styles.TracklistHeaderGeneralItem}>Time</p>
+        <p className={styles.TracklistHeaderGeneralItem}>Popularity</p>
+      </header>
       <div className={styles.TracklistBody}>
         {data.items.map((item) => {
           const { track } = item
@@ -65,11 +65,11 @@ const Tracklist = ({ playlistId }: Props) => {
         })}
         {
           isLoading
-            ? <span>Loading...</span>
+            ? <p>Loading...</p>
             : hasMoreData && <button onClick={handleLoadMore}>Load More</button>
         }
       </div>
-    </div>
+    </article>
   )
 }
 

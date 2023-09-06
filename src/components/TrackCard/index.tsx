@@ -22,7 +22,7 @@ const TrackCard = ({ track, onTrackSelect }: Props) => {
   const duration = convertMsToMinSec(track.duration_ms)
 
   return (
-    <div
+    <article
       className={`
         ${styles.TrackCard} 
         ${isDarkTheme
@@ -31,23 +31,23 @@ const TrackCard = ({ track, onTrackSelect }: Props) => {
         } 
       `}
       onClick={handleClick}>
-      <div className={styles.TrackCardDescription}>
+      <section className={styles.TrackCardDescription}>
         <div style={imageStyle} className={styles.TrackCardDescriptionImage} />
         <div className={styles.TrackCardDescriptionText}>
-          <span className={styles.TrackCardDescriptionTextName}>
+          <p className={styles.TrackCardDescriptionTextName}>
             {track.name}
-          </span>
-          <span className={styles.TrackCardDescriptionTextArtists}>
+          </p>
+          <p className={styles.TrackCardDescriptionTextArtists}>
             {getArtists()}
-          </span>
+          </p>
         </div>
-      </div>
-      <div className={styles.TrackCardAlbum}>{track.album.name}</div>
-      <div className={styles.TrackCardTime}>{`${duration.minutes}:${duration.seconds}`}</div>
-      <div className={styles.TrackCardPopularity}>
+      </section>
+      <section className={styles.TrackCardAlbum}>{track.album.name}</section>
+      <section className={styles.TrackCardTime}>{`${duration.minutes}:${duration.seconds}`}</section>
+      <section className={styles.TrackCardPopularity}>
         <PopularityStars value={track.popularity} />
-      </div>
-    </div>
+      </section>
+    </article>
   )
 }
 

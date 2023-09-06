@@ -9,6 +9,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 20px;
+  cursor: pointer;
   font-size: 0.75rem;
   height: 160px;
   margin: 8px;
@@ -87,8 +88,8 @@
     text-align: center;
 
     p {
-      font-weight: bold;
-      font-size: 0.75rem;
+      font-weight: 500;
+      font-size: 1.2rem;
       margin: 0;
     }
   }

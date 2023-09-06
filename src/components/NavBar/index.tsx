@@ -35,7 +35,7 @@ const NavBar = () => {
   }
 
   const privateLinks = [
-    { label: 'Home', link: '/' },
+    { label: 'Explore', link: '/' },
     { label: 'Favorites', link: '/favorites' },
   ]
 
