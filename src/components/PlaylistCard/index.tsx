@@ -4,7 +4,6 @@ import { capitalizeFirstLetter } from "../../utils"
 import { BsPlayFill } from "react-icons/bs"
 import { MdReadMore } from "react-icons/md"
 import { useAppDispatch } from "../../redux-store"
-import { updateCurrentPlaylist } from "../../redux-store/reducers/playlistSlice"
 import PlaylistInterface from "../../interfaces/PlaylistInterface"
 
 import styles from "./PlaylistCard.module.scss"

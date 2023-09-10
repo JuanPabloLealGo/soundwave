@@ -3,6 +3,7 @@ import PlaylistStateInterface from "../../interfaces/state/PlaylistStateInterfac
 import { ErrorType } from "../../types"
 import { getPlaylist } from "../actions/playlistActions"
 import PlaylistInterface from "../../interfaces/PlaylistInterface"
+import CurrentUrisInterface from "../../interfaces/CurrentUrisInterface"
 
 const initialState = {
   data: null,
@@ -15,9 +16,9 @@ const playlistSlice = createSlice({
   name: 'playlist',
   initialState,
   reducers: {
-    updateCurrentPlaylist: (
+    updateCurrentUris: (
       state: PlaylistStateInterface,
-      action: PayloadAction<string | string[]>
+      action: PayloadAction<CurrentUrisInterface>
     ) => {
       state.currentUris = action.payload
     },
@@ -40,6 +41,6 @@ const playlistSlice = createSlice({
 
 const { actions, reducer } = playlistSlice
 
-export const { updateCurrentPlaylist } = actions
+export const { updateCurrentUris } = actions
 
 export default reducer

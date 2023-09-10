@@ -4,10 +4,11 @@ import Footer from "../Footer"
 import styles from "./MainLayout.module.scss"
 import useAuth from "../../hooks/useAuth"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
-import { uiSelector } from "../../redux-store/selectors"
+import { authSelector, uiSelector } from "../../redux-store/selectors"
 import ErrorMessage from "../ErrorMessage"
 import { setErrorMessage } from "../../redux-store/reducers/uiSlice"
 import { logout } from "../../redux-store/reducers/authSlice"
+import NewPlayer from "../Player/NewPlayer"
 
 const MainLayout = () => {
   const dispatch = useAppDispatch()
@@ -28,6 +29,7 @@ const MainLayout = () => {
           onClick={clickHandler}
         />
       )}
+      <NewPlayer />
       <NavBar />
       <main className={styles.MainLayoutContent}>
         <Outlet />

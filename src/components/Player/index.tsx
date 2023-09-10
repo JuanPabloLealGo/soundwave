@@ -55,7 +55,7 @@ const Player = ({ isDraggable, isLoading, urlImage }: Props) => {
               <SpotifyWebPlayer
                 autoPlay
                 token={token ?? ""}
-                uris={currentUris}
+                uris={currentUris?.uris ?? []}
                 showSaveIcon
                 styles={{
                   activeColor: "#1DB954",

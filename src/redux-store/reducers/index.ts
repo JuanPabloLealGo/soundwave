@@ -8,6 +8,7 @@ import uiReducer from "./uiSlice"
 import storage from "redux-persist/lib/storage"
 import trackReducer from "./trackSlice"
 import persistReducer from "redux-persist/es/persistReducer"
+import playerReducer from "./playerSlice"
 
 const persistConfig = {
   key: 'root',
@@ -22,6 +23,7 @@ const rootReducer = combineReducers<AppStateInterface>({
   playlistPage: playlistPageReducer,
   track: trackReducer,
   ui: uiReducer,
+  player: playerReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

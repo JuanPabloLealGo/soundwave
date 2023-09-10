@@ -44,3 +44,17 @@
   }
 
 }
+
+.NewPlayer {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  background-color: gray;
+  height: 200px;
+  border: 2px solid blue;
+  width: 100%;
+}
+
+.HiddenWebPlayback {
+  display: none;
+}

@@ -44,14 +44,14 @@ const PlaylistPage = () => {
           <p className={isLoading ? `skeleton ${styles.PlaylistSkeletonTitle}` : styles.PlaylistTitle}>
             {data?.name}
           </p>
-          <Player isLoading urlImage={data?.images[0].url} />
+          {/*<Player isLoading urlImage={data?.images[0].url} />*/}
           <div className={styles.PlaylistDescription}>
             {description}
           </div>
         </div>
       </div>
       <div className={styles.PlaylistItems}>
-        <Tracklist playlistId={playlistId} />
+        <Tracklist playlistId={playlistId} playlistUri={data?.uri} />
       </div>
     </div>
   )

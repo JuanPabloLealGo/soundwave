@@ -1,3 +1,5 @@
+import ArtistInterface from "../interfaces/ArtistInterface"
+
 export const capitalizeFirstLetter = (str: string) => {
   return `${str.charAt(0).toUpperCase()}${str.slice(1).toLowerCase()}`
 }
@@ -22,3 +24,6 @@ export const convertToRange = (length: number) => {
 
   return result
 }
+
+export const getArtists = (artists: ArtistInterface[]) =>
+  artists.map((artist) => artist.name).join(', ')

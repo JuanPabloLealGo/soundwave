@@ -7,6 +7,7 @@
     height: 38.4px;
     width: 200px;
     margin-top: 6px;
+    border-radius: 6px;
   }
 }
 
@@ -29,7 +30,7 @@
 
   &BlurredContainer {
     background-color: rgb(0, 0, 0, 6%);
-    border-radius: 0px 0px 30px 30px;
+    border-radius: 0px 0px 20px 20px;
     bottom: 0;
     display: flex;
     flex-direction: column;
@@ -79,6 +80,7 @@
 
     &BlurredContainer {
       padding: 16px;
+      border-radius: 0px 0px 30px 30px;
     }
 
     &Name {
