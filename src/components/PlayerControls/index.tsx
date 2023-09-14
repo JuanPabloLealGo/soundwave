@@ -1,30 +1,28 @@
 import { BsFillPlayCircleFill, BsFillPauseCircleFill, BsShuffle } from "react-icons/bs"
-import { useAppDispatch, useAppSelector } from "../../redux-store"
-import { playerSelector } from "../../redux-store/selectors"
-import { changePlayerState } from "../../redux-store/actions/playerActions"
-import { PlayerStateEnum } from "../../enums/PlayerStateEnum"
+import { TbPlayerTrackPrevFilled, TbPlayerTrackNextFilled } from "react-icons/tb"
+import { BsRewindCircleFill, BsFastForwardCircleFill } from "react-icons/bs"
+
+import styles from "./PlayerControls.module.scss"
 
 interface Props {
-  playerState: boolean
+  isPlaying: boolean
   onChangeState: () => void
 }
 
-const PlayerControls = ({ playerState, onChangeState }: Props) => {
-
-
+const PlayerControls = ({ isPlaying, onChangeState }: Props) => {
 
   return (
-    <section style={{ display: 'flex' }}>
-      <div>
+    <section className={styles.PlayerControls}>
+      {/*<div>
         <BsShuffle />
-      </div>
-      <div>
-        {playerState ? (
-          <BsFillPauseCircleFill onClick={onChangeState} />
-        ) : (
-          <BsFillPlayCircleFill onClick={onChangeState} />
-        )}
-      </div>
+        </div>*/}
+      {isPlaying ? (
+        <BsFillPauseCircleFill className={styles.PlayerControlsPlay} onClick={onChangeState} />
+      ) : (
+        <BsFillPlayCircleFill className={styles.PlayerControlsPlay} onClick={onChangeState} />
+      )}
+      <BsRewindCircleFill className={styles.PlayerControlsNextPrevious} />
+      <BsFastForwardCircleFill className={styles.PlayerControlsNextPrevious} />
     </section>
   )
 }

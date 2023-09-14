@@ -10,7 +10,7 @@ export const convertMsToMinSec = (ms: number) => {
   const seconds = totalSeconds % 60
 
   return {
-    minutes: minutes,
+    minutes: minutes.toString().padStart(2, '0'),
     seconds: seconds.toString().padStart(2, '0')
   }
 }

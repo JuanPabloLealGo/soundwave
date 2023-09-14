@@ -26,7 +26,7 @@ export const getCurrentPlayingTrack = async () => {
   }
 }
 
-export const setPlayerState = async (playerState: PlayerStateEnum, uri: string | string[], position?: null | number) => {
+export const setPlayerState = async (playerState: PlayerStateEnum, uri: string | string[], position?: null | number, progress?: null | number) => {
 
   const isTrack = uri.includes("track");
 
@@ -37,7 +37,7 @@ export const setPlayerState = async (playerState: PlayerStateEnum, uri: string |
       'offset': {
         "position": position
       },
-      "position_ms": 0
+      "position_ms": progress
     }
 
   try {

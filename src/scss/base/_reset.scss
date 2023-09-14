@@ -13,7 +13,6 @@ body {
   overflow-x: hidden;
   position: relative;
   font-family: $font-primary;
-  margin: 0;
 }
 
 #root {
@@ -22,6 +21,7 @@ body {
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 li {

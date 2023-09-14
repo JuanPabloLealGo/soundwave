@@ -10,9 +10,12 @@ import { useAppDispatch, useAppSelector } from '../../redux-store'
 import { logout } from '../../redux-store/reducers/authSlice'
 import { AUTH_URL } from '../../environment/appEnvironment'
 import { Size } from '../../enums/SizeEnum'
-import { authSelector, uiSelector } from '../../redux-store/selectors'
+import { authSelector, playerSelector, uiSelector } from '../../redux-store/selectors'
 import Button, { ButtonType } from '../Button'
 import { toogleTheme } from '../../redux-store/reducers/uiSlice'
+import { changePlayerState } from '../../redux-store/actions/playerActions'
+import { PlayerStateEnum } from '../../enums/PlayerStateEnum'
+import { resetCurrentUris } from '../../redux-store/reducers/playerSlice'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
@@ -24,10 +27,22 @@ const NavBar = () => {
   const onClickHandler = () => setIsActive(!isActive)
   const onClickLogoHandler = () => setIsActive(false)
   const onLoginHandler = () => window.location.replace(AUTH_URL)
+  const { currentTrack, currentUris, playerState } = useAppSelector(playerSelector)
 
   const onLogoutHandler = () => {
-    dispatch(logout())
-    return navigate('/')
+    if (currentTrack.data) {
+      dispatch(changePlayerState({
+        playerState: PlayerStateEnum.pause,
+        uri: '',
+      })).then(() => {
+        dispatch(resetCurrentUris())
+        dispatch(logout())
+        return navigate('/')
+      })
+    } else {
+      dispatch(logout())
+      return navigate('/')
+    }
   }
 
   const onToggleThemeHandler = () => {

@@ -1,78 +1,120 @@
-import { useRef } from "react"
-import Draggable from "react-draggable"
-import SpotifyWebPlayer from "react-spotify-web-playback/lib"
-import store, { useAppDispatch, useAppSelector } from "../../redux-store"
-import styles from "./Player.module.scss"
-import { TbDragDrop } from "react-icons/tb"
-import { playlistSelector } from "../../redux-store/selectors"
-import { playerDragging } from "../../redux-store/reducers/uiSlice"
+import styles from './Player.module.scss'
+import { useAppDispatch, useAppSelector } from '../../redux-store'
+import { authSelector, playerSelector } from '../../redux-store/selectors'
+import CurrentTrack from '../CurrentTrack'
+import { changePlayerState, getCurrentTrack } from '../../redux-store/actions/playerActions'
+import { useEffect, useState } from 'react'
+import PlayerControls from '../PlayerControls'
+import { PlayerStateEnum } from '../../enums/PlayerStateEnum'
+import ProgressBar from '../ProgressBar'
+import { PiPlayFill, PiPauseFill } from "react-icons/pi"
 
-interface Props {
-  isDraggable?: boolean
-  isLoading: boolean
-  urlImage?: string
-}
-
-const Player = ({ isDraggable, isLoading, urlImage }: Props) => {
+const Player = () => {
 
   const dispatch = useAppDispatch()
-  const nodeRef = useRef(null)
-  const token = store.getState().auth.data?.access_token
-  const { currentUris } = useAppSelector(playlistSelector)
-  const imageStyle = urlImage ? { 'backgroundImage': `url(${urlImage})` } : {}
-  const draggablePlayerClasses = isDraggable ? styles.DraggablePlayer : ''
-  const playerContentClasses = currentUris ? styles.PlayerContent : ''
-  const playerImageClasses = !isDraggable && `${styles.PlayerImage} ${isLoading && !urlImage && 'skeleton'}`
 
-  const handleDrag = () => {
-    dispatch(playerDragging(true))
+  const { data: isAuthenticated } = useAppSelector(authSelector)
+  const { currentTrack, currentUris, playerState } = useAppSelector(playerSelector)
+  const isPlaying = currentTrack.data && currentUris
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const mobileBreakpoint = 768;
+      const screenWidth = window.innerWidth;
+      setIsMobile(screenWidth <= mobileBreakpoint);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, [])
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isAuthenticated && isPlaying) {
+      updateCurrentTrack()
+      // monitor the track status
+      // to update the track
+      interval = setInterval(() => updateCurrentTrack(), 1000)
+    }
+
+    return () => {
+      // Clear the interval if it exists
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isAuthenticated, isPlaying])
+
+  useEffect(() => {
+    if (isAuthenticated && currentUris) {
+      dispatch(changePlayerState({
+        playerState: PlayerStateEnum.play,
+        uri: currentUris.uris,
+        position: currentUris.position,
+      }))
+        .then(() => updateCurrentTrack())
+    }
+  }, [dispatch, isAuthenticated, currentUris])
+
+  const HandleChangeState = () => {
+    const state = playerState.data ? PlayerStateEnum.pause : PlayerStateEnum.play
+
+    if (currentTrack.data && currentTrack.data.item && currentUris)
+      dispatch(changePlayerState({
+        playerState: state,
+        uri: currentUris.uris,
+        position: currentUris.position,
+        progress: currentTrack.data?.progress_ms
+      }))
   }
 
-  const handleStopDrag = () => {
-    dispatch(playerDragging(false))
+  const updateCurrentTrack = () => dispatch(getCurrentTrack())
+
+  if (isAuthenticated && currentUris && !currentTrack.data) {
+    return (
+      <article>
+        <h1>Please make sure you have spotify open, play any song for one sec and try play your track in our UI</h1>
+      </article>
+    )
+  }
+
+  if (!isAuthenticated || !currentTrack.data || !currentUris) {
+    return null
   }
 
   return (
-    <Draggable
-      bounds='parent'
-      handle="span"
-      nodeRef={nodeRef}
-      onDrag={handleDrag}
-      onStop={handleStopDrag}
-    >
-      <article ref={nodeRef} className={draggablePlayerClasses}>
-        <div
-          style={imageStyle}
-          className={`shadowed ${playerContentClasses} ${playerImageClasses}`}
-        >
-          {currentUris && (
-            <div className={`${styles.Player} blurred-background`}>
-              {isDraggable && (
-                <span className={styles.PlayerContentDrag}>
-                  <TbDragDrop />
-                </span>
-              )}
-              <SpotifyWebPlayer
-                autoPlay
-                token={token ?? ""}
-                uris={currentUris?.uris ?? []}
-                showSaveIcon
-                styles={{
-                  activeColor: "#1DB954",
-                  bgColor: "transparent",
-                  color: "#000000",
-                  loaderColor: "#1DB954",
-                  sliderColor: "#1DB954",
-                  trackArtistColor: "#000000",
-                  trackNameColor: "#000000",
-                }}
-              />
-            </div>
+    <article className={styles.PlayerContainer} onClick={isMobile ? () => console.log('OPEN PLAYER DETAILS SCREEN') : () => { }}>
+      <div className={styles.Player}>
+        <div className={styles.PlayerTrackInfoSection} >
+          {currentTrack.data?.item && (
+            <CurrentTrack track={currentTrack.data.item} />
           )}
         </div>
-      </article>
-    </Draggable>
+        <div className={styles.PlayerProgressBarSection}>
+          <ProgressBar
+            durationInMs={currentTrack.data?.item?.duration_ms ?? 0}
+            progressInMs={currentTrack.data?.progress_ms ?? 0}
+          />
+        </div>
+        <div className={styles.PlayerControlsSection}>
+          <PlayerControls
+            isPlaying={playerState.data}
+            onChangeState={HandleChangeState}
+          />
+        </div>
+        <div className={styles.SimpleControl}>
+          {playerState.data ? <PiPauseFill onClick={HandleChangeState} /> : <PiPlayFill onClick={HandleChangeState} />}
+        </div>
+      </div>
+    </article>
   )
+
 }
 
 export default Player

@@ -1,60 +1,79 @@
-.DraggablePlayer {
-  position: fixed;
-  bottom: 16px;
-  min-width: 300px;
-  right: 16px;
-  width: 30%;
-  z-index: 100;
-}
+@import '../../scss/main.scss';
 
-.Player {
-  padding: 12px;
-  border-radius: 15px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-
-.PlayerImage {
-  height: 400px;
-  width: 100%;
-  border-radius: 15px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-
-.PlayerContent {
-  position: relative;
-  box-shadow: rgb(0 0 0 / 20%) 0px 2px 6px 0px;
-  border-radius: 15px;
-
-  &Drag {
-    align-items: center;
-    background-color: rgb(29 185 84 / 50%);
-    border-radius: 5px;
-    color: rgb(0 0 0 / 60%);
-    cursor: grab;
-    display: flex;
-    height: 25px;
-    margin-bottom: 8px;
-    margin-left: auto;
-    padding: 4px;
-    width: 25px;
-  }
-
-}
-
-.NewPlayer {
+.PlayerContainer {
   position: fixed;
   bottom: 0;
   z-index: 1;
-  background-color: gray;
-  height: 200px;
-  border: 2px solid blue;
+  height: 70px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: $light-grey;
+  cursor: pointer;
+  color: $black;
 }
 
-.HiddenWebPlayback {
-  display: none;
+.Player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 16px 0 16px;
+
+  &TrackInfoSection {
+    min-width: 300px;
+  }
+
+  &ProgressBarSection {
+    display: none;
+  }
+
+  &ControlsSection {
+    display: none;
+  }
+}
+
+.SimpleControl {
+  display: inline;
+
+  svg {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+@include for-size(m) {
+  .PlayerContainer {
+    height: 100px;
+    cursor: default;
+  }
+
+  .Player {
+
+    justify-content: space-between;
+    color: $black;
+    height: 100%;
+    width: 900px;
+    align-items: center;
+    padding: 20px;
+
+    &TrackInfoSection {
+      width: 300px;
+    }
+
+    &ProgressBarSection {
+      display: inline;
+      width: 100%;
+      padding: 0 30px 0 30px;
+    }
+
+    &ControlsSection {
+      display: inline;
+      width: 200px;
+    }
+  }
+
+  .SimpleControl {
+    display: none;
+  }
 }

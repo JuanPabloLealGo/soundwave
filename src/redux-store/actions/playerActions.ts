@@ -9,6 +9,7 @@ interface ChangePlayerStateProps {
   playerState: PlayerStateEnum
   uri: string | string[]
   position?: number
+  progress?: number
 }
 
 export const getPlayerState = createAsyncThunk<PlayerInterface>(
@@ -28,13 +29,8 @@ export const getCurrentTrack = createAsyncThunk<PlayerInterface>(
   'player/getCurrentTrack',
   async (_, thunkAPI) => {
     try {
-      let data = {} as PlayerInterface
-      // Sometimes the current track takes a while to update from Spotify
-      while (!data.item) {
-        const response = await getCurrentPlayingTrack()
-        data = response.data
-      }
-      return data
+      const response = await getCurrentPlayingTrack()
+      return response.data
     } catch (error) {
       const { message } = (error as ErrorInterface).response.data.error
       return thunkAPI.rejectWithValue(message)
@@ -44,10 +40,9 @@ export const getCurrentTrack = createAsyncThunk<PlayerInterface>(
 
 export const changePlayerState = createAsyncThunk<void, ChangePlayerStateProps, { rejectValue: ErrorType }>(
   'player/changePlayerState',
-  async ({ playerState, uri, position = 0 }: ChangePlayerStateProps, thunkAPI) => {
+  async ({ playerState, uri, position = 0, progress = 0 }: ChangePlayerStateProps, thunkAPI) => {
     try {
-      const response = await setPlayerState(playerState, uri, position)
-      console.log('RESPONSE: ', response)
+      const response = await setPlayerState(playerState, uri, position, progress)
       return response.data
     } catch (error) {
       const { message } = (error as ErrorInterface).response.data.error

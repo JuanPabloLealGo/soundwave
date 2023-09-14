@@ -1,16 +1,12 @@
-import TrackItemInterface from "../../interfaces/TrackItemInterface"
 import TrackCard from "../TrackCard"
-
-import styles from "./Tracklist.module.scss"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
 import { useEffect, useState } from "react"
 import { trackSelector } from "../../redux-store/selectors"
 import { getTrackPage } from "../../redux-store/actions/trackActions"
 import { PaginationEnum } from "../../enums/PaginationEnum"
-import { PlayerStateEnum } from "../../enums/PlayerStateEnum"
-import { changePlayerState, getCurrentTrack } from "../../redux-store/actions/playerActions"
-import TrackInterface from "../../interfaces/TrackInterface"
-import { updateCurrentUris } from "../../redux-store/reducers/playlistSlice"
+
+import styles from "./Tracklist.module.scss"
+import { updateCurrentUris } from "../../redux-store/reducers/playerSlice"
 
 interface Props {
   playlistId?: string
