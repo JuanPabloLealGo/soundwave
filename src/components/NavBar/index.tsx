@@ -27,7 +27,7 @@ const NavBar = () => {
   const onClickHandler = () => setIsActive(!isActive)
   const onClickLogoHandler = () => setIsActive(false)
   const onLoginHandler = () => window.location.replace(AUTH_URL)
-  const { currentTrack, currentUris, playerState } = useAppSelector(playerSelector)
+  const { currentTrack } = useAppSelector(playerSelector)
 
   const onLogoutHandler = () => {
     if (currentTrack.data) {

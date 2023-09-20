@@ -1,6 +1,9 @@
-import { BsFillPlayCircleFill, BsFillPauseCircleFill, BsShuffle } from "react-icons/bs"
-import { TbPlayerTrackPrevFilled, TbPlayerTrackNextFilled } from "react-icons/tb"
-import { BsRewindCircleFill, BsFastForwardCircleFill } from "react-icons/bs"
+import {
+  BsFillPlayCircleFill,
+  BsFillPauseCircleFill,
+  BsRewindCircleFill,
+  BsFastForwardCircleFill,
+} from "react-icons/bs"
 
 import styles from "./PlayerControls.module.scss"
 
@@ -13,9 +16,6 @@ const PlayerControls = ({ isPlaying, onChangeState }: Props) => {
 
   return (
     <article className={styles.PlayerControls}>
-      {/*<div>
-        <BsShuffle />
-        </div>*/}
       {isPlaying ? (
         <BsFillPauseCircleFill className={styles.PlayerControlsPlay} onClick={onChangeState} />
       ) : (

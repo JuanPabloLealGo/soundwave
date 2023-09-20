@@ -1,19 +1,24 @@
-import styles from './Player.module.scss'
-import { useAppDispatch, useAppSelector } from '../../redux-store'
-import { authSelector, playerSelector } from '../../redux-store/selectors'
-import CurrentTrack from '../CurrentTrack'
-import { changePlayerState, getCurrentTrack } from '../../redux-store/actions/playerActions'
-import { useEffect, useState } from 'react'
-import PlayerControls from '../PlayerControls'
-import { PlayerStateEnum } from '../../enums/PlayerStateEnum'
-import ProgressBar from '../ProgressBar'
+import { useCallback, useEffect, useState } from "react"
 import { PiPlayFill, PiPauseFill } from "react-icons/pi"
-import MobilePlayerControls from '../MobilePlayerControls'
 import { IoIosArrowUp } from "react-icons/io"
-import Popup from '../Popup'
 
+import CurrentTrack from "../CurrentTrack"
+import MobilePlayerControls from "../MobilePlayerControls"
+import PlayerControls from "../PlayerControls"
+import Popup from "../Popup"
+import ProgressBar from "../ProgressBar"
+import { useAppDispatch, useAppSelector } from "../../redux-store"
+import { authSelector, playerSelector } from "../../redux-store/selectors"
+import { changePlayerState, getCurrentTrack } from "../../redux-store/actions/playerActions"
+import { PlayerStateEnum } from "../../enums/PlayerStateEnum"
 
-const Player = () => {
+import styles from "./Player.module.scss"
+
+interface Props {
+  onShowSpotifyMessage: (showMessage: boolean) => void
+}
+
+const Player = ({ onShowSpotifyMessage }: Props) => {
 
   const dispatch = useAppDispatch()
 
@@ -23,6 +28,10 @@ const Player = () => {
   const [showMobilePlayer, setShowMobilePlayer] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState(false)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+  const updateCurrentTrack = useCallback(() =>
+    dispatch(getCurrentTrack()), [dispatch]
+  )
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)
@@ -50,7 +59,7 @@ const Player = () => {
         clearInterval(interval);
       }
     };
-  }, [isAuthenticated, isPlaying])
+  }, [isAuthenticated, isPlaying, updateCurrentTrack])
 
   useEffect(() => {
     if (isAuthenticated && currentUris) {
@@ -61,7 +70,12 @@ const Player = () => {
       }))
         .then(() => updateCurrentTrack())
     }
-  }, [dispatch, isAuthenticated, currentUris])
+
+  }, [dispatch, isAuthenticated, currentUris, updateCurrentTrack])
+
+  useEffect(() => {
+    onShowSpotifyMessage((isAuthenticated && currentUris && !currentTrack.data) || false)
+  }, [isAuthenticated, currentUris, currentTrack, onShowSpotifyMessage])
 
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
@@ -79,16 +93,6 @@ const Player = () => {
         position: currentUris.position,
         progress: currentTrack.data?.progress_ms
       }))
-  }
-
-  const updateCurrentTrack = () => dispatch(getCurrentTrack())
-
-  if (isAuthenticated && currentUris && !currentTrack.data) {
-    return (
-      <article className={styles.OpenSpotifyMessage}>
-        <p>Please make sure you have spotify open, play any song for one sec and try play your track in our UI</p>
-      </article>
-    )
   }
 
   if (!isAuthenticated || !currentTrack.data || !currentUris) {
@@ -128,9 +132,9 @@ const Player = () => {
                 />
               </section>
             </div>
-            <div className={`${styles.SimpleControl} color-theme`} onClick={handleChangeState}>
+            <button className={`${styles.SimpleControl} color-theme`} onClick={handleChangeState}>
               {playerState.data ? <PiPauseFill /> : <PiPlayFill />}
-            </div>
+            </button>
           </div>
           <IoIosArrowUp className={styles.ShowDetails} onClick={handlePlayerClick} />
         </article>

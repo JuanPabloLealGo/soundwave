@@ -44,26 +44,13 @@
 .SimpleControl {
   display: inline;
   padding-right: 30px;
+  border: none;
+  background-color: transparent;
 
   svg {
     height: 30px;
     width: 30px;
   }
-}
-
-.OpenSpotifyMessage {
-  position: sticky;
-  top: 80px;
-  z-index: 1;
-  background: $primary;
-  font-size: 1.8rem;
-  font-weight: 400;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $white;
-  margin-bottom: 20px;
-  padding: 16px
 }
 
 .ShowDetails {
