@@ -17,7 +17,7 @@ const ProgressBar = ({ durationInMs, progressInMs }: Props) => {
   const progressPercentage = (progressInMs / durationInMs) * 100
 
   return (
-    <section className={styles.ProgressBar}>
+    <article className={styles.ProgressBar}>
       <div className={styles.ProgressBarIndicator}>
         <div style={{ 'width': `${progressPercentage}%` }} className={styles.ProgressBarFiller} />
       </div>
@@ -30,7 +30,7 @@ const ProgressBar = ({ durationInMs, progressInMs }: Props) => {
         <PiShuffleSimpleFill className={styles.Selected} />
         <TbRepeat />
       </div>
-    </section>
+    </article>
   )
 }
 

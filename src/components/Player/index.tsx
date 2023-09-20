@@ -8,43 +8,46 @@ import PlayerControls from '../PlayerControls'
 import { PlayerStateEnum } from '../../enums/PlayerStateEnum'
 import ProgressBar from '../ProgressBar'
 import { PiPlayFill, PiPauseFill } from "react-icons/pi"
+import MobilePlayerControls from '../MobilePlayerControls'
+import { IoIosArrowUp } from "react-icons/io"
 
-const Player = () => {
+interface Props {
+  onMobilePlayerChange: (isVisible: boolean) => void
+}
+
+const Player = ({ onMobilePlayerChange }: Props) => {
 
   const dispatch = useAppDispatch()
 
   const { data: isAuthenticated } = useAppSelector(authSelector)
   const { currentTrack, currentUris, playerState } = useAppSelector(playerSelector)
   const isPlaying = currentTrack.data && currentUris
-  const [isMobile, setIsMobile] = useState(false);
+  const [showMobilePlayer, setShowMobilePlayer] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
   useEffect(() => {
-    const checkIsMobile = () => {
-      const mobileBreakpoint = 768;
-      const screenWidth = window.innerWidth;
-      setIsMobile(screenWidth <= mobileBreakpoint);
-    };
-
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
+    window.addEventListener('resize', handleResize)
 
     return () => {
-      window.removeEventListener('resize', checkIsMobile);
+      window.removeEventListener('resize', handleResize)
     };
   }, [])
+
+  useEffect(() => {
+    const mobileBreakpoint = 768
+    setIsMobile(screenWidth <= mobileBreakpoint)
+  }, [screenWidth])
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
 
     if (isAuthenticated && isPlaying) {
       updateCurrentTrack()
-      // monitor the track status
-      // to update the track
       interval = setInterval(() => updateCurrentTrack(), 1000)
     }
 
     return () => {
-      // Clear the interval if it exists
       if (interval) {
         clearInterval(interval);
       }
@@ -62,7 +65,17 @@ const Player = () => {
     }
   }, [dispatch, isAuthenticated, currentUris])
 
-  const HandleChangeState = () => {
+  useEffect(() => {
+    onMobilePlayerChange(isMobile && showMobilePlayer)
+  }, [isMobile, showMobilePlayer, onMobilePlayerChange])
+
+  const handleResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  const handlePlayerClick = () => setShowMobilePlayer(true)
+
+  const handleChangeState = () => {
     const state = playerState.data ? PlayerStateEnum.pause : PlayerStateEnum.play
 
     if (currentTrack.data && currentTrack.data.item && currentUris)
@@ -78,8 +91,8 @@ const Player = () => {
 
   if (isAuthenticated && currentUris && !currentTrack.data) {
     return (
-      <article>
-        <h1>Please make sure you have spotify open, play any song for one sec and try play your track in our UI</h1>
+      <article className={styles.OpenSpotifyMessage}>
+        <p>Please make sure you have spotify open, play any song for one sec and try play your track in our UI</p>
       </article>
     )
   }
@@ -88,30 +101,44 @@ const Player = () => {
     return null
   }
 
+  if (isMobile && showMobilePlayer) {
+    return (
+      <MobilePlayerControls
+        onHide={() => setShowMobilePlayer(false)}
+        track={currentTrack.data}
+        isPlaying={playerState.data}
+        onChangeState={handleChangeState}
+      />
+    )
+  }
+
   return (
-    <article className={styles.PlayerContainer} onClick={isMobile ? () => console.log('OPEN PLAYER DETAILS SCREEN') : () => { }}>
+    <article className={`${styles.PlayerContainer} background-theme`}>
       <div className={styles.Player}>
-        <div className={styles.PlayerTrackInfoSection} >
-          {currentTrack.data?.item && (
-            <CurrentTrack track={currentTrack.data.item} />
-          )}
+        <div className={styles.PlayerData} onClick={isMobile ? handlePlayerClick : () => { }}>
+          <section className={styles.PlayerDataTrackInfoSection} >
+            {currentTrack.data?.item && (
+              <CurrentTrack track={currentTrack.data.item} />
+            )}
+          </section>
+          <section className={styles.PlayerDataProgressBarSection}>
+            <ProgressBar
+              durationInMs={currentTrack.data?.item?.duration_ms ?? 0}
+              progressInMs={currentTrack.data?.progress_ms ?? 0}
+            />
+          </section>
+          <section className={styles.PlayerDataControlsSection}>
+            <PlayerControls
+              isPlaying={playerState.data}
+              onChangeState={handleChangeState}
+            />
+          </section>
         </div>
-        <div className={styles.PlayerProgressBarSection}>
-          <ProgressBar
-            durationInMs={currentTrack.data?.item?.duration_ms ?? 0}
-            progressInMs={currentTrack.data?.progress_ms ?? 0}
-          />
-        </div>
-        <div className={styles.PlayerControlsSection}>
-          <PlayerControls
-            isPlaying={playerState.data}
-            onChangeState={HandleChangeState}
-          />
-        </div>
-        <div className={styles.SimpleControl}>
-          {playerState.data ? <PiPauseFill onClick={HandleChangeState} /> : <PiPlayFill onClick={HandleChangeState} />}
+        <div className={`${styles.SimpleControl} color-theme`} onClick={handleChangeState}>
+          {playerState.data ? <PiPauseFill /> : <PiPlayFill />}
         </div>
       </div>
+      <IoIosArrowUp className={styles.ShowDetails} onClick={handlePlayerClick} />
     </article>
   )
 

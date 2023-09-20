@@ -4,37 +4,46 @@
   position: fixed;
   bottom: 0;
   z-index: 1;
-  height: 70px;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: $light-grey;
   cursor: pointer;
   color: $black;
+
+  svg {
+    width: 20px;
+    margin: 3px;
+  }
 }
 
 .Player {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: row;
   width: 100%;
-  padding: 0 16px 0 16px;
+  align-items: center;
+  justify-content: center;
 
-  &TrackInfoSection {
-    min-width: 300px;
-  }
 
-  &ProgressBarSection {
-    display: none;
-  }
+  &Data {
+    display: flex;
+    width: 100%;
+    padding: 12px 30px;
 
-  &ControlsSection {
-    display: none;
+    &TrackInfoSection {
+      min-width: 300px;
+    }
+
+    &ProgressBarSection {
+      display: none;
+    }
+
+    &ControlsSection {
+      display: none;
+    }
   }
 }
 
 .SimpleControl {
   display: inline;
+  padding-right: 30px;
 
   svg {
     height: 30px;
@@ -42,38 +51,75 @@
   }
 }
 
+.OpenSpotifyMessage {
+  position: sticky;
+  top: 80px;
+  z-index: 1;
+  background: $primary;
+  font-size: 1.8rem;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  margin-bottom: 20px;
+  padding: 16px
+}
+
+.ShowDetails {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline;
+  color: $dark-grey;
+}
+
 @include for-size(m) {
   .PlayerContainer {
-    height: 100px;
+    display: flex;
     cursor: default;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: auto;
+      margin: 0;
+    }
   }
 
   .Player {
+    padding: 0;
 
-    justify-content: space-between;
-    color: $black;
-    height: 100%;
-    width: 900px;
-    align-items: center;
-    padding: 20px;
+    &Data {
+      justify-content: space-between;
+      color: $black;
+      height: 100%;
+      width: 900px;
+      align-items: center;
+      padding: 12px 30px;
 
-    &TrackInfoSection {
-      width: 300px;
-    }
+      &TrackInfoSection {
+        width: 300px;
+      }
 
-    &ProgressBarSection {
-      display: inline;
-      width: 100%;
-      padding: 0 30px 0 30px;
-    }
+      &ProgressBarSection {
+        display: inline;
+        width: 100%;
+        padding: 0 30px 0 30px;
+      }
 
-    &ControlsSection {
-      display: inline;
-      width: 200px;
+      &ControlsSection {
+        display: inline;
+        width: 200px;
+      }
     }
   }
 
   .SimpleControl {
+    display: none;
+  }
+
+  .ShowDetails {
     display: none;
   }
 }

@@ -12,7 +12,7 @@ interface Props {
 const PlayerControls = ({ isPlaying, onChangeState }: Props) => {
 
   return (
-    <section className={styles.PlayerControls}>
+    <article className={styles.PlayerControls}>
       {/*<div>
         <BsShuffle />
         </div>*/}
@@ -21,9 +21,9 @@ const PlayerControls = ({ isPlaying, onChangeState }: Props) => {
       ) : (
         <BsFillPlayCircleFill className={styles.PlayerControlsPlay} onClick={onChangeState} />
       )}
-      <BsRewindCircleFill className={styles.PlayerControlsNextPrevious} />
-      <BsFastForwardCircleFill className={styles.PlayerControlsNextPrevious} />
-    </section>
+      <BsRewindCircleFill className={`${styles.PlayerControlsNextPrevious} color-theme`} />
+      <BsFastForwardCircleFill className={`${styles.PlayerControlsNextPrevious} color-theme`} />
+    </article>
   )
 }
 

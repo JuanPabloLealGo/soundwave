@@ -29,7 +29,7 @@ const playerSlice = createSlice({
     ) => {
       state.currentUris = action.payload
     },
-    resetCurrentUris: (state: PlayerStateInterface,) => {
+    resetCurrentUris: (state: PlayerStateInterface) => {
       state.currentUris = null
     }
   },

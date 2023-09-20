@@ -9,13 +9,13 @@ interface Props {
 
 const CurrentTrack = ({ track }: Props) => {
   return (
-    <section className={styles.CurrentTrack}>
+    <article className={styles.CurrentTrack}>
       <img src={track.album.images[0].url} />
       <div className={styles.CurrentTrackInfo}>
-        <p className={styles.CurrentTrackInfoTitle}>{track.name}</p>
+        <p className={`${styles.CurrentTrackInfoTitle} color-theme`}>{track.name}</p>
         <p className={styles.CurrentTrackInfoArtists}>{getArtists(track.artists)}</p>
       </div>
-    </section>
+    </article>
   )
 }
 
