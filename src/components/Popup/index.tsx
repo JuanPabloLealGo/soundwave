@@ -1,16 +1,17 @@
 import styles from "./Popup.module.scss"
 
 interface Props {
-  onClick: React.MouseEventHandler<HTMLButtonElement>
   children: React.ReactNode | string
 }
 
-const Popup = ({ children, onClick }: Props) => {
+const Popup = ({ children }: Props) => {
 
   return (
-    <div className={styles.ErrorMessage}>
-      <div className={styles.ErrorMessageBackdrop} />
-      {children}
+    <div className={styles.Popup}>
+      <div className={styles.PopupBackdrop} />
+      <div className={`${styles.PopupBody} background-theme`} >
+        {children}
+      </div>
     </div>
   );
 }

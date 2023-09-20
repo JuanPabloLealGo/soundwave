@@ -10,12 +10,10 @@ import ProgressBar from '../ProgressBar'
 import { PiPlayFill, PiPauseFill } from "react-icons/pi"
 import MobilePlayerControls from '../MobilePlayerControls'
 import { IoIosArrowUp } from "react-icons/io"
+import Popup from '../Popup'
 
-interface Props {
-  onMobilePlayerChange: (isVisible: boolean) => void
-}
 
-const Player = ({ onMobilePlayerChange }: Props) => {
+const Player = () => {
 
   const dispatch = useAppDispatch()
 
@@ -65,10 +63,6 @@ const Player = ({ onMobilePlayerChange }: Props) => {
     }
   }, [dispatch, isAuthenticated, currentUris])
 
-  useEffect(() => {
-    onMobilePlayerChange(isMobile && showMobilePlayer)
-  }, [isMobile, showMobilePlayer, onMobilePlayerChange])
-
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
   };
@@ -101,47 +95,48 @@ const Player = ({ onMobilePlayerChange }: Props) => {
     return null
   }
 
-  if (isMobile && showMobilePlayer) {
-    return (
-      <MobilePlayerControls
-        onHide={() => setShowMobilePlayer(false)}
-        track={currentTrack.data}
-        isPlaying={playerState.data}
-        onChangeState={handleChangeState}
-      />
-    )
-  }
-
   return (
-    <article className={`${styles.PlayerContainer} background-theme`}>
-      <div className={styles.Player}>
-        <div className={styles.PlayerData} onClick={isMobile ? handlePlayerClick : () => { }}>
-          <section className={styles.PlayerDataTrackInfoSection} >
-            {currentTrack.data?.item && (
-              <CurrentTrack track={currentTrack.data.item} />
-            )}
-          </section>
-          <section className={styles.PlayerDataProgressBarSection}>
-            <ProgressBar
-              durationInMs={currentTrack.data?.item?.duration_ms ?? 0}
-              progressInMs={currentTrack.data?.progress_ms ?? 0}
-            />
-          </section>
-          <section className={styles.PlayerDataControlsSection}>
-            <PlayerControls
-              isPlaying={playerState.data}
-              onChangeState={handleChangeState}
-            />
-          </section>
-        </div>
-        <div className={`${styles.SimpleControl} color-theme`} onClick={handleChangeState}>
-          {playerState.data ? <PiPauseFill /> : <PiPlayFill />}
-        </div>
-      </div>
-      <IoIosArrowUp className={styles.ShowDetails} onClick={handlePlayerClick} />
-    </article>
+    <>
+      {isMobile && showMobilePlayer ? (
+        <Popup>
+          <MobilePlayerControls
+            onHide={() => setShowMobilePlayer(false)}
+            track={currentTrack.data}
+            isPlaying={playerState.data}
+            onChangeState={handleChangeState}
+          />
+        </Popup>
+      ) : (
+        <article className={`${styles.PlayerContainer} background-theme`}>
+          <div className={styles.Player}>
+            <div className={styles.PlayerData} onClick={isMobile ? handlePlayerClick : () => { }}>
+              <section className={styles.PlayerDataTrackInfoSection} >
+                {currentTrack.data?.item && (
+                  <CurrentTrack track={currentTrack.data.item} />
+                )}
+              </section>
+              <section className={styles.PlayerDataProgressBarSection}>
+                <ProgressBar
+                  durationInMs={currentTrack.data?.item?.duration_ms ?? 0}
+                  progressInMs={currentTrack.data?.progress_ms ?? 0}
+                />
+              </section>
+              <section className={styles.PlayerDataControlsSection}>
+                <PlayerControls
+                  isPlaying={playerState.data}
+                  onChangeState={handleChangeState}
+                />
+              </section>
+            </div>
+            <div className={`${styles.SimpleControl} color-theme`} onClick={handleChangeState}>
+              {playerState.data ? <PiPauseFill /> : <PiPlayFill />}
+            </div>
+          </div>
+          <IoIosArrowUp className={styles.ShowDetails} onClick={handlePlayerClick} />
+        </article>
+      )}
+    </>
   )
-
 }
 
 export default Player

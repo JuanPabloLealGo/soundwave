@@ -9,27 +9,18 @@ import ErrorMessage from "../ErrorMessage"
 import { setErrorMessage } from "../../redux-store/reducers/uiSlice"
 import { logout } from "../../redux-store/reducers/authSlice"
 import Player from "../Player"
-import { useState } from "react"
 
 const MainLayout = () => {
   const dispatch = useAppDispatch()
   const authError = useAuth()
   const { errorMessage } = useAppSelector(uiSelector)
   const error = authError || errorMessage
-  const [isMobilePlayer, setIsMobilePLayer] = useState<boolean>(false)
 
   const clickHandler = () => {
     dispatch(setErrorMessage(null))
     dispatch(logout())
   }
 
-  const handleMobilePlayerChange = (isVisible: boolean) => {
-    setIsMobilePLayer(isVisible)
-  }
-
-  const screenStyle = {
-    'minHeight': 'calc(100vh + 180px)',
-  }
 
   return (
     <>
@@ -39,10 +30,10 @@ const MainLayout = () => {
           onClick={clickHandler}
         />
       )}
+      <Player />
       <NavBar />
-      <main className={styles.MainLayoutContent} style={screenStyle}>
-        <Player onMobilePlayerChange={handleMobilePlayerChange} />
-        {!isMobilePlayer && <Outlet />}
+      <main className={styles.MainLayoutContent}>
+        <Outlet />
       </main>
       <Footer />
     </>
