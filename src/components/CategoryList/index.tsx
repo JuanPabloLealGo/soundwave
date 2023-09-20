@@ -51,7 +51,14 @@ const CategoryList = () => {
       {categoryListIsLoading && <SkeletonElement type={SkeletonTypes.CategoryList} />}
       {!isLoading && hasNextPage && (
         <section className={styles.LoadMoreButtonContainer}>
-          <Button onClick={handleLoadMoreClick} type={ButtonType.Filled} label='Load more' icon={<FaArrowDown />} />
+          <Button
+            className={styles.LoadMoreButton}
+            type={ButtonType.Filled}
+            onClick={handleLoadMoreClick}
+          >
+            <span>Load more</span>
+            <FaArrowDown />
+          </Button>
         </section>
       )}
     </article>

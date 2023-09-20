@@ -3,9 +3,14 @@
 .MainLayout {
   &Content {
     grid-column: 1/-1;
-    min-height: calc(100vh - 300px);
+    min-height: calc(100vh - 400px);
     padding-top: 80px;
     position: relative;
+
+    @include for-size(m) {
+      min-height: calc(100vh - 300px);
+    }
+
   }
 }
 

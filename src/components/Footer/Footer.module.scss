@@ -3,7 +3,7 @@
 .Footer {
   align-items: center;
   display: flex;
-  height: 300px;
+  height: 400px;
   justify-content: center;
   text-align: center;
   width: 100%;
@@ -37,6 +37,9 @@
   }
 
   @include for-size(m) {
+
+    height: 300px;
+
     &Container {
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr;

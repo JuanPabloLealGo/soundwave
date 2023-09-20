@@ -13,14 +13,19 @@
   }
 
   &Body {
+    display: flex;
+    justify-content: center;
     border-radius: 15px;
     position: fixed;
-    top: 100px;
+    top: 60px;
     z-index: 101;
     max-height: calc(100vh - 100px);
     overflow-y: scroll;
+    margin: 30px;
+
+    @include for-size(m) {
+      top: 100px;
+
+    }
   }
-
-  @include for-size(m) {}
-
 }

@@ -89,16 +89,19 @@ const NavBar = () => {
             )
           })}
           <Button
+            className={styles.NavBarThemeButton}
             onClick={onToggleThemeHandler}
             type={ButtonType.Text}
-            icon={isDarkTheme ? <IoMdSunny /> : <BiSolidMoon />}
-          />
+          >
+            {isDarkTheme ? <IoMdSunny /> : <BiSolidMoon />}
+          </Button>
           <Button
             className={styles.NavBarButton}
-            label={isAuthenticated ? 'Sign Out' : 'Sign In'}
             onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
             type={ButtonType.Outlined}
-          />
+          >
+            {isAuthenticated ? 'Sign Out' : 'Sign In'}
+          </Button>
         </ul>
         <button
           className={`color-theme ${styles.NavBarMenuIcon}`}

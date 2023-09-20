@@ -8,6 +8,7 @@
   align-items: center;
   max-width: 350px;
   padding-top: 12px;
+  padding-bottom: 30px;
 
   &Header {
     display: flex;
@@ -47,7 +48,7 @@
   }
 
   &ProgressBar {
-    margin: 20px 0 50px 0;
+    margin: 20px 0 40px 0;
   }
 
 }
