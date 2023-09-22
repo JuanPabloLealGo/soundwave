@@ -1,4 +1,4 @@
-import { PlayerStateEnum } from "../enums/PlayerStateEnum"
+import { PlayerControlType } from "../enums/PlayerControlType"
 import { BACKEND_URL } from "../environment/appEnvironment"
 import api from "./apiClient"
 
@@ -26,7 +26,12 @@ export const getCurrentPlayingTrack = async () => {
   }
 }
 
-export const setPlayerState = async (playerState: PlayerStateEnum, uri: string | string[], position?: null | number, progress?: null | number) => {
+export const setPlayerState = async (
+  type: PlayerControlType,
+  uri: string | string[],
+  position?: null | number,
+  progress?: null | number,
+) => {
 
   const isArray = Array.isArray(uri)
 
@@ -41,7 +46,7 @@ export const setPlayerState = async (playerState: PlayerStateEnum, uri: string |
   try {
     const response = await api({
       method: 'PUT',
-      url: `${BACKEND_URL}/me/player/${playerState}`,
+      url: `${BACKEND_URL}/me/player/${type}`,
       data: payload
     })
     return response
@@ -49,3 +54,15 @@ export const setPlayerState = async (playerState: PlayerStateEnum, uri: string |
     throw (error)
   }
 }
+
+export const skipTrack = async (type: PlayerControlType) => {
+  try {
+    const response = await api({
+      method: 'POST',
+      url: `${BACKEND_URL}/me/player/${type}`,
+    })
+    return response
+  } catch (error) {
+    throw (error)
+  }
+} 

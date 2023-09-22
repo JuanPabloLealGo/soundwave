@@ -13,7 +13,7 @@ import { authSelector, playerSelector, uiSelector } from '../../redux-store/sele
 import Button, { ButtonType } from '../Button'
 import { toogleTheme } from '../../redux-store/reducers/uiSlice'
 import { changePlayerState } from '../../redux-store/actions/playerActions'
-import { PlayerStateEnum } from '../../enums/PlayerStateEnum'
+import { PlayerControlType } from '../../enums/PlayerControlType'
 import { resetCurrentUri } from '../../redux-store/reducers/playerSlice'
 
 import styles from './NavBar.module.scss'
@@ -33,7 +33,7 @@ const NavBar = () => {
   const onLogoutHandler = () => {
     if (currentTrack.data) {
       dispatch(changePlayerState({
-        playerState: PlayerStateEnum.pause,
+        playerState: PlayerControlType.pause,
         uri: '',
       })).then(() => {
         dispatch(resetCurrentUri())

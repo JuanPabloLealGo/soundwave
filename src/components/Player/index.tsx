@@ -9,8 +9,8 @@ import Popup from "../Popup"
 import ProgressBar from "../ProgressBar"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
 import { authSelector, playerSelector } from "../../redux-store/selectors"
-import { changePlayerState, getCurrentTrack } from "../../redux-store/actions/playerActions"
-import { PlayerStateEnum } from "../../enums/PlayerStateEnum"
+import { changePlayerState, getCurrentTrack, skipCurrentTrack } from "../../redux-store/actions/playerActions"
+import { PlayerControlType } from "../../enums/PlayerControlType"
 
 import styles from "./Player.module.scss"
 
@@ -33,10 +33,10 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
   )
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', resizeHandler)
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', resizeHandler)
     };
   }, [])
 
@@ -64,22 +64,26 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
     onShowSpotifyMessage((isAuthenticated && currentUri && !currentTrack.data) || false)
   }, [isAuthenticated, currentUri, currentTrack, onShowSpotifyMessage])
 
-  const handleResize = () => {
+  const resizeHandler = () => {
     setScreenWidth(window.innerWidth);
   };
 
-  const handlePlayerClick = () => setShowMobilePlayer(true)
+  const playerClickHandler = () => setShowMobilePlayer(true)
 
-  const handleChangeState = () => {
-    const state = playerState.data ? PlayerStateEnum.pause : PlayerStateEnum.play
+  const changePlayerStateHandler = () => {
+    const state = playerState.data ? PlayerControlType.pause : PlayerControlType.play
 
     if (currentTrack.data && currentTrack.data.item && currentUri)
       dispatch(changePlayerState({
-        playerState: state,
+        type: state,
         uri: currentUri,
         position: currentUri.indexOf(currentTrack.data.item.uri),
         progress: currentTrack.data?.progress_ms
-      }))
+      })).then(() => dispatch(getCurrentTrack()))
+  }
+
+  const skipTrackHandler = (type: PlayerControlType) => {
+    dispatch(skipCurrentTrack(type)).then(() => dispatch(getCurrentTrack()))
   }
 
   if (!isAuthenticated || !currentTrack.data || !currentUri) {
@@ -94,13 +98,14 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
             onHide={() => setShowMobilePlayer(false)}
             track={currentTrack.data}
             isPlaying={playerState.data}
-            onChangeState={handleChangeState}
+            onChangeState={changePlayerStateHandler}
+            onSkipTrack={skipTrackHandler}
           />
         </Popup>
       ) : (
         <article className={`${styles.PlayerContainer} background-theme`}>
           <div className={styles.Player}>
-            <div className={styles.PlayerData} onClick={isMobile ? handlePlayerClick : () => { }}>
+            <div className={styles.PlayerData} onClick={isMobile ? playerClickHandler : () => { }}>
               <section className={styles.PlayerDataTrackInfoSection} >
                 {currentTrack.data?.item && (
                   <CurrentTrack track={currentTrack.data.item} />
@@ -115,15 +120,16 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
               <section className={styles.PlayerDataControlsSection}>
                 <PlayerControls
                   isPlaying={playerState.data}
-                  onChangeState={handleChangeState}
+                  onChangeState={changePlayerStateHandler}
+                  onSkipTrack={skipTrackHandler}
                 />
               </section>
             </div>
-            <button className={`${styles.SimpleControl} color-theme`} onClick={handleChangeState}>
+            <button className={`${styles.SimpleControl} color-theme`} onClick={changePlayerStateHandler}>
               {playerState.data ? <PiPauseFill /> : <PiPlayFill />}
             </button>
           </div>
-          <IoIosArrowUp className={styles.ShowDetails} onClick={handlePlayerClick} />
+          <IoIosArrowUp className={styles.ShowDetails} onClick={playerClickHandler} />
         </article>
       )}
     </>

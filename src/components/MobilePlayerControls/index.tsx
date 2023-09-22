@@ -6,15 +6,17 @@ import PlayerInterface from "../../interfaces/PlayerInterface"
 import { getArtists } from "../../utils"
 
 import styles from "./MobilePlayerControls.module.scss"
+import { PlayerControlType } from "../../enums/PlayerControlType"
 
 interface Props {
   track: null | PlayerInterface
   isPlaying: boolean
   onHide: () => void
   onChangeState: () => void
+  onSkipTrack: (type: PlayerControlType) => void
 }
 
-const MobilePlayerControls = ({ track, isPlaying, onHide, onChangeState }: Props) => {
+const MobilePlayerControls = ({ track, isPlaying, onHide, onChangeState, onSkipTrack }: Props) => {
 
   if (!track?.item) {
     return <h1>Empty</h1>
@@ -41,6 +43,7 @@ const MobilePlayerControls = ({ track, isPlaying, onHide, onChangeState }: Props
           <PlayerControls
             isPlaying={isPlaying}
             onChangeState={onChangeState}
+            onSkipTrack={onSkipTrack}
           />
         </section>
       </div>

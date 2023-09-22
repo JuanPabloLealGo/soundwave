@@ -8,7 +8,7 @@ import { PaginationEnum } from "../../enums/PaginationEnum"
 import styles from "./Tracklist.module.scss"
 import { updateCurrentUri } from "../../redux-store/reducers/playerSlice"
 import { changePlayerState, getCurrentTrack } from "../../redux-store/actions/playerActions"
-import { PlayerStateEnum } from "../../enums/PlayerStateEnum"
+import { PlayerControlType } from "../../enums/PlayerControlType"
 
 interface Props {
   playlistId?: string
@@ -43,7 +43,7 @@ const Tracklist = ({ playlistId }: Props) => {
       dispatch(updateCurrentUri(uris))
 
       dispatch(changePlayerState({
-        playerState: PlayerStateEnum.play,
+        type: PlayerControlType.play,
         uri: uris,
         position: position,
         progress: 0,
