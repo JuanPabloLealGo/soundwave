@@ -21,10 +21,9 @@ interface Props {
 const Player = ({ onShowSpotifyMessage }: Props) => {
 
   const dispatch = useAppDispatch()
-
   const { data: isAuthenticated } = useAppSelector(authSelector)
-  const { currentTrack, currentUris, playerState } = useAppSelector(playerSelector)
-  const isPlaying = currentTrack.data && currentUris
+  const { currentTrack, currentUri, playerState } = useAppSelector(playerSelector)
+  const isPlaying = currentTrack.data && currentUri
   const [showMobilePlayer, setShowMobilePlayer] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState(false)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
@@ -62,20 +61,8 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
   }, [isAuthenticated, isPlaying, updateCurrentTrack])
 
   useEffect(() => {
-    if (isAuthenticated && currentUris) {
-      dispatch(changePlayerState({
-        playerState: PlayerStateEnum.play,
-        uri: currentUris.uris,
-        position: currentUris.position,
-      }))
-        .then(() => updateCurrentTrack())
-    }
-
-  }, [dispatch, isAuthenticated, currentUris, updateCurrentTrack])
-
-  useEffect(() => {
-    onShowSpotifyMessage((isAuthenticated && currentUris && !currentTrack.data) || false)
-  }, [isAuthenticated, currentUris, currentTrack, onShowSpotifyMessage])
+    onShowSpotifyMessage((isAuthenticated && currentUri && !currentTrack.data) || false)
+  }, [isAuthenticated, currentUri, currentTrack, onShowSpotifyMessage])
 
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
@@ -86,16 +73,16 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
   const handleChangeState = () => {
     const state = playerState.data ? PlayerStateEnum.pause : PlayerStateEnum.play
 
-    if (currentTrack.data && currentTrack.data.item && currentUris)
+    if (currentTrack.data && currentTrack.data.item && currentUri)
       dispatch(changePlayerState({
         playerState: state,
-        uri: currentUris.uris,
-        position: currentUris.position,
+        uri: currentUri,
+        position: currentUri.indexOf(currentTrack.data.item.uri),
         progress: currentTrack.data?.progress_ms
       }))
   }
 
-  if (!isAuthenticated || !currentTrack.data || !currentUris) {
+  if (!isAuthenticated || !currentTrack.data || !currentUri) {
     return null
   }
 

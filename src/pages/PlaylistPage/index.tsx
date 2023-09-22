@@ -49,7 +49,7 @@ const PlaylistPage = () => {
         </div>
       </div>
       <div className={styles.PlaylistItems}>
-        <Tracklist playlistId={playlistId} playlistUri={data?.uri} />
+        <Tracklist playlistId={playlistId} />
       </div>
     </div>
   )

@@ -7,7 +7,7 @@ import { ErrorType } from "../../types"
 const initialState = {
   data: null,
   isLoading: false,
-  error: null
+  error: null,
 } as TrackStateInterface
 
 const tracksSlice = createSlice({

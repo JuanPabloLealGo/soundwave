@@ -20,8 +20,6 @@ const MainLayout = () => {
   const [showOpenSpotifyMessage, setShowOpenSpotifyMessage] = useState<boolean>(false)
   const error = authError || errorMessage
 
-  //const error = 'There is a complicated error and you will need to go out of this site, Please logout right now'
-
   const clickHandler = () => {
     dispatch(setErrorMessage(null))
     dispatch(logout())

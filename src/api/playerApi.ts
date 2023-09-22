@@ -28,17 +28,15 @@ export const getCurrentPlayingTrack = async () => {
 
 export const setPlayerState = async (playerState: PlayerStateEnum, uri: string | string[], position?: null | number, progress?: null | number) => {
 
-  const isTrack = uri.includes("track");
+  const isArray = Array.isArray(uri)
 
-  const payload = isTrack
-    ? { 'uris': [uri] }
-    : {
-      'context_uri': uri,
-      'offset': {
-        "position": position
-      },
-      "position_ms": progress
-    }
+  const payload = {
+    'uris': isArray ? uri : [uri],
+    'offset': {
+      "position": position
+    },
+    "position_ms": progress
+  }
 
   try {
     const response = await api({

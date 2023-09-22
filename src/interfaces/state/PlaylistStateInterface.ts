@@ -1,4 +1,3 @@
-import CurrentUrisInterface from "../CurrentUrisInterface";
 import PlaylistInterface from "../PlaylistInterface";
 import CommonStateInterface from "./CommonStateInterface";
 

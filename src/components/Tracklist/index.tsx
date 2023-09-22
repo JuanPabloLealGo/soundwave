@@ -6,14 +6,15 @@ import { getTrackPage } from "../../redux-store/actions/trackActions"
 import { PaginationEnum } from "../../enums/PaginationEnum"
 
 import styles from "./Tracklist.module.scss"
-import { updateCurrentUris } from "../../redux-store/reducers/playerSlice"
+import { updateCurrentUri } from "../../redux-store/reducers/playerSlice"
+import { changePlayerState, getCurrentTrack } from "../../redux-store/actions/playerActions"
+import { PlayerStateEnum } from "../../enums/PlayerStateEnum"
 
 interface Props {
   playlistId?: string
-  playlistUri?: string
 }
 
-const Tracklist = ({ playlistId, playlistUri }: Props) => {
+const Tracklist = ({ playlistId }: Props) => {
 
   const dispatch = useAppDispatch()
   const [currentOffset, setCurrentOffset] = useState(0)
@@ -37,8 +38,16 @@ const Tracklist = ({ playlistId, playlistUri }: Props) => {
   }
 
   const handleTrackSelect = (position: number) => {
-    if (playlistUri) {
-      dispatch(updateCurrentUris({ uris: playlistUri, position }))
+    if (data?.items) {
+      const uris = data.items.map((item) => item.track.uri)
+      dispatch(updateCurrentUri(uris))
+
+      dispatch(changePlayerState({
+        playerState: PlayerStateEnum.play,
+        uri: uris,
+        position: position,
+        progress: 0,
+      })).then(() => dispatch(getCurrentTrack()))
     }
   }
 

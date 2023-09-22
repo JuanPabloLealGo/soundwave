@@ -3,7 +3,6 @@ import PlayerStateInterface from "../../interfaces/state/PlayerStateInterface";
 import { changePlayerState, getCurrentTrack } from "../actions/playerActions";
 import PlayerInterface from "../../interfaces/PlayerInterface";
 import { ErrorType } from "../../types";
-import CurrentUrisInterface from "../../interfaces/CurrentUrisInterface";
 
 const initialState = {
   currentTrack: {
@@ -16,21 +15,21 @@ const initialState = {
     isLoading: false,
     error: null,
   },
-  currentUris: null,
+  currentUri: null,
 } as PlayerStateInterface
 
 const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    updateCurrentUris: (
+    updateCurrentUri: (
       state: PlayerStateInterface,
-      action: PayloadAction<CurrentUrisInterface>
+      action: PayloadAction<null | string | string[]>
     ) => {
-      state.currentUris = action.payload
+      state.currentUri = action.payload
     },
-    resetCurrentUris: (state: PlayerStateInterface) => {
-      state.currentUris = null
+    resetCurrentUri: (state: PlayerStateInterface) => {
+      state.currentUri = null
     }
   },
   extraReducers: (builder) => {
@@ -61,6 +60,6 @@ const playerSlice = createSlice({
 
 const { actions, reducer } = playerSlice
 
-export const { updateCurrentUris, resetCurrentUris } = actions
+export const { updateCurrentUri, resetCurrentUri } = actions
 
 export default reducer
