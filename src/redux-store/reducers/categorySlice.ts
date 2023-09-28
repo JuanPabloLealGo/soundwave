@@ -20,7 +20,7 @@ const categorySlice = createSlice({
         state.isLoading = true
       })
       .addCase(getCategoryPage.fulfilled, (state, action: PayloadAction<CategoryPageInterface>) => {
-        const isLoadMore = action.payload.offset > 0
+        const isLoadMore = action.payload.offset && action.payload.offset > 0
         state.isLoading = false
         state.data = {
           ...action.payload,

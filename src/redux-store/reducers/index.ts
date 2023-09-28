@@ -13,7 +13,7 @@ import playerReducer from "./playerSlice"
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'player', 'ui'] // only these will be persisted
+  whitelist: ['auth', 'player', 'ui', 'track'] // only these will be persisted
 }
 
 const rootReducer = combineReducers<AppStateInterface>({

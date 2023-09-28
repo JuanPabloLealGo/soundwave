@@ -9,7 +9,7 @@ import Popup from "../Popup"
 import ProgressBar from "../ProgressBar"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
 import { authSelector, playerSelector } from "../../redux-store/selectors"
-import { changePlayerState, getCurrentTrack, skipCurrentTrack } from "../../redux-store/actions/playerActions"
+import { changePlayerState, getPlayerState, skipCurrentTrack } from "../../redux-store/actions/playerActions"
 import { PlayerControlType } from "../../enums/PlayerControlType"
 
 import styles from "./Player.module.scss"
@@ -19,18 +19,20 @@ interface Props {
 }
 
 const Player = ({ onShowSpotifyMessage }: Props) => {
-
   const dispatch = useAppDispatch()
   const { data: isAuthenticated } = useAppSelector(authSelector)
-  const { currentTrack, currentUri, playerState } = useAppSelector(playerSelector)
-  const isPlaying = currentTrack.data && currentUri
+  const { currentUri, playerStatus } = useAppSelector(playerSelector)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
   const [showMobilePlayer, setShowMobilePlayer] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const canPlay = playerStatus.data && currentUri
 
-  const updateCurrentTrack = useCallback(() =>
-    dispatch(getCurrentTrack()), [dispatch]
-  )
+  console.log('playerStatus: ', playerStatus.data)
+  console.log('currentUri: ', currentUri)
+
+  useEffect(() => {
+    onShowSpotifyMessage(!canPlay)
+  }, [canPlay])
 
   useEffect(() => {
     window.addEventListener('resize', resizeHandler)
@@ -48,9 +50,9 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
 
-    if (isAuthenticated && isPlaying) {
-      updateCurrentTrack()
-      interval = setInterval(() => updateCurrentTrack(), 1000)
+    if (isAuthenticated && canPlay) {
+      updatePlayerStatus()
+      interval = setInterval(() => updatePlayerStatus(), 1000)
     }
 
     return () => {
@@ -58,35 +60,35 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
         clearInterval(interval);
       }
     };
-  }, [isAuthenticated, isPlaying, updateCurrentTrack])
-
-  useEffect(() => {
-    onShowSpotifyMessage((isAuthenticated && currentUri && !currentTrack.data) || false)
-  }, [isAuthenticated, currentUri, currentTrack, onShowSpotifyMessage])
+  }, [isAuthenticated, canPlay])
 
   const resizeHandler = () => {
     setScreenWidth(window.innerWidth);
   };
 
+  const updatePlayerStatus = useCallback(() => {
+    dispatch(getPlayerState())
+  }, [dispatch])
+
   const playerClickHandler = () => setShowMobilePlayer(true)
 
   const changePlayerStateHandler = () => {
-    const state = playerState.data ? PlayerControlType.pause : PlayerControlType.play
+    const state = playerStatus.data?.is_playing ? PlayerControlType.pause : PlayerControlType.play
 
-    if (currentTrack.data && currentTrack.data.item && currentUri)
+    if (playerStatus.data && playerStatus.data.item && currentUri)
       dispatch(changePlayerState({
         type: state,
         uri: currentUri,
-        position: currentUri.indexOf(currentTrack.data.item.uri),
-        progress: currentTrack.data?.progress_ms
-      })).then(() => dispatch(getCurrentTrack()))
+        position: currentUri.indexOf(playerStatus.data.item.uri),
+        progress: playerStatus.data?.progress_ms
+      })).then(() => updatePlayerStatus())
   }
 
   const skipTrackHandler = (type: PlayerControlType) => {
-    dispatch(skipCurrentTrack(type)).then(() => dispatch(getCurrentTrack()))
+    dispatch(skipCurrentTrack(type)).then(() => updatePlayerStatus())
   }
 
-  if (!isAuthenticated || !currentTrack.data || !currentUri) {
+  if (!canPlay) {
     return null
   }
 
@@ -96,8 +98,8 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
         <Popup>
           <MobilePlayerControls
             onHide={() => setShowMobilePlayer(false)}
-            track={currentTrack.data}
-            isPlaying={playerState.data}
+            track={playerStatus.data}
+            isPlaying={playerStatus.data?.is_playing || false}
             onChangeState={changePlayerStateHandler}
             onSkipTrack={skipTrackHandler}
           />
@@ -107,26 +109,26 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
           <div className={styles.Player}>
             <div className={styles.PlayerData} onClick={isMobile ? playerClickHandler : () => { }}>
               <section className={styles.PlayerDataTrackInfoSection} >
-                {currentTrack.data?.item && (
-                  <CurrentTrack track={currentTrack.data.item} />
+                {playerStatus.data?.item && (
+                  <CurrentTrack track={playerStatus.data.item} />
                 )}
               </section>
               <section className={styles.PlayerDataProgressBarSection}>
                 <ProgressBar
-                  durationInMs={currentTrack.data?.item?.duration_ms ?? 0}
-                  progressInMs={currentTrack.data?.progress_ms ?? 0}
+                  track={playerStatus.data!.item}
+                  progressInMs={playerStatus.data!.progress_ms}
                 />
               </section>
               <section className={styles.PlayerDataControlsSection}>
                 <PlayerControls
-                  isPlaying={playerState.data}
+                  isPlaying={playerStatus.data?.is_playing || false}
                   onChangeState={changePlayerStateHandler}
                   onSkipTrack={skipTrackHandler}
                 />
               </section>
             </div>
             <button className={`${styles.SimpleControl} color-theme`} onClick={changePlayerStateHandler}>
-              {playerState.data ? <PiPauseFill /> : <PiPlayFill />}
+              {playerStatus.data ? <PiPauseFill /> : <PiPlayFill />}
             </button>
           </div>
           <IoIosArrowUp className={styles.ShowDetails} onClick={playerClickHandler} />

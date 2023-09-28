@@ -33,7 +33,7 @@ const NavBar = () => {
   const onLogoutHandler = () => {
     if (currentTrack.data) {
       dispatch(changePlayerState({
-        playerState: PlayerControlType.pause,
+        type: PlayerControlType.pause,
         uri: '',
       })).then(() => {
         dispatch(resetCurrentUri())

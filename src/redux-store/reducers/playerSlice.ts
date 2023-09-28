@@ -1,21 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import PlayerStateInterface from "../../interfaces/state/PlayerStateInterface";
-import { changePlayerState, getCurrentTrack, skipCurrentTrack } from "../actions/playerActions";
-import PlayerInterface from "../../interfaces/PlayerInterface";
+import { getPlayerState, skipCurrentTrack } from "../actions/playerActions";
 import { ErrorType } from "../../types";
+import PlayerStatusDataInterface from "../../interfaces/PlayerStatusDataInterface";
 
 const initialState = {
-  currentTrack: {
+  currentUri: null,
+  playerStatus: {
     data: null,
     isLoading: false,
     error: null,
-  },
-  playerState: {
-    data: false,
-    isLoading: false,
-    error: null,
-  },
-  currentUri: null,
+  }
 } as PlayerStateInterface
 
 const playerSlice = createSlice({
@@ -34,37 +29,21 @@ const playerSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCurrentTrack.pending, (state: PlayerStateInterface,) => {
-        state.currentTrack.isLoading = true
-      })
-      .addCase(getCurrentTrack.fulfilled, (state: PlayerStateInterface, { payload }: PayloadAction<PlayerInterface>) => {
-        state.currentTrack.isLoading = false
-        state.currentTrack.data = typeof payload === 'string' ? null : payload
-        state.playerState.data = payload.is_playing
-      })
-      .addCase(getCurrentTrack.rejected, (state: PlayerStateInterface, action: PayloadAction<ErrorType>) => {
-        state.playerState.isLoading = false
-        state.playerState.error = action.payload
-      })
-
-      .addCase(changePlayerState.pending, (state: PlayerStateInterface,) => {
-        state.playerState.isLoading = true
-      })
-      .addCase(changePlayerState.fulfilled, (state: PlayerStateInterface) => {
-        state.playerState.isLoading = false
-        state.playerState.data = !state.playerState.data
-      })
-      .addCase(changePlayerState.rejected, (state: PlayerStateInterface, action: PayloadAction<ErrorType>) => {
-        state.playerState.isLoading = false
-        state.playerState.error = action.payload
-      })
 
       .addCase(skipCurrentTrack.fulfilled, (state: PlayerStateInterface) => {
-        state.playerState.isLoading = false
+        state.playerStatus.isLoading = false
       })
       .addCase(skipCurrentTrack.rejected, (state: PlayerStateInterface, action: PayloadAction<ErrorType>) => {
-        state.playerState.isLoading = false
-        state.playerState.error = action.payload
+        state.playerStatus.isLoading = false
+        state.playerStatus.error = action.payload
+      })
+
+      .addCase(getPlayerState.pending, (state: PlayerStateInterface) => {
+        state.playerStatus.isLoading = true
+      })
+      .addCase(getPlayerState.fulfilled, (state: PlayerStateInterface, action: PayloadAction<PlayerStatusDataInterface>) => {
+        state.playerStatus.isLoading = false
+        state.playerStatus.data = action.payload
       })
   }
 })

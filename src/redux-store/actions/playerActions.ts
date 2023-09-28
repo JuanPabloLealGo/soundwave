@@ -4,6 +4,7 @@ import { getCurrentPlayingTrack, getPlaybackState, setPlayerState, skipTrack } f
 import ErrorInterface from "../../interfaces/ErrorInterface";
 import { PlayerControlType } from "../../enums/PlayerControlType";
 import { ErrorType } from "../../types";
+import PlayerStatusDataInterface from "../../interfaces/PlayerStatusDataInterface";
 
 interface ChangePlayerStateProps {
   type: PlayerControlType
@@ -12,11 +13,16 @@ interface ChangePlayerStateProps {
   progress?: number
 }
 
-export const getPlayerState = createAsyncThunk<PlayerInterface>(
+export const getPlayerState = createAsyncThunk<PlayerStatusDataInterface, void, { rejectValue: ErrorType }>(
   'player/getPlayerState',
   async (_, thunkAPI) => {
     try {
       const response = await getPlaybackState()
+
+      if (response.status === 204) {
+        return null
+      }
+
       return response.data
     } catch (error) {
       const { message } = (error as ErrorInterface).response.data.error

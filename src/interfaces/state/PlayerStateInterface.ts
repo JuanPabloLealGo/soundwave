@@ -1,8 +1,6 @@
-import PlaybackStateInterface from "../PlaybackStateInterface";
-import PlayerDataInterface from "../PlayerDataInterface";
+import PlayerStatusInterface from "../PlayerStatusInterface";
 
 export default interface PlayerStateInterface {
-  currentTrack: PlayerDataInterface
-  playerState: PlaybackStateInterface
   currentUri: null | string | string[]
+  playerStatus: PlayerStatusInterface
 }

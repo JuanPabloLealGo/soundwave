@@ -16,7 +16,13 @@ interface Props {
   onSkipTrack: (type: PlayerControlType) => void
 }
 
-const MobilePlayerControls = ({ track, isPlaying, onHide, onChangeState, onSkipTrack }: Props) => {
+const MobilePlayerControls = ({
+  track,
+  isPlaying,
+  onHide,
+  onChangeState,
+  onSkipTrack,
+}: Props) => {
 
   if (!track?.item) {
     return <h1>Empty</h1>
@@ -35,7 +41,7 @@ const MobilePlayerControls = ({ track, isPlaying, onHide, onChangeState, onSkipT
         </section>
         <section className={styles.MobilePlayerProgressBar}>
           <ProgressBar
-            durationInMs={track.item.duration_ms ?? 0}
+            track={track.item}
             progressInMs={track.progress_ms ?? 0}
           />
         </section>
