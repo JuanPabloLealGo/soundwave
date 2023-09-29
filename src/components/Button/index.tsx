@@ -8,13 +8,12 @@ export enum ButtonType {
 
 interface Props {
   className?: Object
-  icon?: JSX.Element
-  label?: string
+  children: React.ReactNode
   onClick?: React.MouseEventHandler<HTMLElement>
   type: ButtonType
 }
 
-const Button = ({ className, icon, label, onClick, type }: Props) => {
+const Button = ({ className, children, onClick, type }: Props) => {
 
   const _getClassName = (type: ButtonType) => {
     let className = ''
@@ -35,11 +34,11 @@ const Button = ({ className, icon, label, onClick, type }: Props) => {
   }
 
   return (
-    <button className={`${className} ${styles.Button} ${_getClassName(type)} btn--${type}`} onClick={onClick}>
-      {icon && (
-        <div className={styles.ButtonIcon}>{icon}</div>
-      )}
-      {label && <span className={icon && styles.ButtonLabel}>{label}</span>}
+    <button
+      className={`${styles.Button} ${_getClassName(type)} btn--${type} ${className}`}
+      onClick={onClick}
+    >
+      {children}
     </button>
   )
 }

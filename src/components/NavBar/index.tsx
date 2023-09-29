@@ -1,4 +1,3 @@
-import styles from './NavBar.module.scss'
 import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import { BiSolidMoon } from 'react-icons/bi'
@@ -10,9 +9,14 @@ import { useAppDispatch, useAppSelector } from '../../redux-store'
 import { logout } from '../../redux-store/reducers/authSlice'
 import { AUTH_URL } from '../../environment/appEnvironment'
 import { Size } from '../../enums/SizeEnum'
-import { authSelector, uiSelector } from '../../redux-store/selectors'
+import { authSelector, playerSelector, uiSelector } from '../../redux-store/selectors'
 import Button, { ButtonType } from '../Button'
 import { toogleTheme } from '../../redux-store/reducers/uiSlice'
+import { changePlayerState } from '../../redux-store/actions/playerActions'
+import { PlayerControlType } from '../../enums/PlayerControlType'
+import { resetCurrentUri } from '../../redux-store/reducers/playerSlice'
+
+import styles from './NavBar.module.scss'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
@@ -24,10 +28,22 @@ const NavBar = () => {
   const onClickHandler = () => setIsActive(!isActive)
   const onClickLogoHandler = () => setIsActive(false)
   const onLoginHandler = () => window.location.replace(AUTH_URL)
+  const { playerStatus } = useAppSelector(playerSelector)
 
   const onLogoutHandler = () => {
-    dispatch(logout())
-    return navigate('/')
+    if (playerStatus.data && playerStatus.data.is_playing) {
+      dispatch(changePlayerState({
+        type: PlayerControlType.pause,
+        uri: '',
+      })).then(() => {
+        dispatch(resetCurrentUri())
+        dispatch(logout())
+        return navigate('/')
+      })
+    } else {
+      dispatch(logout())
+      return navigate('/')
+    }
   }
 
   const onToggleThemeHandler = () => {
@@ -74,16 +90,19 @@ const NavBar = () => {
             )
           })}
           <Button
+            className={styles.NavBarThemeButton}
             onClick={onToggleThemeHandler}
             type={ButtonType.Text}
-            icon={isDarkTheme ? <IoMdSunny /> : <BiSolidMoon />}
-          />
+          >
+            {isDarkTheme ? <IoMdSunny /> : <BiSolidMoon />}
+          </Button>
           <Button
             className={styles.NavBarButton}
-            label={isAuthenticated ? 'Sign Out' : 'Sign In'}
             onClick={isAuthenticated ? onLogoutHandler : onLoginHandler}
             type={ButtonType.Outlined}
-          />
+          >
+            {isAuthenticated ? 'Sign Out' : 'Sign In'}
+          </Button>
         </ul>
         <button
           className={`color-theme ${styles.NavBarMenuIcon}`}

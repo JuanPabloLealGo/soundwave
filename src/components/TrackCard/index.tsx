@@ -1,23 +1,22 @@
 import TrackItemInterface from "../../interfaces/TrackItemInterface"
 import { useAppSelector } from "../../redux-store"
 import { uiSelector } from "../../redux-store/selectors"
-import { convertMsToMinSec } from "../../utils"
+import { convertMsToMinSec, getArtists } from "../../utils"
 import PopularityStars from "../PopularityStars"
 import styles from "./TrackCard.module.scss"
 
 interface Props {
   track: TrackItemInterface
-  onTrackSelect: (track: TrackItemInterface) => void
+  onTrackSelect: (position: number) => void
+  position: number
 }
 
-const TrackCard = ({ track, onTrackSelect }: Props) => {
+const TrackCard = ({ track, onTrackSelect, position }: Props) => {
   const { isDarkTheme } = useAppSelector(uiSelector)
-  const handleClick = () => onTrackSelect(track)
+  const handleClick = () => onTrackSelect(position)
   const imageStyle = {
     'backgroundImage': `url(${track.album.images[0].url})`
   }
-
-  const getArtists = () => track.artists.map((artist) => artist.name).join(', ')
 
   const duration = convertMsToMinSec(track.duration_ms)
 
@@ -38,7 +37,7 @@ const TrackCard = ({ track, onTrackSelect }: Props) => {
             {track.name}
           </p>
           <p className={styles.TrackCardDescriptionTextArtists}>
-            {getArtists()}
+            {getArtists(track.artists)}
           </p>
         </div>
       </section>

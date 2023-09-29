@@ -4,7 +4,6 @@ import { NavLink, useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
 import { getPlaylist } from "../../redux-store/actions/playlistActions"
 import { playlistSelector } from "../../redux-store/selectors"
-import Player from "../../components/Player"
 import Tracklist from "../../components/Tracklist"
 import styles from "./PlaylistPage.module.scss"
 import { IoIosArrowBack } from 'react-icons/io'
@@ -44,7 +43,6 @@ const PlaylistPage = () => {
           <p className={isLoading ? `skeleton ${styles.PlaylistSkeletonTitle}` : styles.PlaylistTitle}>
             {data?.name}
           </p>
-          <Player isLoading urlImage={data?.images[0].url} />
           <div className={styles.PlaylistDescription}>
             {description}
           </div>

@@ -13,6 +13,12 @@
   margin-top: 20px;
 }
 
+.LoadMoreButton {
+  display: flex;
+  gap: 5px;
+  padding: 16px 30px;
+}
+
 @include for-size(m) {
 
   .CategoryList {

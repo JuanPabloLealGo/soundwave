@@ -1,18 +1,23 @@
+import { useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
-import NavBar from "../NavBar"
+
+import ToastMessage, { MessageType } from "../ToastMessage"
 import Footer from "../Footer"
-import styles from "./MainLayout.module.scss"
+import NavBar from "../NavBar"
+import Player from "../Player"
 import useAuth from "../../hooks/useAuth"
 import { useAppDispatch, useAppSelector } from "../../redux-store"
 import { uiSelector } from "../../redux-store/selectors"
-import ErrorMessage from "../ErrorMessage"
 import { setErrorMessage } from "../../redux-store/reducers/uiSlice"
 import { logout } from "../../redux-store/reducers/authSlice"
+
+import styles from "./MainLayout.module.scss"
 
 const MainLayout = () => {
   const dispatch = useAppDispatch()
   const authError = useAuth()
   const { errorMessage } = useAppSelector(uiSelector)
+  const [showOpenSpotifyMessage, setShowOpenSpotifyMessage] = useState<boolean>(false)
   const error = authError || errorMessage
 
   const clickHandler = () => {
@@ -20,16 +25,28 @@ const MainLayout = () => {
     dispatch(logout())
   }
 
+  const openSpotifyMessageHandler = (showMessage: boolean) =>
+    setShowOpenSpotifyMessage(showMessage)
+
+  const openSpotifyMessage = (
+    <section className={styles.OpenSpotifyMessage}>
+      <p>Please make sure you have spotify open, play any song for one sec before playing any track in our UI</p>
+    </section>
+  )
+
   return (
     <>
       {error && (
-        <ErrorMessage
+        <ToastMessage
+          type={MessageType.Error}
           error={error}
           onClick={clickHandler}
         />
       )}
+      <Player onShowSpotifyMessage={openSpotifyMessageHandler} />
       <NavBar />
       <main className={styles.MainLayoutContent}>
+        {showOpenSpotifyMessage && openSpotifyMessage}
         <Outlet />
       </main>
       <Footer />

@@ -13,7 +13,6 @@ body {
   overflow-x: hidden;
   position: relative;
   font-family: $font-primary;
-  margin: 0;
 }
 
 #root {
@@ -22,6 +21,7 @@ body {
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 li {
@@ -68,10 +68,22 @@ a {
   backdrop-filter: blur(16px);
 }
 
+.error {
+  color: $error;
+}
+
+.success {
+  color: $success;
+}
+
 .light {
   background-color: $white;
   color: $black;
   min-height: 100%;
+
+  .default {
+    color: $black;
+  }
 
   a {
     color: $black;
@@ -140,6 +152,10 @@ a {
   background-color: $black;
   color: $white;
   min-height: 100%;
+
+  .default {
+    color: $white;
+  }
 
   a {
     color: $white;

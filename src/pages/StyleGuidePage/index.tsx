@@ -55,9 +55,15 @@ const Grid = () => {
 const Buttons = () => {
   return (
     <article className={styles.StyleGuideButtons} >
-      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Filled} label='Filled' />
-      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Outlined} label='Outlined' />
-      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Text} label='Text' />
+      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Filled}>
+        <span>Filled</span>
+      </Button>
+      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Outlined}>
+        <span>Outlined</span>
+      </Button>
+      <Button className={styles.StyleGuideButtonsItem} type={ButtonType.Text}>
+        <span>Text</span>
+      </Button>
     </article>
   )
 }
