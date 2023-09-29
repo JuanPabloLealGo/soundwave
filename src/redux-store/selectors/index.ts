@@ -11,3 +11,5 @@ export const playlistSelector = (state: RootState) => state.playlist
 export const playlistPageSelector = (state: RootState) => state.playlistPage
 
 export const trackSelector = (state: RootState) => state.track
+
+export const playerSelector = (state: RootState) => state.player

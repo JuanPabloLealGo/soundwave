@@ -1,0 +1,31 @@
+@import '../../scss/main.scss';
+
+.Popup {
+  display: flex;
+  justify-content: center;
+
+  &Backdrop {
+    background-color: rgb(0, 0, 0, 45%);
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    z-index: 101;
+  }
+
+  &Body {
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    position: fixed;
+    top: 60px;
+    z-index: 101;
+    max-height: calc(100vh - 100px);
+    overflow-y: scroll;
+    margin: 30px;
+
+    @include for-size(m) {
+      top: 100px;
+
+    }
+  }
+}

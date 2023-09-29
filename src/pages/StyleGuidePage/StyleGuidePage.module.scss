@@ -1,10 +1,17 @@
 @import '../../scss/main.scss';
 
 .StyleGuide {
-  position: relative;
+
+  &Title {
+    grid-column: 1/-1;
+    text-align: center;
+  }
 
   &Section {
     grid-column: 1/-1; //col span full
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 40px;
 
     &Subtitle {
@@ -15,23 +22,21 @@
   &Tipography,
   &Colors {
     text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   &Color {
     background-color: $black;
-    display: block;
-    margin-bottom: 30px;
+    border: 2px solid $black;
     padding: 25px;
-
-    @include for-size(l) {
-      display: inline-block;
-      width: 300px;
-      margin-right: 30px;
-    }
+    width: 100%;
 
     &0 {
       background-color: $white;
-      border: 2px solid $black;
       color: $black;
     }
 
@@ -44,21 +49,11 @@
       background-color: $primary;
       color: $black;
     }
-
-    &3 {
-      background-color: $secondary;
-      color: $black;
-    }
-
-    &4 {
-      background-color: $tertiary;
-      color: $black;
-    }
   }
 
   &Tipography {
 
-    &Heading,
+    &Item,
     &Title {
       grid-column: 1/-1;
       margin: 20px 0;
@@ -82,29 +77,29 @@
     display: flex;
     flex-direction: column;
 
-    @include for-size(m) {
-      flex-direction: row;
-    }
-
     &Item {
       margin-bottom: 30px;
-
-      @include for-size(m) {
-        margin-right: 30px;
-      }
     }
   }
 
-  &Wrapper {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    min-height: 100px;
-    width: 100%;
-  }
+  @include for-size(m) {
+    &Colors {
+      flex-direction: row;
+      justify-content: space-between;
+    }
 
-  &Masthead {
-    padding: 20px;
-    text-align: center;
+    &Color {
+      margin-right: 15px;
+      margin-left: 15px;
+    }
+
+    &Buttons {
+      flex-direction: row;
+
+      &Item {
+        margin-right: 15px;
+        margin-left: 15px;
+      }
+    }
   }
 }

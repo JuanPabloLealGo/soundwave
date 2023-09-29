@@ -2,6 +2,10 @@
 @use '../abstracts/typography' as *;
 @use '../abstracts/layout' as *;
 
+html {
+  font-size: 62.5%;
+}
+
 html,
 body {
   height: 100%;
@@ -17,6 +21,7 @@ body {
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 li {
@@ -45,47 +50,16 @@ a {
 }
 
 .logo {
-
-  &--xs {
-    height: 18px;
-  }
-
   &--s {
-    height: 20px;
-  }
-
-  &--m {
-    height: 24px;
-  }
-
-  &--l {
-    height: 28px;
-  }
-
-  &--xl {
     height: 30px;
   }
 
-  @include for-size(m) {
-    &--xs {
-      height: 16px;
-    }
+  &--m {
+    height: 40px;
+  }
 
-    &--s {
-      height: 24px;
-    }
-
-    &--m {
-      height: 30px;
-    }
-
-    &--l {
-      height: 32px;
-    }
-
-    &--xl {
-      height: 36px;
-    }
+  &--l {
+    height: 60px;
   }
 }
 
@@ -94,11 +68,22 @@ a {
   backdrop-filter: blur(16px);
 }
 
+.error {
+  color: $error;
+}
+
+.success {
+  color: $success;
+}
 
 .light {
   background-color: $white;
   color: $black;
   min-height: 100%;
+
+  .default {
+    color: $black;
+  }
 
   a {
     color: $black;
@@ -152,10 +137,6 @@ a {
     }
   }
 
-  .nav-icon {
-    color: $black;
-  }
-
   @keyframes light-skeleton-loading {
     0% {
       background-color: rgb(231, 231, 231, 70%);
@@ -172,6 +153,10 @@ a {
   color: $white;
   min-height: 100%;
 
+  .default {
+    color: $white;
+  }
+
   a {
     color: $white;
   }
@@ -181,7 +166,7 @@ a {
   }
 
   .color-theme {
-    color: $primary;
+    color: $white;
   }
 
   .shadowed {
@@ -216,10 +201,6 @@ a {
         background-color: #374151;
       }
     }
-  }
-
-  .nav-icon {
-    color: $white;
   }
 
   @keyframes dark-skeleton-loading {

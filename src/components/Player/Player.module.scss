@@ -1,46 +1,113 @@
-.DraggablePlayer {
+@import '../../scss/main.scss';
+
+.PlayerContainer {
   position: fixed;
-  bottom: 16px;
-  min-width: 300px;
-  right: 16px;
-  width: 30%;
-  z-index: 100;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  cursor: pointer;
+  color: $black;
+
+  svg {
+    width: 20px;
+    margin: 3px;
+  }
 }
 
 .Player {
-  padding: 12px;
-  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  position: absolute;
-  bottom: 0;
-}
+  align-items: center;
+  justify-content: center;
 
-.PlayerImage {
-  height: 400px;
-  width: 100%;
-  border-radius: 15px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
 
-.PlayerContent {
-  position: relative;
-  box-shadow: rgb(0 0 0 / 20%) 0px 2px 6px 0px;
-  border-radius: 15px;
-
-  &Drag {
-    align-items: center;
-    background-color: rgb(29 185 84 / 50%);
-    border-radius: 5px;
-    color: rgb(0 0 0 / 60%);
-    cursor: grab;
+  &Data {
     display: flex;
-    height: 25px;
-    margin-bottom: 8px;
-    margin-left: auto;
-    padding: 4px;
-    width: 25px;
+    width: 100%;
+    padding: 12px 30px;
+
+    &TrackInfoSection {
+      min-width: 300px;
+    }
+
+    &ProgressBarSection {
+      display: none;
+    }
+
+    &ControlsSection {
+      display: none;
+    }
+  }
+}
+
+.SimpleControl {
+  display: inline;
+  padding-right: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+.ShowDetails {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline;
+  color: $dark-grey;
+}
+
+@include for-size(m) {
+  .PlayerContainer {
+    display: flex;
+    cursor: default;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: auto;
+      margin: 0;
+    }
   }
 
+  .Player {
+    padding: 0;
+
+    &Data {
+      justify-content: space-between;
+      color: $black;
+      height: 100%;
+      width: 900px;
+      align-items: center;
+      padding: 12px 30px;
+
+      &TrackInfoSection {
+        width: 300px;
+      }
+
+      &ProgressBarSection {
+        display: inline;
+        width: 100%;
+        padding: 0 30px 0 30px;
+      }
+
+      &ControlsSection {
+        display: inline;
+        width: 200px;
+      }
+    }
+  }
+
+  .SimpleControl {
+    display: none;
+  }
+
+  .ShowDetails {
+    display: none;
+  }
 }

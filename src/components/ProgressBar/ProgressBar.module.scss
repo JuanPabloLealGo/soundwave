@@ -1,0 +1,62 @@
+@import '../../scss/main.scss';
+
+.ProgressBar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &Indicator {
+    width: 100%;
+    height: 5px;
+    background-color: $primary-100;
+    border-radius: 50px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  &Filler {
+    height: 100%;
+    background-color: $primary;
+    border-radius: inherit;
+    width: 30%;
+  }
+
+  &Time {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      font-size: 1.4rem;
+      color: $primary;
+      font-weight: 500;
+    }
+  }
+
+  &Actions {
+    display: flex;
+    justify-content: center;
+    color: $dark-grey;
+    gap: 50px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .Selected {
+      color: $primary
+    }
+
+    @include for-size(m) {
+      svg {
+        &:hover {
+          color: $primary;
+          transition: all 0.5s ease;
+        }
+      }
+    }
+  }
+
+}

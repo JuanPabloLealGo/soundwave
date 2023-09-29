@@ -3,8 +3,7 @@
 .Footer {
   align-items: center;
   display: flex;
-  font-size: 1rem;
-  height: 300px;
+  height: 400px;
   justify-content: center;
   text-align: center;
   width: 100%;
@@ -19,24 +18,28 @@
     width: 100%;
   }
 
-  &Logo {
-    display: flex;
-    height: 30px;
-    justify-content: center;
-  }
-
-  &Links {
-    text-align: center;
-  }
-
   &Link {
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 300;
     margin: 0 10px;
-    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &SocialMediaItem {
+    margin: 8px;
+
+    svg {
+      font-size: 40px;
+    }
   }
 
   @include for-size(m) {
+
+    height: 300px;
+
     &Container {
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr;

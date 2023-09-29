@@ -14,7 +14,6 @@ export default interface TrackItemInterface {
   name: string
   popularity: number
   preview_url: string | null
-  track: boolean
   track_number: number
   type: string
   uri: string

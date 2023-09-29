@@ -8,11 +8,12 @@ import uiReducer from "./uiSlice"
 import storage from "redux-persist/lib/storage"
 import trackReducer from "./trackSlice"
 import persistReducer from "redux-persist/es/persistReducer"
+import playerReducer from "./playerSlice"
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'ui'] // only these will be persisted
+  whitelist: ['auth', 'player', 'ui', 'track'] // only these will be persisted
 }
 
 const rootReducer = combineReducers<AppStateInterface>({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers<AppStateInterface>({
   playlistPage: playlistPageReducer,
   track: trackReducer,
   ui: uiReducer,
+  player: playerReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

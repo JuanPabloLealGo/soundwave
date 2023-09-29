@@ -1,0 +1,59 @@
+@import '../../scss/main.scss';
+
+.MobilePlayer {
+  height: calc(100% - 80px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 350px;
+  padding-top: 12px;
+  padding-bottom: 30px;
+
+  &Header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    text-align: end;
+    padding: 0 12px 16px 12px;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      color: $dark-grey;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  &Container {
+    padding: 0px 40px 30px 40px;
+  }
+
+  &TrackData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    img {
+      width: 100%;
+      border-radius: 24px;
+      margin-bottom: 20px;
+    }
+
+    .TrackArtists {
+      color: $dark-grey;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+
+  &ProgressBar {
+    margin: 20px 0 40px 0;
+  }
+
+}

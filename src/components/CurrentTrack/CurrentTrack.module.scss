@@ -1,0 +1,36 @@
+@import '../../scss/main.scss';
+
+.CurrentTrack {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    margin-right: 20px;
+  }
+
+  &Info {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    width: 70%;
+
+    &Title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      line-height: 1.6rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &Artists {
+      font-size: 1.4rem;
+      color: $dark-grey;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

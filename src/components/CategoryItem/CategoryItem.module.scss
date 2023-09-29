@@ -1,20 +1,16 @@
 @import "../../scss/main.scss";
 
 .CategoryItem {
-  padding-top: 20px;
 
-  &Name {
-    font-size: 1.25rem;
-    font-weight: 700;
+  h3 {
+    margin-bottom: 0px;
+    margin-top: 6px;
   }
 
   @include for-size(m) {
-
-    padding-top: 30px;
-
-    &Name {
-      font-size: 1.75rem;
+    h3 {
+      margin-bottom: 0px;
+      margin-top: 10px;
     }
-
   }
 }

@@ -1,8 +1,30 @@
+@import '../../scss/main.scss';
+
 .MainLayout {
   &Content {
     grid-column: 1/-1;
-    min-height: calc(100vh - 300px);
+    min-height: calc(100vh - 400px);
     padding-top: 80px;
     position: relative;
+
+    @include for-size(m) {
+      min-height: calc(100vh - 300px);
+    }
+
   }
+}
+
+.OpenSpotifyMessage {
+  position: sticky;
+  top: 80px;
+  z-index: 1;
+  background: $primary;
+  font-size: 1.8rem;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  margin-bottom: 20px;
+  padding: 16px
 }

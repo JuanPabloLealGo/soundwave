@@ -8,20 +8,12 @@ const initialState = {
   data: null,
   isLoading: false,
   error: null,
-  currentUris: null,
 } as PlaylistStateInterface
 
 const playlistSlice = createSlice({
   name: 'playlist',
   initialState,
-  reducers: {
-    updateCurrentPlaylist: (
-      state: PlaylistStateInterface,
-      action: PayloadAction<string | string[]>
-    ) => {
-      state.currentUris = action.payload
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getPlaylist.pending, (state) => {
@@ -38,8 +30,7 @@ const playlistSlice = createSlice({
   }
 })
 
-const { actions, reducer } = playlistSlice
+const { reducer } = playlistSlice
 
-export const { updateCurrentPlaylist } = actions
 
 export default reducer

@@ -1,6 +1,8 @@
-import TrackPageInterface from "../TrackPageInterface";
+import SavedTrackPageDataInterface from "../SavedTrackPageDataInterface";
+import TrackPageDataInterface from "../TrackPageDataInterface";
 import CommonStateInterface from "./CommonStateInterface";
 
 export default interface TrackStateInterface extends CommonStateInterface {
-  data: null | TrackPageInterface
+  trackPageByPlaylist: TrackPageDataInterface
+  likedTracks: SavedTrackPageDataInterface
 }
