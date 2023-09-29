@@ -1,6 +1,6 @@
 import { LiaHeartSolid, LiaHeart } from "react-icons/lia"
 import { PiShuffleSimpleFill } from "react-icons/pi"
-import { TbRepeat } from "react-icons/tb"
+import { TbRepeat, TbRepeatOnce } from "react-icons/tb"
 
 import { convertMsToMinSec } from "../../utils"
 
@@ -10,13 +10,17 @@ import { removeLikedTrack, saveLikedTrack } from "../../redux-store/actions/trac
 import TrackItemInterface from "../../interfaces/TrackItemInterface"
 import { trackSelector } from "../../redux-store/selectors"
 import { useEffect, useState } from "react"
+import { changePlayerShuffle, changeRepeatMode } from "../../redux-store/actions/playerActions"
+import { repeatOptions } from "../../utils/constants"
 
 interface Props {
   progressInMs: number
   track: TrackItemInterface
+  suffleIsOn: boolean
+  repeatState: string
 }
 
-const ProgressBar = ({ track, progressInMs }: Props) => {
+const ProgressBar = ({ track, progressInMs, suffleIsOn, repeatState }: Props) => {
 
   const dispatch = useAppDispatch()
   const { likedTracks } = useAppSelector(trackSelector)
@@ -27,6 +31,8 @@ const ProgressBar = ({ track, progressInMs }: Props) => {
   const progress = convertMsToMinSec(durationInMs)
   const progressPercentage = (progressInMs / durationInMs) * 100
   const isFavorite = likedTrackIds.includes(track.id)
+  const [currentIndex, setCurrentIndex] =
+    useState<number>(repeatOptions.indexOf(repeatState))
 
   useEffect(() => {
     if (likedTracks.data) {
@@ -44,6 +50,21 @@ const ProgressBar = ({ track, progressInMs }: Props) => {
     }
   }
 
+  const changePlayerShuffleHandler = () => {
+    dispatch(changePlayerShuffle(!suffleIsOn))
+  }
+
+  const getNextRepeatOption = () => {
+    const index = (currentIndex + 1) % repeatOptions.length
+    setCurrentIndex(index)
+    return repeatOptions[index]
+  }
+
+  const changeRepeatStateHandler = () => {
+    const nextOption = getNextRepeatOption()
+    dispatch(changeRepeatMode(nextOption))
+  }
+
   return (
     <article className={styles.ProgressBar}>
       <section className={styles.ProgressBarIndicator}>
@@ -58,8 +79,20 @@ const ProgressBar = ({ track, progressInMs }: Props) => {
           ? <LiaHeartSolid className={styles.Selected} onClick={saveTrackHandler} />
           : <LiaHeart onClick={saveTrackHandler} />
         }
-        <PiShuffleSimpleFill className={styles.Selected} />
-        <TbRepeat />
+        <PiShuffleSimpleFill
+          className={suffleIsOn ? styles.Selected : ''}
+          onClick={changePlayerShuffleHandler}
+        />
+        {repeatState === repeatOptions[1]
+          ? <TbRepeatOnce
+            className={styles.Selected}
+            onClick={changeRepeatStateHandler}
+          />
+          : <TbRepeat
+            className={repeatState === repeatOptions[2] ? '' : styles.Selected}
+            onClick={changeRepeatStateHandler}
+          />
+        }
       </section>
     </article>
   )

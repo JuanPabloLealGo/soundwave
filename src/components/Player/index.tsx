@@ -27,9 +27,6 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
   const [isMobile, setIsMobile] = useState(false)
   const canPlay = playerStatus.data && currentUri
 
-  console.log('playerStatus: ', playerStatus.data)
-  console.log('currentUri: ', currentUri)
-
   useEffect(() => {
     onShowSpotifyMessage(!canPlay)
   }, [canPlay])
@@ -97,9 +94,8 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
       {isMobile && showMobilePlayer ? (
         <Popup>
           <MobilePlayerControls
+            playerStatus={playerStatus.data!}
             onHide={() => setShowMobilePlayer(false)}
-            track={playerStatus.data}
-            isPlaying={playerStatus.data?.is_playing || false}
             onChangeState={changePlayerStateHandler}
             onSkipTrack={skipTrackHandler}
           />
@@ -117,6 +113,8 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
                 <ProgressBar
                   track={playerStatus.data!.item}
                   progressInMs={playerStatus.data!.progress_ms}
+                  suffleIsOn={playerStatus.data!.shuffle_state}
+                  repeatState={playerStatus.data!.repeat_state}
                 />
               </section>
               <section className={styles.PlayerDataControlsSection}>

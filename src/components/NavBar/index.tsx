@@ -28,10 +28,10 @@ const NavBar = () => {
   const onClickHandler = () => setIsActive(!isActive)
   const onClickLogoHandler = () => setIsActive(false)
   const onLoginHandler = () => window.location.replace(AUTH_URL)
-  const { currentTrack } = useAppSelector(playerSelector)
+  const { playerStatus } = useAppSelector(playerSelector)
 
   const onLogoutHandler = () => {
-    if (currentTrack.data) {
+    if (playerStatus.data && playerStatus.data.is_playing) {
       dispatch(changePlayerState({
         type: PlayerControlType.pause,
         uri: '',

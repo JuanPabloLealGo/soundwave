@@ -65,4 +65,28 @@ export const skipTrack = async (type: PlayerControlType) => {
   } catch (error) {
     throw (error)
   }
-} 
+}
+
+export const setRepeatMode = async (state: string) => {
+  try {
+    const response = await api({
+      method: 'PUT',
+      url: `${BACKEND_URL}/me/player/repeat?state=${state}`,
+    })
+    return response
+  } catch (error) {
+    throw (error)
+  }
+}
+
+export const tooglePlaybackShuffle = async (state: boolean) => {
+  try {
+    const response = await api({
+      method: 'PUT',
+      url: `${BACKEND_URL}/me/player/shuffle?state=${state}`,
+    })
+    return response
+  } catch (error) {
+    throw (error)
+  }
+}

@@ -30,7 +30,7 @@ const MainLayout = () => {
 
   const openSpotifyMessage = (
     <section className={styles.OpenSpotifyMessage}>
-      <p>Please make sure you have spotify open, play any song for one sec and try play your track in our UI</p>
+      <p>Please make sure you have spotify open, play any song for one sec before playing any track in our UI</p>
     </section>
   )
 

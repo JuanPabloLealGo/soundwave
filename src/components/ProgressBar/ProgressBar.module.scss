@@ -43,15 +43,19 @@
       width: 24px;
       height: 24px;
       cursor: pointer;
-
-      &:hover {
-        color: $primary;
-        transition: all 0.5s ease;
-      }
     }
 
     .Selected {
       color: $primary
+    }
+
+    @include for-size(m) {
+      svg {
+        &:hover {
+          color: $primary;
+          transition: all 0.5s ease;
+        }
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import PlayerInterface from "../../interfaces/PlayerInterface";
-import { getCurrentPlayingTrack, getPlaybackState, setPlayerState, skipTrack } from "../../api/playerApi";
+import { getCurrentPlayingTrack, getPlaybackState, setPlayerState, setRepeatMode, skipTrack, tooglePlaybackShuffle } from "../../api/playerApi";
 import ErrorInterface from "../../interfaces/ErrorInterface";
 import { PlayerControlType } from "../../enums/PlayerControlType";
 import { ErrorType } from "../../types";
@@ -62,6 +62,32 @@ export const skipCurrentTrack = createAsyncThunk<void, PlayerControlType, { reje
   async (type: PlayerControlType, thunkAPI) => {
     try {
       const response = await skipTrack(type)
+      return response.data
+    } catch (error) {
+      const { message } = (error as ErrorInterface).response.data.error
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const changeRepeatMode = createAsyncThunk<void, string, { rejectValue: ErrorType }>(
+  'player/changeRepeatMode',
+  async (state: string, thunkAPI) => {
+    try {
+      const response = await setRepeatMode(state)
+      return response.data
+    } catch (error) {
+      const { message } = (error as ErrorInterface).response.data.error
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const changePlayerShuffle = createAsyncThunk<void, boolean, { rejectValue: ErrorType }>(
+  'player/changePlayerShuffle',
+  async (state: boolean, thunkAPI) => {
+    try {
+      const response = await tooglePlaybackShuffle(state)
       return response.data
     } catch (error) {
       const { message } = (error as ErrorInterface).response.data.error
