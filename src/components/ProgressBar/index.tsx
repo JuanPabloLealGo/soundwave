@@ -26,11 +26,11 @@ const ProgressBar = ({ track, progressInMs, suffleIsOn, repeatState }: Props) =>
   const { likedTracks } = useAppSelector(trackSelector)
   const [likedTrackIds, setLikedTrackIds] = useState<string[]>([])
 
-  const durationInMs = track.duration_ms
+  const durationInMs = track?.duration_ms ?? 0
   const maxDuration = convertMsToMinSec(progressInMs)
   const progress = convertMsToMinSec(durationInMs)
   const progressPercentage = (progressInMs / durationInMs) * 100
-  const isFavorite = likedTrackIds.includes(track.id)
+  const isFavorite = track ? likedTrackIds.includes(track.id) : false
   const [currentIndex, setCurrentIndex] =
     useState<number>(repeatOptions.indexOf(repeatState))
 

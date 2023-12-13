@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useRoutes } from "react-router-dom"
+import { useRoutes, useLocation } from "react-router-dom"
 
 import { useAppSelector } from "./redux-store"
 import { authSelector, uiSelector } from "./redux-store/selectors"
@@ -18,6 +18,7 @@ import StyleGuidePage from "./pages/StyleGuidePage"
 import "./scss/main.scss"
 
 const App = () => {
+  const location = useLocation();
   const { data: isAuthenticated } = useAppSelector(authSelector)
   const { isDarkTheme } = useAppSelector(uiSelector)
   let initialScreen = isAuthenticated ? <HomePage /> : <LandingPage />
@@ -31,6 +32,11 @@ const App = () => {
       document.body.classList.add('light');
     }
   }, [isDarkTheme])
+  
+  useEffect(() => {
+    // Scroll to the top when the route changes
+    document.body.scrollTo(0, 0)
+  }, [location])
 
   const element = useRoutes([
     {

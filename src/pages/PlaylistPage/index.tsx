@@ -14,8 +14,12 @@ const PlaylistPage = () => {
   const { data, isLoading } = useAppSelector(playlistSelector)
 
   useEffect(() => {
+    document.body.classList.add(styles.HideScroll);
     if (playlistId) {
       dispatch(getPlaylist(playlistId))
+    }
+    return () => { 
+      document.body.classList.remove(styles.HideScroll);
     }
   }, [playlistId, dispatch])
 

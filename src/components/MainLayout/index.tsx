@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Outlet } from "react-router-dom"
 
 import ToastMessage, { MessageType } from "../ToastMessage"
@@ -34,6 +34,10 @@ const MainLayout = () => {
     </section>
   )
 
+  const bodyStyle = {
+    top: showOpenSpotifyMessage ? '60px' : '0',
+  }
+
   return (
     <>
       {error && (
@@ -45,11 +49,11 @@ const MainLayout = () => {
       )}
       <Player onShowSpotifyMessage={openSpotifyMessageHandler} />
       <NavBar />
-      <main className={styles.MainLayoutContent}>
+      <main className={styles.MainLayoutContent} style={bodyStyle}>
         {showOpenSpotifyMessage && openSpotifyMessage}
         <Outlet />
       </main>
-      <Footer />
+      {/*<Footer />*/}
     </>
   )
 }

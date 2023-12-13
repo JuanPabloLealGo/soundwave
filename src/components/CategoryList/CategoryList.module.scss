@@ -4,7 +4,7 @@
   grid-column: 1/-1;
   position: relative;
   width: 100%;
-  padding-bottom: 30px;
+  padding-bottom: 150px;
 }
 
 .LoadMoreButtonContainer {
@@ -20,11 +20,6 @@
 }
 
 @include for-size(m) {
-
-  .CategoryList {
-    padding-bottom: 50px;
-  }
-
   .LoadMoreButtonContainer {
     margin-top: 40px;
   }

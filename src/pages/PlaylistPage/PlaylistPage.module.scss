@@ -1,5 +1,5 @@
 .Playlist {
-
+  
   &BackButton {
     align-items: center;
     display: flex;
@@ -45,4 +45,8 @@
     grid-column: 6/-1;
   }
 
+}
+
+.HideScroll {
+  overflow: hidden;
 }

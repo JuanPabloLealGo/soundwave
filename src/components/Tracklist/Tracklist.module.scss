@@ -1,6 +1,7 @@
 @import "../../scss/main.scss";
 
 .Tracklist {
+  margin-bottom: 100px;
   &Header {
     color: $light-grey;
     display: flex;
@@ -25,7 +26,7 @@
   }
 
   &Body {
-    height: 550px;
+    height: calc(100vh - 300px);
     overflow-y: auto;
   }
 
