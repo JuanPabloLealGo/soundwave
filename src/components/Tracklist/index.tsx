@@ -74,8 +74,8 @@ const Tracklist = ({ playlistId }: Props) => {
       <header className={styles.TracklistHeader}>
         <p className={styles.TracklistHeaderTitle}>Track / Artist</p>
         <p className={styles.TracklistHeaderAlbum}>Album</p>
-        <p className={styles.TracklistHeaderGeneralItem}>Time</p>
-        <p className={styles.TracklistHeaderGeneralItem}>Popularity</p>
+        <p className={styles.TracklistHeaderTime}>Time</p>
+        <p className={styles.TracklistHeaderPopularity}>Popularity</p>
       </header>
       <div className={styles.TracklistBody}>
         {data.items.map((item: TrackInterface, index: number) => {

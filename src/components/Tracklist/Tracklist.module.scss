@@ -3,24 +3,34 @@
 .Tracklist {
   margin-bottom: 100px;
   &Header {
-    color: $light-grey;
     display: flex;
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: 400;
     justify-content: space-around;
     padding: 20px 10px;
+    text-align: center;
+    opacity: 0.5;
+
+    &Title,
+    &Album,
+    &Time,
+    &Popularity {
+      font-size: 1.4rem;
+    }
 
     &Title {
-      width: 50%;
-      padding-left: 80px;
+      width: 40%;
     }
 
     &Album {
       width: 30%;
     }
 
-    &GeneralItem {
+    &Time {
       width: 10%;
+    }
+
+    &Popularity {
+      width: 20%;
     }
 
   }

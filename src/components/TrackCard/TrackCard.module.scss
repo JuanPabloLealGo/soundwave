@@ -6,10 +6,11 @@
   padding: 10px;
   align-items: center;
   font-size: 1rem;
-  font-weight: 300;
   justify-content: space-around;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  font-weight: 200;
 
   &Dark {
     &:hover {
@@ -27,7 +28,8 @@
     align-items: center;
     display: flex;
     white-space: nowrap;
-    width: 50%;
+    width: 40%;
+    text-align: start;
 
     &Image {
       background-repeat: no-repeat;
@@ -44,8 +46,8 @@
 
       &Name {
         display: block;
-        font-size: 1.25rem;
-        font-weight: 700;
+        font-size: 1.4rem;
+        font-weight: 500;
         margin-bottom: 3px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -54,7 +56,8 @@
       &Artists {
         display: block;
         flex-direction: column;
-        font-size: 0.8rem;
+        font-size: 1.2rem;
+        font-weight: 300;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -67,13 +70,19 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 30%;
+    text-align: start;
+    font-size: 1.4rem;
+    padding: 0 10px;
   }
 
   &Time {
     width: 10%;
+    font-size: 1.4rem;
+    padding: 0 10px;
   }
 
   &Popularity {
-    width: 10%;
+    width: 20%;
+    padding: 0 10px;
   }
 }
