@@ -14,7 +14,7 @@ const PlaylistCard = ({ playlist }: Props) => {
   const handleClick = () => playlist && navigate(`/playlist/${playlist.id}`)
 
   const cardStyle = {
-    'backgroundImage': `url(${playlist ? playlist.images[0]?.url : '/images/error_file.png'})`
+    'backgroundImage': `url(${playlist ? playlist.images[0]?.url : '/assets/images/error_file.png'})`
   }
 
   return (

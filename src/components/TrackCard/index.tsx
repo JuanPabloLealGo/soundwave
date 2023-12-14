@@ -15,7 +15,7 @@ const TrackCard = ({ track, onTrackSelect, position }: Props) => {
   const { isDarkTheme } = useAppSelector(uiSelector)
   const handleClick = () => onTrackSelect(position)
   const imageStyle = {
-    'backgroundImage': `url(${track.album.images[0].url})`
+    'backgroundImage': `url(${track.album.images[0]?.url ?? ''})`
   }
 
   const duration = convertMsToMinSec(track.duration_ms)

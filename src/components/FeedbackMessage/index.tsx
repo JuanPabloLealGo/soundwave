@@ -25,11 +25,11 @@ const FeedbackMessage = ({ message, type }: Props) => {
 
 const FeedBackIcon = ({ type }: IconProps) => {
   if (type === FeedbackMessageType.Error) {
-    return <img className={styles.FeedbackMessageIcon} alt='error' src='/images/sad-emoji.svg' />
+    return <img className={styles.FeedbackMessageIcon} alt='error' src='/assets/images/sad-emoji.svg' />
   }
 
   if (type === FeedbackMessageType.Information) {
-    return <img className={styles.FeedbackMessageIcon} alt='info' src='/images/crying-emoji.svg' />
+    return <img className={styles.FeedbackMessageIcon} alt='info' src='/assets/images/crying-emoji.svg' />
   }
 
   return null

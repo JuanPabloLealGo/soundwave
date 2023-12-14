@@ -10,6 +10,8 @@ import { updateCurrentUri } from "../../redux-store/reducers/playerSlice"
 import { changePlayerState, getPlayerState } from "../../redux-store/actions/playerActions"
 import { PlayerControlType } from "../../enums/PlayerControlType"
 import TrackInterface from "../../interfaces/TrackInterface"
+import { ReactComponent as Loader } from '../../assets/icons/loader.svg'
+import Button, { ButtonType } from "../Button"
 
 interface Props {
   playlistId?: string
@@ -92,11 +94,16 @@ const Tracklist = ({ playlistId }: Props) => {
             />
           )
         })}
-        {
-          isLoading
-            ? <p>Loading...</p>
-            : hasMoreData && <button onClick={handleLoadMore}>Load More</button>
-        }
+        {hasMoreData && (
+          <Button
+            className={styles.TracklistLoadMoreButton}
+            type={ButtonType.Filled}
+            onClick={handleLoadMore}
+          >
+            <span>{isLoading ? <Loader className='spinner' /> : 'Load More'}</span>
+          </Button>
+        )}
+        
       </div>
     </article>
   )
