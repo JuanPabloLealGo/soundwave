@@ -2,7 +2,6 @@ import { IoIosArrowDown } from "react-icons/io"
 
 import ProgressBar from "../ProgressBar"
 import PlayerControls from "../PlayerControls"
-import PlayerInterface from "../../interfaces/PlayerInterface"
 import { getArtists } from "../../utils"
 
 import styles from "./MobilePlayerControls.module.scss"

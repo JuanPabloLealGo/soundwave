@@ -29,7 +29,7 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
 
   useEffect(() => {
     onShowSpotifyMessage(!canPlay)
-  }, [canPlay])
+  }, [canPlay, onShowSpotifyMessage])
 
   useEffect(() => {
     window.addEventListener('resize', resizeHandler)
@@ -44,6 +44,10 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
     setIsMobile(screenWidth <= mobileBreakpoint)
   }, [screenWidth])
 
+  const updatePlayerStatus = useCallback(() => {
+    dispatch(getPlayerState())
+  }, [dispatch])
+
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
 
@@ -54,18 +58,14 @@ const Player = ({ onShowSpotifyMessage }: Props) => {
 
     return () => {
       if (interval) {
-        clearInterval(interval);
+        clearInterval(interval)
       }
-    };
-  }, [isAuthenticated, canPlay])
+    }
+  }, [isAuthenticated, canPlay, updatePlayerStatus])
 
   const resizeHandler = () => {
     setScreenWidth(window.innerWidth);
   };
-
-  const updatePlayerStatus = useCallback(() => {
-    dispatch(getPlayerState())
-  }, [dispatch])
 
   const playerClickHandler = () => setShowMobilePlayer(true)
 

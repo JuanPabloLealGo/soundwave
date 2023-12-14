@@ -2,7 +2,6 @@ import { useState } from "react"
 import { Outlet } from "react-router-dom"
 
 import ToastMessage, { MessageType } from "../ToastMessage"
-import Footer from "../Footer"
 import NavBar from "../NavBar"
 import Player from "../Player"
 import useAuth from "../../hooks/useAuth"

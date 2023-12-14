@@ -21,7 +21,6 @@ const Tracklist = ({ playlistId }: Props) => {
 
   const dispatch = useAppDispatch()
   const [currentOffset, setCurrentOffset] = useState(0)
-  const [likedTrackIds, setLikedTrackIds] = useState<string[]>([])
   const { trackPageByPlaylist, likedTracks } = useAppSelector(trackSelector)
   const { data, isLoading } = trackPageByPlaylist
   const hasMoreData = data && data.next !== null
@@ -35,9 +34,7 @@ const Tracklist = ({ playlistId }: Props) => {
     if (hasMorePages) {
       dispatch(getLikedTracks({ limit: 50, offset: likedTracks.data!.offset! }))
     }
-    const likedSongIds = likedTracks.data?.items.map((item) => item.track.id) ?? []
-    setLikedTrackIds(likedSongIds)
-  }, [likedTracks])
+  }, [dispatch, likedTracks])
 
   useEffect(() => {
     if (playlistId) {
