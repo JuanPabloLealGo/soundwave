@@ -6,12 +6,15 @@ import { getPlaylist } from "../../redux-store/actions/playlistActions"
 import { playlistSelector } from "../../redux-store/selectors"
 import Tracklist from "../../components/Tracklist"
 import styles from "./PlaylistPage.module.scss"
-import { IoIosArrowBack } from 'react-icons/io'
+import { FaArrowLeft } from "react-icons/fa";
 
 const PlaylistPage = () => {
   const dispatch = useAppDispatch()
   const { playlistId } = useParams()
   const { data, isLoading } = useAppSelector(playlistSelector)
+  const imageStyle = {
+    'backgroundImage': `url(${data?.images[0]?.url ?? ''})`
+  }
 
   useEffect(() => {
     document.body.classList.add(styles.HideScroll);
@@ -39,14 +42,15 @@ const PlaylistPage = () => {
   return (
     <div className='grid' >
       <NavLink className={styles.PlaylistBackButton} to='/'>
-        <IoIosArrowBack />
+        <FaArrowLeft />
         <span>Home</span>
       </NavLink>
-      <div className={styles.PlaylistPlayer}>
-        <div className={styles.PlaylistPlayerContent}>
-          <p className={isLoading ? `skeleton ${styles.PlaylistSkeletonTitle}` : styles.PlaylistTitle}>
+      <div className={styles.PlaylistInfo}>
+        <div className={styles.PlaylistInfoContent}>
+          <h1 className={isLoading ? `skeleton ${styles.PlaylistSkeletonTitle}` : styles.PlaylistTitle}>
             {data?.name}
-          </p>
+          </h1>
+          <div style={imageStyle} className={styles.PlaylistInfoContentImage} />
           <div className={styles.PlaylistDescription}>
             {description}
           </div>

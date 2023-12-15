@@ -13,11 +13,19 @@
     height: 70px;
     color: $primary;
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   &NextPrevious {
     width: 50px;
     height: 50px;
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }

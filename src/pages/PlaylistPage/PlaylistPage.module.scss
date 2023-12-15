@@ -1,15 +1,22 @@
+@import "../../scss/main.scss";
+
 .Playlist {
-  
+
   &BackButton {
+    grid-column: 1/-1;
     align-items: center;
     display: flex;
-    font-size: 1rem;
-    font-weight: 600;
-  }
+    gap: 8px;
+    width: 100px;
 
-  &Title {
-    font-size: 2rem;
-    font-weight: 700;
+    &:hover {
+      opacity: 0.9;
+    }
+
+    span {
+      font-size: 2rem;
+      font-weight: 400;
+    }
   }
 
   &SkeletonTitle {
@@ -35,16 +42,63 @@
     font-weight: 300;
     padding-top: 16px;
     width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
   }
 
-  &Player {
-    grid-column: 1/5;
+  &Title {
+    width: 100%;
+    text-align: center;
+  }
+
+  &Info {
+    grid-column: 1/-1;
+
+    &Content {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+
+      &Image {
+        display: none;
+      }
+    }
   }
 
   &Items {
-    grid-column: 6/-1;
+    grid-column: 1/-1;
   }
 
+  @include for-size(m) {
+
+    &Description {
+      text-align: start;
+      margin-bottom: 10px;
+    }
+
+    &Info {
+      grid-column: 1/5;
+
+      &Content {
+        &Image {
+          display: inline;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 5px;
+          min-width: 250px;
+          height: 300px;
+          margin: 50px 0 20px 0;
+        }
+      }
+    }
+  
+    &Items {
+      grid-column: 6/-1;
+    }    
+  }
 }
 
 .HideScroll {
